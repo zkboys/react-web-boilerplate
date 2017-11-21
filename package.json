@@ -91,7 +91,7 @@
             "<rootDir>/tests/setupTests.js"
         ],
         "testMatch": [
-            "**/?(*.)(spec|test|e2e).js?(x)"
+            "<rootDir>/src/**/?(*.)(spec|test|e2e).js?(x)"
         ],
         "setupTestFrameworkScriptFile": "<rootDir>/tests/jasmine.js",
         "moduleFileExtensions": [
