@@ -4,7 +4,7 @@
 
 ## 依赖
 1. nodejs v8.1.3
-1. yarn v0.27.5
+1. yarn v1.3.2
 1. 兼容windwos / mac / ubuntu
 
 ## 安装 & 启动

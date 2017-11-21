@@ -51,7 +51,7 @@ export default class extends Component {
                         if (props.location.pathname === '/login') {
                             return null;
                         }
-                        return <PageFrame/>;
+                        return <PageFrame {...props}/>;
                     }}/>
                     <Switch>
                         <AuthRoute exact path="/" component={Home}/>
@@ -59,7 +59,12 @@ export default class extends Component {
                             <AuthRoute key={item.path} exact path={item.path} component={(props) => <Bundle load={item.getComponent}>{renderBundle(props)}</Bundle>}/>
                         ))}
                         <Route path="/frame" component={IFrame}/>
-                        <Route component={Error404}/>
+                        <Route render={props => {
+                            if (props.location.pathname === '/login') {
+                                return null;
+                            }
+                            return <Error404 {...props}/>
+                        }}/>
                     </Switch>
                 </div>
             </Router>

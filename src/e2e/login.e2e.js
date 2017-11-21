@@ -4,7 +4,7 @@ describe('Login', () => {
   let page;
   beforeEach(() => {
     page = Nightmare();
-    page.goto('http://localhost:8000/#/user/login');
+    page.goto('http://localhost:8000/login');
   });
 
   it('should login with failure', async () => {
@@ -16,12 +16,12 @@ describe('Login', () => {
   });
 
   it('should login successfully', async () => {
-    const text = await page.type('#userName', 'admin')
-      .type('#password', '888888')
+    const text = await page.type('#userName', 'test')
+      .type('#password', '111')
       .click('button[type="submit"]')
       .wait('.ant-layout-sider h1') // should display error
       .evaluate(() => document.body.innerHTML)
       .end();
-    expect(text).toContain('<h1>Ant Design Pro</h1>');
+    expect(text).toContain('<h1>React Web</h1>');
   });
 });
