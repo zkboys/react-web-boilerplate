@@ -1,0 +1,114 @@
+{
+    "name": "ant-design-pro",
+    "version": "0.3.0",
+    "description": "An out-of-box UI solution for enterprise applications",
+    "private": true,
+    "scripts": {
+        "precommit": "npm run lint-staged",
+        "start": "zk-roadhog server",
+        "start:no-proxy": "cross-env NO_PROXY=true zk-roadhog server",
+        "build": "zk-roadhog build",
+        "site": "roadhog-api-doc static && gh-pages -d dist",
+        "analyze": "node ./roadhog/lib/build --analyze",
+        "lint:style": "stylelint \"src/**/*.less\" --syntax less",
+        "lint": "eslint --ext .js src mock tests && npm run lint:style",
+        "lint:fix": "eslint --fix --ext .js src mock tests && npm run lint:style",
+        "lint-staged": "lint-staged",
+        "lint-staged:js": "eslint --ext .js",
+        "test": "jest",
+        "test:all": "node ./tests/run-tests.js"
+    },
+    "dependencies": {
+        "animate.css": "^3.5.2",
+        "antd": "3.0.0-rc.1",
+        "axios": "^0.17.1",
+        "axios-mock-adapter": "^1.10.0",
+        "classnames": "^2.2.5",
+        "core-js": "^2.5.1",
+        "cropperjs": "^1.1.3",
+        "flux-standard-action": "^2.0.0",
+        "g-cloud": "^1.0.2-beta",
+        "jszip": "^3.1.5",
+        "lodash": "^4.17.4",
+        "lodash-decorators": "^4.4.1",
+        "lodash.clonedeep": "^4.5.0",
+        "moment": "^2.19.1",
+        "nprogress": "^0.2.0",
+        "numeral": "^2.0.6",
+        "prop-types": "^15.5.10",
+        "qs": "^6.5.0",
+        "react": "15.6.1",
+        "react-container-query": "^0.9.1",
+        "react-document-title": "^2.0.3",
+        "react-dom": "15.6.1",
+        "react-fittext": "^1.0.0",
+        "react-helmet": "^5.2.0",
+        "react-redux": "^5.0.6",
+        "react-rnd": "^7.1.5",
+        "react-router-dom": "^4.2.2",
+        "redux": "^3.7.2",
+        "redux-actions": "^2.2.1",
+        "redux-thunk": "^2.2.0",
+        "zk-antd": "^1.0.1",
+        "zk-axios": "^1.0.0",
+        "zk-redux": "^1.0.1",
+        "zk-roadhog": "^0.0.1",
+        "zk-utils": "^1.0.1"
+    },
+    "devDependencies": {
+        "cross-env": "^5.1.1",
+        "cross-port-killer": "^1.0.1",
+        "enzyme": "^3.1.0",
+        "enzyme-adapter-react-16": "^1.0.2",
+        "gh-pages": "^1.0.0",
+        "husky": "^0.14.3",
+        "jest": "^21.0.1",
+        "lint-staged": "^4.3.0",
+        "mockjs": "^1.0.1-beta3",
+        "pro-download": "^1.0.0",
+        "raven-js": "^3.20.1",
+        "react-test-renderer": "^16.0.0",
+        "redbox-react": "^1.3.2",
+        "roadhog-api-doc": "^0.2.5",
+        "stylelint": "^8.1.0",
+        "stylelint-config-standard": "^17.0.0"
+    },
+    "optionalDependencies": {
+        "nightmare": "^2.10.0"
+    },
+    "babel": {
+        "presets": [
+            "env",
+            "react"
+        ],
+        "plugins": [
+            "transform-decorators-legacy",
+            "transform-class-properties"
+        ]
+    },
+    "jest": {
+        "setupFiles": [
+            "<rootDir>/tests/setupTests.js"
+        ],
+        "testMatch": [
+            "**/?(*.)(spec|test|e2e).js?(x)"
+        ],
+        "setupTestFrameworkScriptFile": "<rootDir>/tests/jasmine.js",
+        "moduleFileExtensions": [
+            "js",
+            "jsx"
+        ],
+        "moduleNameMapper": {
+            "\\.(css|less)$": "<rootDir>/tests/styleMock.js"
+        }
+    },
+    "lint-staged": {
+        "**/*.{js,jsx}": "lint-staged:js",
+        "**/*.less": "stylelint --syntax less"
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not ie <= 10"
+    ]
+}
