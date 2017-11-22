@@ -123,9 +123,7 @@ class App extends Component {
                 {
                     loading ?
                         (
-                            <Spin tip="Loading...">
-                                <div style={{height: document.body.clientHeight}}/>
-                            </Spin>
+                            <Spin style={{position: 'absolute', left: '50%', top: '30%'}} tip="Loading..." size={'large'}/>
                         )
                         :
                         (

@@ -31,7 +31,7 @@ export default class index extends Component {
 
                 <Button
                     onClick={() => {
-                        this.props.$ajax.get('/mock/test-ajax/array', null, {successTip: '获取成功！'})
+                        this.props.$ajax.put('/mock/test-ajax/array', null, {successTip: '获取成功！'})
                             .then(res => {
                                 console.log(res);
                             });

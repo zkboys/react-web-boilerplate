@@ -17,7 +17,7 @@ export default {
         });
     },
 
-    'post /mock/test-ajax/array': [123],
+    'put /mock/test-ajax/array': ['put'],
     'post /mock/test-ajax/object': {name: 123},
     'post /mock/test-ajax/function': (config) => {
         const {

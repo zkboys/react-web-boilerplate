@@ -14,6 +14,7 @@ const models = {
     pageHead,
     side,
 };
+
 // 需要同步的数据，对应meta中的sync字段，对应的是reducers中的数据
 const syncKeys = [
     'settings',

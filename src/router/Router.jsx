@@ -42,7 +42,7 @@ const renderBundle = (props) => (Com) => {
 export default class extends Component {
     render() {
 
-        // 将 PageFrame 与 路由页面 作为兄弟节点，避免PageFrame重新渲染，导致 页面也重新渲染的问题；
+        // 将 PageFrame 与 路由页面 作为兄弟节点，避免PageFrame重新渲染，导致页面也重新渲染的问题；
         return (
             <Router history={history}>
                 <div>
