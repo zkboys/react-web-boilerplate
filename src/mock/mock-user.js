@@ -1,7 +1,7 @@
 import {getUsersByPageSize} from './mockdata/user';
 
-export default function (mock) {
-    mock.onGet('/mock/users').reply((config) => {
+export default {
+    'get /mock/users': (config) => {
         const {
             pageSize,
             pageNum,
@@ -18,15 +18,9 @@ export default function (mock) {
                 }]);
             }, 1000);
         });
-    });
-    mock.onPost('/mock/logout').reply(() => {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve([200, {}]);
-            }, 500);
-        });
-    });
-    mock.onPost('/mock/login').reply((config) => {
+    },
+
+    'post /mock/login': (config) => {
         const {
             userName,
             password,
@@ -49,5 +43,6 @@ export default function (mock) {
                 }, 1000);
             }
         });
-    });
+    },
+    'post /mock/logout': {},
 }

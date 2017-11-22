@@ -5,7 +5,7 @@ export default function ({error, errorTip}) {
     if (errorTip === false) return;
     let msg = '操作失败';
     if (errorTip) msg = errorTip;
-    if (error.response) {
+    if (error && error.response) {
         const resData = error.response;
         const {status} = error.response;
 
@@ -25,7 +25,7 @@ export default function ({error, errorTip}) {
             msg = '您访问的资源不存在！';
         }
     } else {
-        msg = error.message;
+        msg = error && error.message;
     }
 
     if (error && error.message && error.message.startsWith('timeout of')) {

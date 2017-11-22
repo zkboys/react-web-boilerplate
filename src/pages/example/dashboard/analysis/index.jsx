@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Button} from 'antd';
+import PageContent from '../../../../layouts/page-content';
 import {ajax} from '../../../../commons/axios';
 
 export const PAGE_ROUTE = '/dashboard/analysis';
@@ -18,7 +19,7 @@ export default class index extends Component {
 
     render() {
         return (
-            <div>
+            <PageContent>
                 <Button
                     onClick={() => {
                         this.props.$ajax.get('/test-ajax', null, {successTip: '获取成功！'})
@@ -26,8 +27,17 @@ export default class index extends Component {
                                 console.log(res);
                             });
                     }}
-                >发请求</Button>
-            </div>
+                >发请求 proxy 请求</Button>
+
+                <Button
+                    onClick={() => {
+                        this.props.$ajax.get('/mock/test-ajax/array', null, {successTip: '获取成功！'})
+                            .then(res => {
+                                console.log(res);
+                            });
+                    }}
+                >发请求 mock 请求</Button>
+            </PageContent>
         );
     }
 }

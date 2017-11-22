@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Button} from 'antd';
 import FixBottom from '../../../layouts/fix-bottom';
+import PageContent from '../../../layouts/page-content';
+
 import {
-    PageContent,
     ListPage,
     Operator,
 } from 'zk-antd';
@@ -194,9 +195,7 @@ export default class index extends Component {
         } = this.state;
         const {pageNum} = this.state.params;
         return (
-            <PageContent
-                style={{marginBottom: '66px'}}
-            >
+            <PageContent>
                 <ListPage
                     loading={loading}
                     toolItems={this.toolItems}

@@ -17,7 +17,7 @@ export function isMock(url /* url, data, method, options */) {
  * @type {ZkAxios}
  */
 export const zkAxios = new ZkAxios({
-    onShowErrorTip: handleError,
+    onShowErrorTip: (error, errorTip) => handleError({error, errorTip}),
     onShowSuccessTip: (response, successTip) => handleSuccess({successTip}),
     isMock,
 });

@@ -1,9 +1,14 @@
 import MockAdapter from 'axios-mock-adapter';
 import {mockInstance} from '../commons/axios';
-import mockMenu from './mock-menu';
-import mockUser from './mock-user';
+import simplify from './simplify';
 
 const mock = new MockAdapter(mockInstance);
 
-mockMenu(mock);
-mockUser(mock);
+simplify(mock, [
+    require('./mock-menu'),
+    require('./mock-test-ajax'),
+    require('./mock-user')
+]);
+
+
+
