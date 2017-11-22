@@ -10,3 +10,17 @@
 1. 页面头部title自动获取/可设置
 1. 页面头部面包屑自动获取/可设置
 1. 页面头部可以隐藏/显示
+
+## 页面头部
+```jsx harmony
+
+const {pageHead} = this.props.$actions;
+pageHead.setTitle('自定义title');
+pageHead.hide();
+pageHead.show();
+pageHead.setBreadcrumbs([
+    {text: '自定义',icon: 'home',path: '/path'},
+    {text: '面包屑',icon: 'home',path: '/path'},
+    {text: '导航',icon: 'home',path: '/path'},
+])
+```

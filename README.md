@@ -29,13 +29,28 @@ $ yarn start
 ```
 $ yarn build
 ```
+## 项目结构
+```
+.
+├── public          // 静态文件存放目录，不经过webpack打包但是项目中还用到的文件
+└── src
+    ├── commons     // 公共方法
+    ├── components  // 通用业务组件
+    ├── e2e         // 端对端测试
+    ├── layouts     // 布局
+    ├── mock        // mock数据
+    ├── models      // redux 封装，模块，提供数据
+    ├── pages       // 各个页面
+    ├── router      // 路由相关
+    └── services    // 服务    
+```
 
 ## 连接后端
-开发时通过[配置proxy](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#configuring-the-proxy-manually)，与后端进行连接;
+开发时通过在.roadhogrc文件中[配置proxy](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#configuring-the-proxy-manually)，与后端进行连接;
 生产环境通过nginx进行配置；
 
 ### 开发环境
-package.json文件中：
+.roadhogrc文件中：
 ```
 "proxy": {
     "/api": {
@@ -43,7 +58,7 @@ package.json文件中：
     }
 }
 ```
-注：`api` 为前后端约定的请求地址前缀，具体以团队约定为准
+注：`api` 为前后端约定的请求地址前缀，一般axios`baseURL`也配置成 `api` ，具体以团队约定为准。
 
 ### 生产环境
 前后端分离 ngnix配置 参考：
@@ -74,4 +89,3 @@ server {
 
 ## TODO
 
-- [ ] 构建优化，目前rebuild 和 build 都比较慢；

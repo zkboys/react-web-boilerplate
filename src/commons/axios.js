@@ -30,7 +30,5 @@ zkAxios.mockDefaults.baseURL = '/';
 // mockjs使用的axios实例
 export const mockInstance = zkAxios.mockInstance;
 
-/**
- * ajax高阶组件
- */
+// ajax高阶组件
 export const ajax = createAjaxHoc(zkAxios);
