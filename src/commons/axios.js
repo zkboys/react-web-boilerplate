@@ -1,5 +1,5 @@
 import ZkAxios, {createAjaxHoc} from 'zk-axios';
-// import mockUrls from '../mock/url-config';
+import mockUrls from '../mock/url-config';
 import handleError from './handle-error';
 import handleSuccess from './handle-success';
 
@@ -9,7 +9,7 @@ import handleSuccess from './handle-success';
  * @returns {boolean|*}
  */
 export function isMock(url /* url, data, method, options */) {
-    return /* mockUrls.indexOf(url) > -1 || */ url.startsWith('/mock');
+    return mockUrls.indexOf(url) > -1 || url.startsWith('/mock');
 }
 
 /**
@@ -23,9 +23,9 @@ export const zkAxios = new ZkAxios({
 });
 
 // 默认配置
-zkAxios.defaults.baseUrl = '/api';
+zkAxios.defaults.baseURL = '/api';
 zkAxios.defaults.timeout = 1000 * 5;
-zkAxios.mockDefaults.baseUrl = '/';
+zkAxios.mockDefaults.baseURL = '/';
 
 // mockjs使用的axios实例
 export const mockInstance = zkAxios.mockInstance;

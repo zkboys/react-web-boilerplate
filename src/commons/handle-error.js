@@ -1,4 +1,4 @@
-import {message, Modal} from 'antd';
+import {notification} from 'antd';
 import {toLogin} from './index';
 
 export default function ({error, errorTip}) {
@@ -32,14 +32,8 @@ export default function ({error, errorTip}) {
         msg = '请求超时！';
     }
 
-    // 方便调试，开发时，使用message方式提示
-    // 线上使用modal提示，防止用户注意不到message提示
-    if (process.env.NODE_ENV === 'development') {
-        message.error(msg, 3);
-    } else {
-        Modal.error({
-            title: '提示',
-            content: msg,
-        });
-    }
+    notification.error({
+        message: '错误！',
+        description: msg,
+    });
 }

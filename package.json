@@ -6,7 +6,6 @@
     "scripts": {
         "precommit": "npm run lint-staged",
         "start": "zk-roadhog server",
-        "start:no-proxy": "cross-env NO_PROXY=true zk-roadhog server",
         "build": "zk-roadhog build",
         "site": "roadhog-api-doc static && gh-pages -d dist",
         "analyze": "node ./roadhog/lib/build --analyze",
@@ -20,7 +19,7 @@
     },
     "dependencies": {
         "animate.css": "^3.5.2",
-        "antd": "3.0.0-rc.1",
+        "antd": "^2.13.10",
         "axios": "^0.17.1",
         "axios-mock-adapter": "^1.10.0",
         "classnames": "^2.2.5",

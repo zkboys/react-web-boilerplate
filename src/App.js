@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {LocaleProvider, Spin} from 'antd';
-import zhCN from 'antd/lib/locale-provider/zh_CN';
 import 'moment/locale/zh-cn';
 import {Provider} from 'react-redux';
 import moment from 'moment';
@@ -120,7 +119,7 @@ class App extends Component {
     render() {
         const {loading} = this.state;
         return (
-            <LocaleProvider locale={zhCN}>
+            <LocaleProvider>
                 {
                     loading ?
                         (

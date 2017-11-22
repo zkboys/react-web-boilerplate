@@ -46,5 +46,11 @@
   // 忽略文件，不进行构建，提供部分模块打包功能，一般是配合补充 pagePath 进行使用，字符串或者数组
   "pageIgnore": [
       // "**/ActionsExample.jsx",
-  ]
+  ],
+
+  "proxy": {
+      "/api": {
+        "target": "http://localhost:3000"
+      }
+    }
 }
