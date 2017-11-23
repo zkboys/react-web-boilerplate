@@ -44,7 +44,7 @@ export default class index extends Component {
         {
             type: 'primary', text: '添加', icon: 'plus-circle-o',
             onClick: () => {
-                this.props.$actions.pageHead.setTitle('查询');
+                this.props.$action.pageHead.setTitle('查询');
             },
         },
     ];

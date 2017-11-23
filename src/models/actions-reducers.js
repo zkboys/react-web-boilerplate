@@ -4,15 +4,13 @@ import uuid from 'uuid/v4';
 import {checkAction, actionUtils, actionPage, reducerPage} from 'zk-redux';
 import pageInitState from '../pages/page-init-state';
 import initialState from '../pages/page-init-state';
-import * as menu from './menu';
-import * as pageHead from './page-head';
-import * as side from './side';
 
-// models
+// models key 即对应 $action中的key
 const models = {
-    menu,
-    pageHead,
-    side,
+    menu: require('./menu'), // this.props.$action.menu
+    pageHead: require('./page-head'),
+    side: require('./side'),
+    global: require('./global'),
 };
 
 // 需要同步的数据，对应meta中的sync字段，对应的是reducers中的数据
@@ -21,16 +19,12 @@ const syncKeys = [
     'side',
     'menu',
 ];
-const sideActions = side.actions;
-const sideReducers = handleActions(side.reducers, side.initialState);
 
 const utils = actionUtils({pageInitState, syncKeys});
 const pageState = reducerPage(initialState);
 let _actions = checkAction({actionPage, utils});
 const _reducers = {pageState};
 
-_actions.side = sideActions;
-_reducers.side = sideReducers;
 
 Object.keys(models).forEach(key => {
     const model = models[key];

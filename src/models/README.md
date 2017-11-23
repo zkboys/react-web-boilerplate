@@ -1,10 +1,45 @@
 # models(redux) 封装
-为了方便维护，types actions reducers 可以在一个文件中编写，参见`models/side.js` `models/index.js`;
+为了方便维护，types actions reducers 可以在一个文件中编写，参见`models/side.js` `models/page-head.js`;
 
-action reducers 二合一
+## 组件与redux进行连接
+提供了两种方式，装饰器方式、函数调用方式；
+
+注：连接路由的组件已经自动connect，非路由直接组件，需要显示connect；
+
+### 装饰器
+```jsx harmony
+import {connect} from 'path/to/models';
+
+@connect(state => {
+    return {
+        ...
+    }
+})
+class Demo extends Component{
+    ...
+}
+```
+
+### 函数
+```jsx harmony
+import {connectComponent} from 'path/to/models';
+
+class Demo extends Component {
+   ... 
+}
+function mapStateToProps(state) {
+    return {
+        ...
+    };
+}
+
+export default connectComponent({LayoutComponent: Demo, mapStateToProps});
+```
+
+## action reducers 二合一
 ```js
 // action reducer 合并写法，如果一个action 只对应一个reducer，这种写法可以有效减少代码量
-export const ar = {
+export const ar = { // ar 为约定变量名，不可更改
     arDemo: { // 如果action有额外的数据处理，请使用这种结构
         payloadCreator() {
         },
@@ -36,9 +71,9 @@ export const ar = {
 ## 关于redux
 actions可以被各个页面组件和reducers复用
 
-- 各个页面（组件）如果挂载到路由，export出两个变量`LayoutComponent`(或者default 对应的是组件)和`mapStateToProps`，系统就会将这个组件与redux关联，即可使用`this.props.$actions`中的方法，获取到redux中的数据；
+- 各个页面（组件）如果挂载到路由，export出两个变量`LayoutComponent`(或者default 对应的是组件)和`mapStateToProps`，系统就会将这个组件与redux关联，即可使用`this.props.$action`中的方法，获取到redux中的数据；
 - 各个页面（组件）如果不是挂载到路由上的，需要显示调用`connect`进行redux的连接；
-- 各个页面（组件）如果已经与redux进行连接，通过`const {$actions} = this.props`获取actions对象，然后调用`$actions.xxx.xxx()`或`$actions.xxx()` 触发action；
+- 各个页面（组件）如果已经与redux进行连接，通过`const {$action} = this.props`获取actions对象，然后调用`$action.xxx.xxx()`或`$action.xxx()` 触发action；
 - `mapStateToProps` 用于指定redux的state中哪部分数据用于当前组件，由于reducer的`combineReducers`方法包装之后，将各个reducer的state存放在对应的key中，key指的是combineReducers包装时指定的key，比如：
 
     ```javascript

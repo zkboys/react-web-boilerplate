@@ -15,7 +15,7 @@ export default class TabWithRoute extends Component {
     state = {};
 
     componentDidMount() {
-        const {pageHead} = this.props.$actions;
+        const {pageHead} = this.props.$action;
 
         pageHead.setTitle('自定义title');
         pageHead.hide();
@@ -34,7 +34,7 @@ export default class TabWithRoute extends Component {
                         let key = match.params.activeKey;
                         if (key !== activeKey) {
                             key = key === ':activeKey' ? '1' : key;
-                            this.props.$actions.setState({activeKey: key})
+                            this.props.$action.setState({activeKey: key})
                         }
                     }
                     return null;

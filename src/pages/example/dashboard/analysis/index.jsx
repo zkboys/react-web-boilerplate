@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import {Button} from 'antd';
 import PageContent from '../../../../layouts/page-content';
-import {ajax} from '../../../../commons/axios';
 
 export const PAGE_ROUTE = '/dashboard/analysis';
 
-@ajax()
 export default class index extends Component {
     state = {};
 
@@ -14,7 +12,7 @@ export default class index extends Component {
     }
 
     componentDidMount() {
-
+        console.log(this.props.$service);
     }
 
     render() {
@@ -37,6 +35,18 @@ export default class index extends Component {
                             });
                     }}
                 >发请求 mock 请求</Button>
+
+                <Button
+                    onClick={() => {
+                        const {$action: {global}} = this.props;
+                        global.showLoading();
+                        setTimeout(() => {
+                            global.hideLoading();
+                        }, 3000)
+                    }}
+                >
+                    全局loading
+                </Button>
             </PageContent>
         );
     }

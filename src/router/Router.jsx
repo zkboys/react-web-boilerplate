@@ -19,6 +19,8 @@ import Error404 from '../pages/error/Error404';
 import PageFrame from '../layouts/base-frame';
 import IFrame from '../layouts/iframe'
 import AuthRoute from './AuthRoute';
+import {ajax} from '../commons/axios';
+import service from '../services/service-hoc';
 
 const allRoutes = pageRoutes.concat(routes);
 
@@ -35,7 +37,7 @@ const renderBundle = (props) => (Com) => {
         return null;
     }
     NProgress.done();
-    Com = withRouter(connectComponent(Com));
+    Com = service()(ajax()(withRouter(connectComponent(Com))));
     return <Com {...props}/>;
 };
 

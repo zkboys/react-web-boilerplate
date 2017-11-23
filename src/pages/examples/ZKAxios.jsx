@@ -31,7 +31,7 @@ export default class PromiseAjaxExample extends Component {
     };
 
     componentDidMount() {
-        console.log(this.props.$actions);
+        console.log(this.props.$action);
     }
 
     handleSendGetTimeout = () => {

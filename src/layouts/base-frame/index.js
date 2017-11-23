@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Icon, BackTop} from 'antd';
+import {Icon, BackTop, Spin} from 'antd';
 import Rnd from 'react-rnd';
 import {Helmet} from 'react-helmet';
 import {withRouter, Link} from 'react-router-dom';
@@ -19,6 +19,7 @@ const scrollBarWidth = getScrollBarWidth();
     const {menus, openKeys, topMenu, selectedMenu} = state.menu;
     const {title, breadcrumbs, show} = state.pageHead;
     const {width, collapsed} = state.side;
+    const {loading} = state.global;
     return {
         menus,
         openKeys,
@@ -29,6 +30,7 @@ const scrollBarWidth = getScrollBarWidth();
         breadcrumbs,
         sideWidth: width,
         sideCollapsed: collapsed,
+        globalLoading: loading,
     };
 })
 @withRouter
@@ -39,8 +41,8 @@ export default class BaseFrame extends Component {
     };
 
     componentWillMount() {
-        const {$actions, $actions: {menu}} = this.props;
-        $actions.getStateFromStorage();
+        const {$action, $action: {menu}} = this.props;
+        $action.getStateFromStorage();
         menu.getMenus();
         menu.getMenuStatus();
         this.setBreadcrumbs();
@@ -51,7 +53,7 @@ export default class BaseFrame extends Component {
     }
 
     setBreadcrumbs() {
-        const {$actions: {pageHead}} = this.props;
+        const {$action: {pageHead}} = this.props;
         setTimeout(() => {
             const {selectedMenu} = this.props;
             let breadcrumbs = [];
@@ -93,13 +95,13 @@ export default class BaseFrame extends Component {
 
     handleToggle = () => {
         const {sideCollapsed} = this.props;
-        this.props.$actions.side.setCollapsed(!sideCollapsed);
+        this.props.$action.side.setCollapsed(!sideCollapsed);
         this.setState({transitionDuration: 300});
     };
 
     handleMenuOpenChange = (openKeys) => {
         const {sideCollapsed} = this.props;
-        if (!sideCollapsed) this.props.$actions.menu.setOpenKeys(openKeys);
+        if (!sideCollapsed) this.props.$action.menu.setOpenKeys(openKeys);
     };
 
     handleSideResizeStart = () => {
@@ -109,7 +111,7 @@ export default class BaseFrame extends Component {
     };
 
     handleSideResize = (e, direction, ref) => {
-        this.props.$actions.side.setWidth(ref.offsetWidth);
+        this.props.$action.side.setWidth(ref.offsetWidth);
     };
 
     handleSideResizeStop = () => {
@@ -128,6 +130,7 @@ export default class BaseFrame extends Component {
             breadcrumbs,
             sideCollapsed,
             sideWidth,
+            globalLoading,
         } = this.props;
 
         let {transitionDuration} = this.state;
@@ -215,6 +218,10 @@ export default class BaseFrame extends Component {
                             />
                         ) : null
                     }
+                </div>
+
+                <div styleName="global-loading" style={{display: globalLoading ? 'block' : 'none'}}>
+                    <Spin spinning size="large"/>
                 </div>
             </div>
         );

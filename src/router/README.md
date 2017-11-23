@@ -74,6 +74,17 @@ import {Link} from 'react-router';
 this.props.router.push('/user/add');
 ```
 
+## 注入页面中的属性
+页面进行了一些包装，注入了一些常用属性 `service()(ajax()(withRouter(connectComponent(Com))));`;
+
+在页面中，可以调用：
+
+- this.porps.$ajax
+- this.props.$service
+- this.porps.$action
+- this.props.history
+
+注：非路由直接连接页面没有这些属性，需要使用相应的高阶组件进行包装
 
 ## 页面离开提示
 

@@ -23,46 +23,46 @@ export class LayoutComponent extends Component {
     state = {};
     render() {
         return (
-            <PageContent className="$actions-set-state">
-                <Button onClick={() => this.props.$actions.showFullPageLoading()}>showFullPageLoading</Button>
+            <PageContent className="$action-set-state">
+                <Button onClick={() => this.props.$action.showFullPageLoading()}>showFullPageLoading</Button>
                 <p>
                     <Button onClick={() => {
-                        this.props.$actions.setState({
+                        this.props.$action.setState({
                             e: 'eeeeeee',
                         });
-                    }}>$actions.setState</Button>
+                    }}>$action.setState</Button>
                     <br/>
                     <span>{this.props.e}</span>
                 </p>
                 <p>
                     <Button onClick={() => {
-                        this.props.$actions.arrAppend('a.b.c', '11');
-                    }}>$actions.arrAppend 11</Button>
+                        this.props.$action.arrAppend('a.b.c', '11');
+                    }}>$action.arrAppend 11</Button>
                     <Button onClick={() => {
-                        this.props.$actions.arrAppend('a.b.c', ['11', '22']);
-                    }}>$actions.arrAppend ['11', '22']</Button>
+                        this.props.$action.arrAppend('a.b.c', ['11', '22']);
+                    }}>$action.arrAppend ['11', '22']</Button>
                     <Button onClick={() => {
-                        this.props.$actions.arrRemove('a.b.c', '11');
-                    }}>$actions.arrRemove 11</Button>
+                        this.props.$action.arrRemove('a.b.c', '11');
+                    }}>$action.arrRemove 11</Button>
                     <Button onClick={() => {
-                        this.props.$actions.arrRemoveAll('a.b.c', '22');
-                    }}>$actions.arrRemoveAll 22</Button>
+                        this.props.$action.arrRemoveAll('a.b.c', '22');
+                    }}>$action.arrRemoveAll 22</Button>
                     <br/>
                     <span>{this.props.a.b.c.join(',')}</span>
                 </p>
                 <p>
                     <Button onClick={() => {
-                        this.props.$actions.objSet('a.b.c2', '11');
-                    }}>$actions.objSet a.b.c2 = 11</Button>
+                        this.props.$action.objSet('a.b.c2', '11');
+                    }}>$action.objSet a.b.c2 = 11</Button>
                     <Button onClick={() => {
-                        this.props.$actions.objRemove('a.b.c2', '11');
-                    }}>$actions.objRemove a.b.c2</Button>
+                        this.props.$action.objRemove('a.b.c2', '11');
+                    }}>$action.objRemove a.b.c2</Button>
                     <br/>
                     <span>{this.props.a.b.c2}</span>
                 </p>
                 <p>
                     <Button onClick={() => {
-                        this.props.$actions.demo('我是demo');
+                        this.props.$action.demo('我是demo');
                     }}>
                         测试共享操作action
                     </Button>

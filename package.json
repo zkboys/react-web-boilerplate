@@ -5,10 +5,11 @@
     "private": true,
     "scripts": {
         "precommit": "npm run lint-staged",
+        "dev": "zk-roadhog server",
         "start": "zk-roadhog server",
         "build": "zk-roadhog build",
         "site": "roadhog-api-doc static && gh-pages -d dist",
-        "analyze": "node ./roadhog/lib/build --analyze",
+        "analyze": "zk-roadhog build --analyze",
         "lint:style": "stylelint \"src/**/*.less\" --syntax less",
         "lint": "eslint --ext .js src mock tests && npm run lint:style",
         "lint:fix": "eslint --fix --ext .js src mock tests && npm run lint:style",

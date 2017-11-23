@@ -2,6 +2,13 @@
 
 基于 react react-router@4 redux antd 的管理系统框架
 
+## 相关文档
+
+- [models(redux)](https://github.com/zkboys/react-web-boilerplate/blob/master/src/models/README.md)
+- [layouts(布局)](https://github.com/zkboys/react-web-boilerplate/blob/master/src/layouts/base-frame/README.md)
+- [router(路由)](https://github.com/zkboys/react-web-boilerplate/blob/master/src/router/README.md)
+- [services(服务)](https://github.com/zkboys/react-web-boilerplate/blob/master/src/services/README.md)
+
 ## 依赖
 1. nodejs v8.1.3
 1. yarn v1.3.2
