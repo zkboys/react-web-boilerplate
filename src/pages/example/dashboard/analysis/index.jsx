@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button} from 'antd';
 import PageContent from '../../../../layouts/page-content';
+import girl from './girl.jpeg';
 
 export const PAGE_ROUTE = '/dashboard/analysis';
 
@@ -48,6 +49,7 @@ export default class index extends Component {
                 >
                     全局loading
                 </Button>
+                <img src={girl} alt="girl"/>
             </PageContent>
         );
     }

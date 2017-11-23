@@ -1,5 +1,5 @@
 {
-    "name": "ant-design-pro",
+    "name": "react-web-boilerplate",
     "version": "0.3.0",
     "description": "An out-of-box UI solution for enterprise applications",
     "private": true,
@@ -36,6 +36,7 @@
         "moment": "^2.19.1",
         "nprogress": "^0.2.0",
         "numeral": "^2.0.6",
+        "path-to-regexp": "^2.1.0",
         "prop-types": "^15.5.10",
         "qs": "^6.5.0",
         "react": "15.6.1",
@@ -50,10 +51,11 @@
         "redux": "^3.7.2",
         "redux-actions": "^2.2.1",
         "redux-thunk": "^2.2.0",
-        "zk-antd": "^1.0.1",
+        "uuid": "^3.1.0",
+        "zk-antd": "^1.0.3",
         "zk-axios": "^1.0.0",
         "zk-redux": "^1.0.1",
-        "zk-roadhog": "^0.0.4",
+        "zk-roadhog": "0.0.6",
         "zk-utils": "^1.0.1"
     },
     "devDependencies": {
