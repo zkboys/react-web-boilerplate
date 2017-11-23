@@ -71,7 +71,7 @@ export const ar = { // ar 为约定变量名，不可更改
 ## 关于redux
 actions可以被各个页面组件和reducers复用
 
-- 各个页面（组件）如果挂载到路由，export出两个变量`LayoutComponent`(或者default 对应的是组件)和`mapStateToProps`，系统就会将这个组件与redux关联，即可使用`this.props.$action`中的方法，获取到redux中的数据；
+- 各个页面（组件）如果挂载到路由，将自动与redux进行连接
 - 各个页面（组件）如果不是挂载到路由上的，需要显示调用`connect`进行redux的连接；
 - 各个页面（组件）如果已经与redux进行连接，通过`const {$action} = this.props`获取actions对象，然后调用`$action.xxx.xxx()`或`$action.xxx()` 触发action；
 - `mapStateToProps` 用于指定redux的state中哪部分数据用于当前组件，由于reducer的`combineReducers`方法包装之后，将各个reducer的state存放在对应的key中，key指的是combineReducers包装时指定的key，比如：
@@ -105,6 +105,7 @@ actions可以被各个页面组件和reducers复用
         - 来自cookie/localStorage等其他存储的数据
         - 多组件公用数据
         - 多组件间通信数据
+        - 基础业务数据，其他页面会频繁使用
     - 哪些数据直接使用组件内部state即可？
         - 不涉及组件外数据修改（比如ajax修改后端数据），不被其他任何外部组件使用的数据，比如：点击显示隐藏modal；点击展开收起div等控制内部状态的数据。
 

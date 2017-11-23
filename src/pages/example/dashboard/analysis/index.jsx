@@ -13,6 +13,7 @@ export default class index extends Component {
 
     componentDidMount() {
         console.log(this.props.$service);
+        console.log(this.props.$action.setState)
     }
 
     render() {

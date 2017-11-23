@@ -9,11 +9,9 @@ import {
     Operator,
 } from 'zk-antd';
 import './style.less';
-import service from '../../../services/service-hoc';
 
 export const PAGE_ROUTE = '/users';
 
-@service()
 export default class index extends Component {
 
     state = {
