@@ -9,8 +9,9 @@ import {
     createConnectHOC,
 } from 'zk-redux';
 
-import {actions, reducers} from './actions-reducers';
+import actionsAndReducers from './actions-reducers';
 
+const {actions, reducers} = actionsAndReducers;
 let middlewares = [
     thunkMiddleware,
     middlewarePromise,

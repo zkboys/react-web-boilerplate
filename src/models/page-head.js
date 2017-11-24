@@ -22,17 +22,7 @@ export const ar = {
         breadcrumbs = breadcrumbs.concat(payload);
         return {...state, breadcrumbs};
     },
-    setTitle(state, action) {
-        const {payload} = action;
-        return {
-            ...state,
-            title: payload,
-        };
-    },
-    show(state) {
-        return {...state, show: true}
-    },
-    hide(state) {
-        return {...state, show: false}
-    },
+    setTitle: (state, {payload}) => ({...state, title: payload}),
+    show: (state) => ({...state, show: true}),
+    hide: (state) => ({...state, show: false}),
 };
