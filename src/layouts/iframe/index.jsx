@@ -13,7 +13,7 @@ export default class IFrame extends Component {
 
     componentDidMount() {
         this.setHeight();
-        this.props.$addEventListener(window, 'resize', this.setHeight)
+        this.props.addEventListener(window, 'resize', this.setHeight)
     }
 
     setHeight = () => {
