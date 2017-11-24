@@ -1,5 +1,5 @@
-import BaseService from '../base-service';
-import {zkAxios} from '../../commons/axios';
+import BaseService from './base-service';
+import {zkAxios} from '../commons/axios';
 
 export default class SystemService extends BaseService {
     constructor(...args) {

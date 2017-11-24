@@ -30,7 +30,7 @@ export default class index extends Component {
                 <div styleName="page-content">
                     {children}
                 </div>
-                {footer ? <Footer/> : null}
+                {footer ? <div styleName="footer"><Footer/></div> : null}
             </div>
         );
     }

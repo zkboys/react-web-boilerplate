@@ -9651,13 +9651,13 @@ zk-antd@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/zk-antd/-/zk-antd-1.0.5.tgz#f4acb6cd24176bef928c0f38ab76730ff1415550"
 
-zk-axios@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/zk-axios/-/zk-axios-1.0.0.tgz#82a8b805ecc9d33ca3652f5799260907d42340ef"
+zk-axios@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/zk-axios/-/zk-axios-1.0.1.tgz#dfad263992bf93d56cdfd1f69d7802a49af85683"
 
-zk-redux@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/zk-redux/-/zk-redux-1.0.3.tgz#0bfb8987acfd3ff39543f8d0b7f12d068b187acd"
+zk-redux@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/zk-redux/-/zk-redux-1.0.4.tgz#5e3be63400dcdbe136b1cffc80e99a331462a23b"
 
 zk-roadhog@^0.0.8:
   version "0.0.8"
@@ -9741,6 +9741,6 @@ zk-roadhog@^0.0.8:
     webpack-visualizer-plugin "^0.1.6"
     yargs "^8.0.1"
 
-zk-utils@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/zk-utils/-/zk-utils-1.0.1.tgz#b5b8a7ac52e48d5f813b648a6c7b80e450b30a0c"
+zk-utils@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/zk-utils/-/zk-utils-1.0.2.tgz#b62aaa8f5b9e85944e8da14dbb676496c72c56af"
