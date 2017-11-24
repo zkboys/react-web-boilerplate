@@ -22,7 +22,7 @@ const types = { // types只是做action 与 reducer之间的连接，它的值�
 export const actions = {
     getMenus: createAction(types.GET_MENUS, getMenuTreeData),
     setOpenKeys: createAction(types.SET_OPEN_KEYS),
-    // 获取菜单状态，openKeys selectMenu topMenu
+    // 获取菜单状态，openKeys selectedMenu topMenu
     getMenuStatus: createAction(types.GET_MENU_STATUS, getMenuTreeData, () => ({sync: 'menu'})),
 };
 
@@ -32,8 +32,8 @@ export const reducers = {
         const {payload = {}} = action;
         const {menu} = payload;
         if (menu) {
-            const {openKeys = [], selectMenu, topMenu} = menu;
-            return {...state, openKeys, selectMenu, topMenu};
+            const {openKeys = [], selectedMenu, topMenu} = menu;
+            return {...state, openKeys, selectedMenu, topMenu};
         }
         return {...state};
     },
@@ -51,7 +51,7 @@ export const reducers = {
             openKeys: payload,
         };
     },
-    [types.GET_MENU_STATUS](state, action) { // 根据url 获取菜单状态 openKeys selectMenu topMenu
+    [types.GET_MENU_STATUS](state, action) { // 根据url 获取菜单状态 openKeys selectedMenu topMenu
         const menuTreeData = action.payload;
         let selectedMenu = {};
         let topMenu = {};

@@ -42,7 +42,7 @@ export default class index extends Component {
         {
             type: 'primary', text: '添加', icon: 'plus-circle-o',
             onClick: () => {
-                this.props.$action.pageHead.setTitle('查询');
+                this.props.action.pageHead.setTitle('查询');
             },
         },
     ];
@@ -175,7 +175,7 @@ export default class index extends Component {
         params = {...this.state.params, ...params};
         this.setState({params, loading: true});
         console.log('user/index.js', params);
-        this.props.$service.userService
+        this.props.service.userService
             .getUsersByPage(params, {permission: 'USER_SEARCH'})
             .then(data => {
                 this.setState({

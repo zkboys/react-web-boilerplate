@@ -14,7 +14,7 @@
 ## 页面头部
 ```jsx harmony
 
-const {pageHead} = this.props.$action;
+const {pageHead} = this.props.action;
 pageHead.setTitle('自定义title');
 pageHead.hide();
 pageHead.show();

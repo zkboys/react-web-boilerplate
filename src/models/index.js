@@ -11,9 +11,9 @@ import {
 } from 'zk-redux';
 import pageInitState from '../pages/page-init-state';
 
-// models key 即对应 $action中的key
+// models key 即对应 action中的key
 const models = {
-    menu: require('./menu'), // this.props.$action.menu
+    menu: require('./menu'), // this.props.action.menu
     pageHead: require('./page-head'),
     side: require('./side'),
     global: require('./global'),

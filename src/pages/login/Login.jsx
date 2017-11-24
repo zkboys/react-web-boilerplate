@@ -31,7 +31,7 @@ export default class extends Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 this.setState({loading: true, message: ''});
-                this.props.$ajax.post('/mock/login', values, {errorTip: false})
+                this.props.ajax.post('/mock/login', values, {errorTip: false})
                     .then((res) => {
                         setCurrentLoginUser(res);
                         this.setState({loading: false});

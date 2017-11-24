@@ -46,7 +46,7 @@ class App extends Component {
         if (userId) {
             // 根据用户id查询用户菜单权限
             this.setState({loading: true});
-            this.props.$service.systemService
+            this.props.service.systemService
                 .getMenus({userId})
                 .then(res => {
                     let menus = res || [];

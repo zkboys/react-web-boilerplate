@@ -5,7 +5,7 @@
 可以提高复用，统一维护数据交互。
 
 ## service命名
-service命名不必带具体业务的名词，比如，UserService下getUserById可以直接定义为getById，因为调用的时候可以区分出`this.props.$service.userService.getById`。
+service命名不必带具体业务的名词，比如，UserService下getUserById可以直接定义为getById，因为调用的时候可以区分出`this.props.service.userService.getById`。
 
 ## base-service
 > 通过base-service 提供一些其他具体service的公共方法。
@@ -17,7 +17,7 @@ ajax请求基于restfull规范，base-service基于restfull提供了一些基础
 
 提供了一个高阶组件，来解决自动资源释放问题`service-hoc.jsx`,此高阶组件作用：
 
-1. 将创建各个Service类的实例，统一将service实例以`$service`变量名传入组件的props,
-各个service以首字母消息驼峰命名，比如：UserService，经过`service-hoc.jsx`处理后，组件中以`this.props.$service.userService`方式进行调用。
+1. 将创建各个Service类的实例，统一将service实例以`service`变量名传入组件的props,
+各个service以首字母消息驼峰命名，比如：UserService，经过`service-hoc.jsx`处理后，组件中以`this.props.service.userService`方式进行调用。
 1. 组件Unmount时，调用各个service实例的`release`方法进行资源释放。
 

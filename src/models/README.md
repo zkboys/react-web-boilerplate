@@ -73,7 +73,7 @@ actions可以被各个页面组件和reducers复用
 
 - 各个页面（组件）如果挂载到路由，将自动与redux进行连接
 - 各个页面（组件）如果不是挂载到路由上的，需要显示调用`connect`进行redux的连接；
-- 各个页面（组件）如果已经与redux进行连接，通过`const {$action} = this.props`获取actions对象，然后调用`$action.xxx.xxx()`或`$action.xxx()` 触发action；
+- 各个页面（组件）如果已经与redux进行连接，通过`const {action} = this.props`获取actions对象，然后调用`action.xxx.xxx()`或`action.xxx()` 触发action；
 - `mapStateToProps` 用于指定redux的state中哪部分数据用于当前组件，由于reducer的`combineReducers`方法包装之后，将各个reducer的state存放在对应的key中，key指的是combineReducers包装时指定的key，比如：
 
     ```javascript

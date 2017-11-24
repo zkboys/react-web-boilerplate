@@ -41,8 +41,8 @@ export default class BaseFrame extends Component {
     };
 
     componentWillMount() {
-        const {$action, $action: {menu}} = this.props;
-        $action.getStateFromStorage();
+        const {action, action: {menu}} = this.props;
+        action.getStateFromStorage();
         menu.getMenus();
         menu.getMenuStatus();
         this.setBreadcrumbs();
@@ -53,7 +53,7 @@ export default class BaseFrame extends Component {
     }
 
     setBreadcrumbs() {
-        const {$action: {pageHead}} = this.props;
+        const {action: {pageHead}} = this.props;
         setTimeout(() => {
             const {selectedMenu} = this.props;
             let breadcrumbs = [];
@@ -95,13 +95,13 @@ export default class BaseFrame extends Component {
 
     handleToggle = () => {
         const {sideCollapsed} = this.props;
-        this.props.$action.side.setCollapsed(!sideCollapsed);
+        this.props.action.side.setCollapsed(!sideCollapsed);
         this.setState({transitionDuration: 300});
     };
 
     handleMenuOpenChange = (openKeys) => {
         const {sideCollapsed} = this.props;
-        if (!sideCollapsed) this.props.$action.menu.setOpenKeys(openKeys);
+        if (!sideCollapsed) this.props.action.menu.setOpenKeys(openKeys);
     };
 
     handleSideResizeStart = () => {
@@ -111,7 +111,7 @@ export default class BaseFrame extends Component {
     };
 
     handleSideResize = (e, direction, ref) => {
-        this.props.$action.side.setWidth(ref.offsetWidth);
+        this.props.action.side.setWidth(ref.offsetWidth);
     };
 
     handleSideResizeStop = () => {

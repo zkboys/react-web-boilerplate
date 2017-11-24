@@ -3,7 +3,7 @@ import {firstLowerCase} from 'zk-utils';
 import * as allServices from './index';
 /**
  * service高级组件
- * 将$services属性注入到目标组件props中，目标组件可以通过this.props.$services(...)方式进行使用;
+ * 将services属性注入到目标组件props中，目标组件可以通过this.props.services(...)方式进行使用;
  * 在componentWillUnmount方法中，进行统一资源（ajax等）清除（打断未完成ajax请求）
  * @example
  * import service from 'path/to/service-hoc';
@@ -12,7 +12,7 @@ import * as allServices from './index';
  * // class SomeComponent extends Component {...}
  *
  * // 传递参数，修改注入的props属性
- * // @event({propName = '$$service', SomeService}) // 组件内调用：this.props.$$service
+ * // @event({propName = '$service', SomeService}) // 组件内调用：this.props.$service
  * // class SomeComponent extends Component {...}
  *
  * @example
@@ -28,7 +28,7 @@ export default function service(options) {
         class WithSubscription extends Component {
             constructor(props) {
                 super(props);
-                const {propName = '$service'} = options || {};
+                const {propName = 'service'} = options || {};
                 this.propName = propName;
                 this.services = {};
                 // 创建service实例，实例名首字母自动转为小写

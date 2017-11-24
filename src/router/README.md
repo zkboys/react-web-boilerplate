@@ -79,9 +79,9 @@ this.props.router.push('/user/add');
 
 在页面中，可以调用：
 
-- this.porps.$ajax
-- this.props.$service
-- this.porps.$action
+- this.porps.ajax
+- this.props.service
+- this.porps.action
 - this.props.history
 
 注：非路由直接连接页面没有这些属性，需要使用相应的高阶组件进行包装
