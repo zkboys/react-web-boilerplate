@@ -17,6 +17,11 @@ export const ar = {
     },
     // action 数据不需要特殊处理，会直接传递给 reducer的action.payload
     setBreadcrumbs: (state, {payload}) => ({...state, breadcrumbs: payload}),
+    appendBreadcrumbs: (state, {payload}) => {
+        let {breadcrumbs = []} = state;
+        breadcrumbs = breadcrumbs.concat(payload);
+        return {...state, breadcrumbs};
+    },
     setTitle(state, action) {
         const {payload} = action;
         return {

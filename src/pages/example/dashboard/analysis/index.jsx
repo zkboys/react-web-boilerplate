@@ -14,7 +14,25 @@ export default class index extends Component {
 
     componentDidMount() {
         console.log(this.props.$service);
-        console.log(this.props.$action.setState)
+        console.log(this.props.$action.setState);
+        this.props.$action.pageHead.appendBreadcrumbs([
+            {
+                key: 'need a key1',
+                text: 'append',
+                icon: 'fa-user'
+            },
+            {
+                key: 'need a key',
+                text: 'append',
+                icon: 'fa-user'
+            }
+        ]);
+        // this.props.$action.pageHead.setBreadcrumbs([
+        //     {
+        //         key: 'need a key',
+        //         text: <span style={{color: 'red'}}>理论上可以设置成任何东西</span>,
+        //     }
+        // ]);
     }
 
     render() {
@@ -49,7 +67,9 @@ export default class index extends Component {
                 >
                     全局loading
                 </Button>
-                <img src={girl} alt="girl"/>
+                <br/>
+                <br/>
+                <img src={girl} alt="girl" style={{width: '100%'}}/>
             </PageContent>
         );
     }

@@ -9658,8 +9658,8 @@ yauzl@2.4.1:
     fd-slicer "~1.0.1"
 
 zk-antd@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/zk-antd/-/zk-antd-1.0.3.tgz#5027ee4a5796ee7c6233595d9a7c5b0a103ffdd8"
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/zk-antd/-/zk-antd-1.0.5.tgz#f4acb6cd24176bef928c0f38ab76730ff1415550"
 
 zk-axios@^1.0.0:
   version "1.0.0"
