@@ -27,6 +27,7 @@ export const actions = {
 };
 
 export const reducers = {
+    // 如何从store中恢复数据
     [actionTypes.GET_STATE_FROM_STORAGE](state, action) {
         const {payload = {}} = action;
         const {menu} = payload;
