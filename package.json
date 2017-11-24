@@ -52,10 +52,10 @@
         "redux-actions": "^2.2.1",
         "redux-thunk": "^2.2.0",
         "uuid": "^3.1.0",
-        "zk-antd": "^1.0.3",
+        "zk-antd": "^1.0.5",
         "zk-axios": "^1.0.0",
-        "zk-redux": "^1.0.1",
-        "zk-roadhog": "0.0.6",
+        "zk-redux": "^1.0.2",
+        "zk-roadhog": "^0.0.8",
         "zk-utils": "^1.0.1"
     },
     "devDependencies": {
