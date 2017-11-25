@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {Button} from 'antd';
 import FixBottom from '../../../layouts/fix-bottom';
 import PageContent from '../../../layouts/page-content';
+import {connect} from '../../../models';
 
 import {
     ListPage,
@@ -12,13 +13,15 @@ import './style.less';
 
 export const PAGE_ROUTE = '/users';
 
-export default class index extends Component {
+@connect(state => ({
+    users: state.user.users,
+    total: state.user.total,
+    loading: state.user.loading,
+}))
+export default class UserList extends Component {
 
     state = {
-        loading: false,
         params: {pageNum: 1},
-        total: 0,
-        dataSource: [],
     };
 
     queryItems = [
@@ -46,6 +49,7 @@ export default class index extends Component {
             },
         },
     ];
+
     columns = [
         {title: '姓名', dataIndex: 'name'},
         {title: '性别', dataIndex: 'gender'},
@@ -167,31 +171,29 @@ export default class index extends Component {
         },
     ];
 
+    componentWillMount() {
+
+    }
+
     componentDidMount() {
         console.log(this.props);
     }
 
     handleSearch = (params = {}) => {
         params = {...this.state.params, ...params};
-        this.setState({params, loading: true});
-        console.log('user/index.js', params);
-        this.props.service.userService
-            .getUsersByPage(params, {permission: 'USER_SEARCH'})
-            .then(data => {
-                this.setState({
-                    total: data.total,
-                    dataSource: data.list,
-                });
-            }).finally(() => this.setState({loading: false}));
+        this.setState({params});
+
+        this.props.action.user.fetchUser({params, onResolve: () => console.log('成功')});
     };
 
     render() {
         const {
             loading,
             total,
-            dataSource,
-        } = this.state;
+            users,
+        } = this.props;
         const {pageNum} = this.state.params;
+
         return (
             <PageContent>
                 <ListPage
@@ -204,7 +206,7 @@ export default class index extends Component {
                     defaultPageSize={10}
                     tableProps={{
                         columns: this.columns,
-                        dataSource,
+                        dataSource: users,
                     }}
                     onSearch={this.handleSearch}
                     onPageNumChange={pn => this.handleSearch({pageNum: pn})}

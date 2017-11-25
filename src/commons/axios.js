@@ -13,7 +13,7 @@ export function isMock(url /* url, data, method, options */) {
 }
 
 /**
- * ajax工具
+ * ajax工具，含有errorTip 和 successTip
  * @type {ZkAxios}
  */
 export const zkAxios = new ZkAxios({
@@ -27,8 +27,21 @@ zkAxios.defaults.baseURL = '/api';
 zkAxios.defaults.timeout = 1000 * 5;
 zkAxios.mockDefaults.baseURL = '/';
 
+
+/**
+ * ajax工具，不含有 errorTip和successTip
+ * @type {ZkAxios}
+ */
+export const axios = new ZkAxios({
+    isMock,
+});
+
+// 默认配置
+axios.defaults.baseURL = '/api';
+axios.defaults.timeout = 1000 * 5;
+
 // mockjs使用的axios实例
-export const mockInstance = zkAxios.mockInstance;
+export const mockInstance = axios.mockInstance = zkAxios.mockInstance;
 
 // ajax高阶组件
 export const ajax = createAjaxHoc(zkAxios);

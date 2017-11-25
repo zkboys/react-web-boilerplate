@@ -17,6 +17,7 @@ const models = {
     pageHead: require('./page-head'),
     side: require('./side'),
     global: require('./global'),
+    user: require('./user'),
 };
 
 // 这里需要指定同步数据的key，对应meta中的sync字段，对应的是reducers中的数据
