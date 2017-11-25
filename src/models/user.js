@@ -29,18 +29,7 @@ export const ar = {
                 errorTip: '自定义errorTip',
             };
         },
-        /*
-        * promise异步reducer参数说明
-        * 每个函数的参数都是 (state, action)，每个函数的state都是上游函数处理过的最新state
-        *
-        * always = (state) => ({...state}),     // 每个状态之前都会触发，pending、resolve、reject、complete之前都会触发
-        * pending = (state) => ({...state}),    // 请求开始之前
-        * resolve = (state) => ({...state}),    // 成功
-        * reject = (state) => ({...state}),     // 失败
-        * complete = (state) => ({...state}),   // 完成，无论成功失败，都会触发
-        *
-        * pending -> resolve(reject)->complete
-        * */
+        // 基于promise 异步reducer写法；普通reducer直接写函数即可；
         reducer: {
             pending: () => ({loading: true}),
             resolve(state, {payload = {}}) {

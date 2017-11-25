@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Button} from 'antd';
+import {ListPage, Operator} from 'zk-antd';
 import FixBottom from '../../../layouts/fix-bottom';
 import PageContent from '../../../layouts/page-content';
 import {connect} from '../../../models';
-
-import {
-    ListPage,
-    Operator,
-} from 'zk-antd';
 import './style.less';
 
 export const PAGE_ROUTE = '/users';
