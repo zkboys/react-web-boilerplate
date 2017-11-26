@@ -35,7 +35,9 @@ export default class extends Component {
                     .then((res) => {
                         setCurrentLoginUser(res);
                         this.setState({loading: false});
-                        window.location.href = '/';
+
+                        const lastHref = window.sessionStorage.getItem('last-href');
+                        window.location.href = lastHref || '/';
                     })
                     .catch(err => {
                         this.setState({message: err.message, loading: false});
