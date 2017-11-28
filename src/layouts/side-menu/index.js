@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {Menu, Icon} from 'antd';
 import {FontIcon} from 'zk-antd';
-import {renderNode} from 'zk-utils/tree-utils';
+import {renderNode} from 'zk-utils/lib/tree-utils';
 import './style.less';
 
 const SubMenu = Menu.SubMenu;

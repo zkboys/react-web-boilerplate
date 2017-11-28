@@ -54,9 +54,9 @@
         "uuid": "^3.1.0",
         "zk-antd": "^1.0.5",
         "zk-axios": "^1.0.1",
-        "zk-redux": "^1.0.4",
+        "zk-redux": "^1.0.6",
         "zk-roadhog": "^0.0.8",
-        "zk-utils": "^1.0.2"
+        "zk-utils": "^1.0.3"
     },
     "devDependencies": {
         "cross-env": "^5.1.1",

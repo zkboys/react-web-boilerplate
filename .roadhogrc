@@ -34,7 +34,8 @@
   "ignoreMomentLocale": true,
   "theme": "./src/theme.js",
   "cssModulesExclude": [
-    "./src/*.css"
+    "./src/**/*.css",
+    "./src/**/*.min.css"
   ],
   // 业务页面所在目录，用来构建路由以及init state，字符串或者数组
   "pagePath": "./src/pages/**/*.jsx",

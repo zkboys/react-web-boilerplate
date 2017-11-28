@@ -1,4 +1,4 @@
-import {session} from 'zk-utils/storage';
+import {session} from 'zk-utils/lib/storage';
 
 export const isPro = process.env.NODE_ENV === 'production';
 export const isTest = process.env.NODE_ENV === 'test';

@@ -2401,7 +2401,7 @@ debug@2.6.8:
   dependencies:
     ms "2.0.0"
 
-debug@2.6.9, debug@^2.1.1, debug@^2.1.3, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.6, debug@^2.6.8, debug@^2.6.9:
+debug@2.6.9, debug@^2.1.1, debug@^2.1.3, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.6, debug@^2.6.8:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   dependencies:
@@ -3590,10 +3590,10 @@ flux-standard-action@^2.0.0:
     lodash "^4.0.0"
 
 follow-redirects@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.2.5.tgz#ffd3e14cbdd5eaa72f61b6368c1f68516c2a26cc"
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.2.6.tgz#4dcdc7e4ab3dd6765a97ff89c3b4c258117c79bf"
   dependencies:
-    debug "^2.6.9"
+    debug "^3.1.0"
 
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
@@ -9652,12 +9652,15 @@ zk-antd@^1.0.5:
   resolved "https://registry.yarnpkg.com/zk-antd/-/zk-antd-1.0.5.tgz#f4acb6cd24176bef928c0f38ab76730ff1415550"
 
 zk-axios@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/zk-axios/-/zk-axios-1.0.1.tgz#dfad263992bf93d56cdfd1f69d7802a49af85683"
-
-zk-redux@^1.0.4:
   version "1.0.4"
-  resolved "https://registry.yarnpkg.com/zk-redux/-/zk-redux-1.0.4.tgz#5e3be63400dcdbe136b1cffc80e99a331462a23b"
+  resolved "https://registry.yarnpkg.com/zk-axios/-/zk-axios-1.0.4.tgz#de1683a4cd206788266636abdd48b9a681ae7165"
+  dependencies:
+    axios "^0.17.1"
+    qs "^6.5.0"
+
+zk-redux@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/zk-redux/-/zk-redux-1.0.6.tgz#cfa7bb26200ba833085b6b2d4573bef725b2f6c5"
 
 zk-roadhog@^0.0.8:
   version "0.0.8"
@@ -9741,6 +9744,6 @@ zk-roadhog@^0.0.8:
     webpack-visualizer-plugin "^0.1.6"
     yargs "^8.0.1"
 
-zk-utils@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/zk-utils/-/zk-utils-1.0.2.tgz#b62aaa8f5b9e85944e8da14dbb676496c72c56af"
+zk-utils@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/zk-utils/-/zk-utils-1.0.3.tgz#e15690d6b04097918680e04a0c4a85d08508ca3b"

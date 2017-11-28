@@ -1,6 +1,6 @@
 import {createAction} from 'redux-actions';
 import pathToRegexp from 'path-to-regexp';
-import {getNodeByPropertyAndValue, getTopNodeByNode} from 'zk-utils/tree-utils';
+import {getNodeByPropertyAndValue, getTopNodeByNode} from 'zk-utils/lib/tree-utils';
 import {uniqueArray} from 'zk-utils';
 import {actionTypes} from 'zk-redux';
 import uuid from 'uuid/v4';
