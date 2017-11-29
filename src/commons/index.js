@@ -63,7 +63,7 @@ export function hasPermission(code) {
     const currentLoginUser = getCurrentLoginUser();
     if (currentLoginUser) {
         const {permissions = []} = currentLoginUser;
-        return permissions.includes(code);
+        return permissions.indexOf(code) > -1;
     }
     return false;
 }

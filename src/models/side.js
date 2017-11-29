@@ -10,7 +10,8 @@ const types = {
 
 export default {
     initialState: {
-        width: 256, // 左侧宽度
+        width: 256,         // 左侧宽度
+        collapsedWidth: 80, // 收起时宽度
         collapsed: false,
     },
     actions: {

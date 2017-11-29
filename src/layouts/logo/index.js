@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import logo from './logo.svg';
 import './style.less';
 
 export default class index extends Component {
+    static propTypes = {
+        min: PropTypes.bool,
+    };
     static defaultProps = {
         logo: logo,
         title: 'React Web',

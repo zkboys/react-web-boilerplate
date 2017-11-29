@@ -3,6 +3,12 @@ import PropTypes from 'prop-types';
 import './style.less';
 import Footer from '../footer';
 
+/**
+ * 页面内容 容器
+ * 1. 添加统一padding、background等样式
+ * 1. 自动判断是否含有FixBottom，并为之腾出空间
+ * 1. 是否含有公共footer
+ */
 export default class index extends Component {
     static propTypes = {
         footer: PropTypes.bool,
@@ -13,23 +19,23 @@ export default class index extends Component {
     };
 
     render() {
-        const {footer, children} = this.props;
-        const style = {};
-        const hasFixBottom = children.find(item => item.type.displayName === 'Connect(FixBottom)');
+        const {footer, children, ...others} = this.props;
 
-        if (hasFixBottom) {
+        let hasFixBottom = false;
+        React.Children.map(children, item => {
+            console.log(item);
+            if (item && item.type && item.type.__FIX_BOTTOM) hasFixBottom = true;
+        });
+
+        const style = {...others.style};
+        if (hasFixBottom && style.marginBottom === undefined) {
             style.marginBottom = '66px';
         }
+        others.style = style;
 
-        const divProps = {...this.props};
-        Reflect.deleteProperty(divProps, 'footer');
-
-        divProps.style = {...divProps.style, ...style};
         return (
-            <div {...divProps}>
-                <div styleName="page-content">
-                    {children}
-                </div>
+            <div {...others}>
+                <div styleName="page-content">{children}</div>
                 {footer ? <div styleName="footer"><Footer/></div> : null}
             </div>
         );

@@ -37,13 +37,14 @@ const renderBundle = (props) => (Com) => {
         return null;
     }
     NProgress.done();
+
+    // 各种高阶函数包装，方便调用相关方法
     Com = service()(ajax()(withRouter(connectComponent(Com))));
     return <Com {...props}/>;
 };
 
 export default class extends Component {
     render() {
-
         // 将 PageFrame 与 路由页面 作为兄弟节点，避免PageFrame重新渲染，导致页面也重新渲染的问题；
         return (
             <Router history={history}>

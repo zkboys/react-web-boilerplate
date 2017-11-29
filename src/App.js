@@ -63,13 +63,14 @@ class App extends Component {
                         return item;
                     });
 
+                    // 用户权限code，通过菜单携带过来的
                     const permissions = menus.map(item => {
                         if (item.type === '0') return item.key;
                         if (item.type === '1') return item.code;
                         return null;
                     });
 
-                    // 根据order 排序
+                    // 菜单根据order 排序
                     const orderedData = [...menus].sort((a, b) => {
                         const aOrder = a.order || 0;
                         const bOrder = b.order || 0;
@@ -82,7 +83,7 @@ class App extends Component {
                         return bOrder - aOrder;
                     });
 
-                    // 设置顶级节点path
+                    // 设置顶级节点path，有的顶级没有指定path，默认设置为子孙节点的第一个path
                     const findPath = (node) => {
                         const children = orderedData.filter(item => item.parentKey === node.key);
                         let path = '';
@@ -98,7 +99,6 @@ class App extends Component {
                         }
                         return path;
                     };
-
                     orderedData.forEach(item => {
                         if (!item.path) {
                             item.path = findPath(item);
@@ -123,15 +123,9 @@ class App extends Component {
             <LocaleProvider locale={zhCN}>
                 {
                     loading ?
-                        (
-                            <Spin style={{position: 'absolute', left: '50%', top: '30%'}} tip="Loading..." size={'large'}/>
-                        )
+                        <Spin style={{position: 'absolute', left: '50%', top: '30%'}} tip="Loading..." size={'large'}/>
                         :
-                        (
-                            <Provider store={store}>
-                                <Router/>
-                            </Provider>
-                        )
+                        <Provider store={store}><Router/></Provider>
                 }
             </LocaleProvider>
         );

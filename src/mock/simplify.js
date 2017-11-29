@@ -1,3 +1,5 @@
+// 约定：method url delay，各部分以单个空格隔开
+// example: 'get /mock/users 1000' : users,
 export default (mock, mocks) => mocks.forEach(item => Object.keys(item).forEach(key => {
     let method = key.split(' ')[0];
     const url = key.split(' ')[1];

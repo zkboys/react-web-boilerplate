@@ -10,9 +10,9 @@ const SubMenu = Menu.SubMenu;
 
 export default class index extends Component {
     static propTypes = {
-        dataSource: PropTypes.array, // 菜单数据
-        theme: PropTypes.string, // 主题
-        selectedKeys: PropTypes.array, // 选中菜单keys
+        dataSource: PropTypes.array,    // 菜单数据
+        theme: PropTypes.string,        // 主题
+        selectedKeys: PropTypes.array,  // 选中菜单keys
     };
 
     static defaultProps = {
@@ -20,14 +20,6 @@ export default class index extends Component {
         theme: 'default',
         selectedKeys: [],
     };
-
-    componentWillMount() {
-
-    }
-
-    componentDidMount() {
-
-    }
 
     renderMenus() {
         const {dataSource} = this.props;

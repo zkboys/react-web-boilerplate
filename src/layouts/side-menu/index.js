@@ -10,12 +10,12 @@ const SubMenu = Menu.SubMenu;
 
 export default class index extends Component {
     static propTypes = {
-        dataSource: PropTypes.array, // 菜单数据
-        theme: PropTypes.string, // 主题
-        collapsed: PropTypes.bool, // 是否收起
-        openKeys: PropTypes.array, // 打开菜单keys
-        selectedKeys: PropTypes.array, // 选中菜单keys
-        onOpenChange: PropTypes.func, // 菜单打开关闭时触发
+        dataSource: PropTypes.array,    // 菜单数据
+        theme: PropTypes.string,        // 主题
+        collapsed: PropTypes.bool,      // 是否收起
+        openKeys: PropTypes.array,      // 打开菜单keys
+        selectedKeys: PropTypes.array,  // 选中菜单keys
+        onOpenChange: PropTypes.func,   // 菜单打开关闭时触发
     };
 
     static defaultProps = {

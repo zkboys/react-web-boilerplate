@@ -1,30 +1,21 @@
 import React, {Component} from 'react';
 import {Menu, Dropdown, Avatar, Icon} from 'antd';
 import avatar from './avatar.svg';
-import {toLogin} from '../../commons';
+import {toLogin, getCurrentLoginUser} from '../../commons';
 import './style.less';
 
 const Item = Menu.Item;
+
 export default class HeaderUser extends Component {
-    state = {};
-
-    componentWillMount() {
-
-    }
-
-    componentDidMount() {
-
-    }
-
     handleMenuClick = ({key}) => {
         if (key === 'logout') {
-            // TODO 发请求，后端退出
             toLogin();
         }
     };
 
     render() {
-        const name = 'zkboys';
+        const user = getCurrentLoginUser() || {};
+        const name = user.name;
 
         const {className} = this.props;
 

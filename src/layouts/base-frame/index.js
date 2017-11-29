@@ -18,7 +18,7 @@ const scrollBarWidth = getScrollBarWidth();
 @connect(state => {
     const {menus, openKeys, topMenu, selectedMenu} = state.menu;
     const {title, breadcrumbs, show} = state.pageHead;
-    const {width, collapsed} = state.side;
+    const {width, collapsed, collapsedWidth} = state.side;
     const {loading} = state.global;
     return {
         menus,
@@ -30,6 +30,7 @@ const scrollBarWidth = getScrollBarWidth();
         breadcrumbs,
         sideWidth: width,
         sideCollapsed: collapsed,
+        sideCollapsedWidth: collapsedWidth,
         globalLoading: loading,
     };
 })
@@ -129,13 +130,14 @@ export default class BaseFrame extends Component {
             title,
             breadcrumbs,
             sideCollapsed,
+            sideCollapsedWidth,
             sideWidth,
             globalLoading,
         } = this.props;
 
         let {transitionDuration} = this.state;
 
-        sideWidth = sideCollapsed ? 80 : sideWidth;
+        sideWidth = sideCollapsed ? sideCollapsedWidth : sideWidth;
         const sideInnerWidth = sideWidth + scrollBarWidth;
         const outerOverFlow = sideCollapsed ? 'visible' : 'hidden';
         const innerOverFlow = sideCollapsed ? 'visible' : '';
