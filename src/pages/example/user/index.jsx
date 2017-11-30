@@ -208,9 +208,9 @@ export default class UserList extends Component {
                     onPageNumChange={pn => this.handleSearch({pageNum: pn})}
                 />
                 <FixBottom
-                    style={{textAlign: 'right'}}
+                    right
                 >
-                    <Button type="danger" style={{marginRight: 8}}>批量删除</Button>
+                    <Button type="danger">批量删除</Button>
                     <Button type="primary">导出</Button>
                 </FixBottom>
             </PageContent>

@@ -14,16 +14,16 @@ const types = { // types只是做action 与 reducer之间的连接，它的值�
 
 export default {
     initialState: {
-        menus: [], // 菜单数据，树状结构
-        openKeys: [], // 当前展开菜单keys
-        selectedMenu: [], // 当前选中菜单
-        topMenu: [], // 当前选中菜单的顶级菜单
+        menus: [],          // 菜单数据，树状结构
+        openKeys: [],       // 当前展开菜单keys
+        selectedMenu: [],   // 当前选中菜单
+        topMenu: [],        // 当前选中菜单的顶级菜单
     },
     actions: {
         getMenus: createAction(types.GET_MENUS, getMenuTreeData),
         setOpenKeys: createAction(types.SET_OPEN_KEYS),
         // 获取菜单状态，openKeys selectedMenu topMenu
-        getMenuStatus: createAction(types.GET_MENU_STATUS, getMenuTreeData, () => ({sync: 'menu'})),
+        getMenuStatus: createAction(types.GET_MENU_STATUS, getMenuTreeData, () => ({sync: 'menu'})), // sync 用于指定是否同步到存储中，menu要对应模块名
     },
     reducers: {
         // 如何从store中恢复数据
@@ -88,10 +88,8 @@ export default {
                 if (selectedMenu) {
                     topMenu = getTopNodeByNode(menuTreeData, selectedMenu);
                     const parentKeys = selectedMenu.parentKeys || [];
-                    // 保持其他打开的菜单
-                    // openKeys = openKeys.concat(parentKeys);
-                    // 关闭其他菜单
-                    openKeys = [...parentKeys];
+                    // openKeys = openKeys.concat(parentKeys); // 保持其他打开的菜单
+                    openKeys = [...parentKeys]; // 关闭其他菜单
 
                     openKeys = uniqueArray(openKeys);
                 }

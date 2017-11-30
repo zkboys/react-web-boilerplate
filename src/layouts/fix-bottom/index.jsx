@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, {Component, cloneElement} from 'react';
+import PropTypes from 'prop-types';
 import {connect} from "../../models/index";
 import './style.less';
 
@@ -12,23 +13,42 @@ import './style.less';
 }))
 export default class FixBottom extends Component {
     static __FIX_BOTTOM = true;
+    static propTypes = {
+        right: PropTypes.bool,  // 内部内容是否居又显示
+    };
+
+    static defaultProps = {
+        right: true,
+    };
 
     render() {
         let {
-            sideWidth, sideCollapsedWidth, sideCollapsed, style = {}, styleName, children, ...others
+            right, sideWidth, sideCollapsedWidth, sideCollapsed, style = {}, styleName, children, ...others
         } = this.props;
 
         sideWidth = sideCollapsed ? sideCollapsedWidth : sideWidth;
 
-        style = {left: sideWidth, ...style};
+        style = {left: sideWidth, textAlign: right ? 'right' : 'left', ...style};
         styleName = styleName ? `${styleName} fix-bottom` : 'fix-bottom';
+
+        // 如果子元素是antd button ，自动处理间距
+        const cl = React.Children.map(children, item => {
+            if (item && item.type && item.type.__ANT_BUTTON) {
+                let style = right ? {marginLeft: '8px'} : {marginRight: '8px'};
+                style = {...style, ...item.props.style};
+
+                return cloneElement(item, {style});
+            }
+            return item;
+        });
+
         return (
             <div
                 {...others}
                 styleName={styleName}
                 style={style}
             >
-                {children}
+                {cl}
             </div>
         );
     }

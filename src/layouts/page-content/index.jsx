@@ -23,7 +23,6 @@ export default class index extends Component {
 
         let hasFixBottom = false;
         React.Children.map(children, item => {
-            console.log(item);
             if (item && item.type && item.type.__FIX_BOTTOM) hasFixBottom = true;
         });
 
