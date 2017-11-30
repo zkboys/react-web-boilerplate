@@ -1,5 +1,5 @@
 {
-  "hash": false,
+  "hash": true,
   "entry": "src/index.js",
   "extraBabelPlugins": [
     "transform-runtime",
