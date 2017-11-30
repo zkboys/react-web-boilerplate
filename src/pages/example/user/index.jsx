@@ -179,7 +179,12 @@ export default class UserList extends Component {
         params = {...this.state.params, ...params};
         this.setState({params});
 
-        this.props.action.user.fetchUser({params, onResolve: () => console.log('成功')});
+        this.props.action.user.fetchUser({
+            params,
+            successTip: '查询成功！',
+            errorTip: '查询失败',
+            onResolve: () => console.log('成功')
+        });
     };
 
     render() {

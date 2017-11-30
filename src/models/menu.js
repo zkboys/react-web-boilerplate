@@ -6,9 +6,11 @@ import {actionTypes} from 'zk-redux';
 import uuid from 'uuid/v4';
 import {getMenuTreeData} from '../commons';
 
-const types = { // types只是做action 与 reducer之间的连接，它的值并没有太多意义；
-    GET_MENUS: uuid(),
-    GET_MENU_STATUS: uuid(),
+// types只是做action 与 reducer之间的连接，它的值并没有太多意义；
+// 如果其他model用到这个model的types，可以将这个types export 出去；
+const types = {
+    GET_MENUS: 'MENU_GET_MENUS',    // 防止各个模块冲突，最好模块名开头
+    GET_MENU_STATUS: uuid(),        // 使用uuid，编写方便，但是redux的Log信息可读性比较差
     SET_OPEN_KEYS: uuid(),
 };
 

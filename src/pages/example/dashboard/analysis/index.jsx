@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Button} from 'antd';
+import moment from 'moment';
 import PageContent from '../../../../layouts/page-content';
 import {connect} from "../../../../models/index";
 import girl from './girl.jpeg';
@@ -13,7 +14,10 @@ export default class index extends Component {
     state = {};
 
     componentWillMount() {
-
+        this.st = setInterval(() => {
+            const time = moment().format('YYYY-MM-DD HH:mm:ss');
+            this.setState({time});
+        }, 1000)
     }
 
     componentDidMount() {
@@ -40,9 +44,17 @@ export default class index extends Component {
         // ]);
     }
 
+    componentWillUnmount() {
+        if (this.st) clearInterval(this.st);
+    }
+
+
     render() {
+        const {time} = this.state;
+
         return (
             <PageContent>
+                <div>当前时间：{time}</div>
                 <Button
                     onClick={() => {
                         this.props.ajax.get('/test-ajax', null, {successTip: '获取成功！'})

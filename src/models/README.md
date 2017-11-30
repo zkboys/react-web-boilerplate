@@ -1,4 +1,13 @@
 # models(redux) 封装
+
+models用于管理数据，他要解决的问题：
+1. 如何方便的获取数据：connect与组件连接
+2. 如何方便的修改数据：action中方法
+3. 客户端数据持久化（保存到LocalStorage中）：sync标记
+4. 异步数据处理：基于promise异步封装
+5. 错误处理：error处理封装，自动提示
+
+
 为了方便维护，types actions reducers 可以在一个文件中编写，参见`models/side.js` `models/page-head.js`;
 
 ## 组件与redux进行连接
@@ -41,9 +50,9 @@ export default connectComponent({LayoutComponent: Demo, mapStateToProps});
 // action reducer 合并写法，如果一个action 只对应一个reducer，这种写法可以有效减少代码量
 export const ar = { // ar 为约定变量名，不可更改
     arDemo: { // 如果action有额外的数据处理，请使用这种结构
-        payloadCreator() {
+        payload() {
         },
-        metaCreator() {
+        meta() {
         },
         reducer(state, action) {
             return {...state};
