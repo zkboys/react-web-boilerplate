@@ -9,9 +9,8 @@ import {getMenuTreeData} from '../commons';
 // types只是做action 与 reducer之间的连接，它的值并没有太多意义；
 // 如果其他model用到这个model的types，可以将这个types export 出去；
 const types = {
-    GET_MENUS: 'MENU_GET_MENUS',    // 防止各个模块冲突，最好模块名开头
+    // GET_MENU_STATUS: 'MENU_GET_MENU_STATUS',        // 防止各个模块冲突，最好模块名开头
     GET_MENU_STATUS: uuid(),        // 使用uuid，编写方便，但是redux的Log信息可读性比较差
-    SET_OPEN_KEYS: uuid(),
 };
 
 export default {
@@ -21,9 +20,14 @@ export default {
         selectedMenu: [],   // 当前选中菜单
         topMenu: [],        // 当前选中菜单的顶级菜单
     },
+    // action reducer 混合写法
+    setOpenKeys: (state, {payload}) => ({openKeys: payload}),
+    getMenus: () => ({menus: getMenuTreeData()}),
+    // getMenus: {
+    //     payload: getMenuTreeData,
+    //     reducer: (state, {payload}) => ({menus: payload}),
+    // },
     actions: {
-        getMenus: createAction(types.GET_MENUS, getMenuTreeData),
-        setOpenKeys: createAction(types.SET_OPEN_KEYS),
         // 获取菜单状态，openKeys selectedMenu topMenu
         getMenuStatus: createAction(types.GET_MENU_STATUS, getMenuTreeData, () => ({sync: 'menu'})), // sync 用于指定是否同步到存储中，menu要对应模块名
     },
@@ -34,23 +38,8 @@ export default {
             const {menu} = payload;
             if (menu) {
                 const {openKeys = [], selectedMenu, topMenu} = menu;
-                return {...state, openKeys, selectedMenu, topMenu};
+                return {openKeys, selectedMenu, topMenu};
             }
-            return {...state};
-        },
-        [types.GET_MENUS](state, action) {
-            const {payload} = action;
-            return {
-                ...state,
-                menus: payload,
-            };
-        },
-        [types.SET_OPEN_KEYS](state, action) {
-            const {payload} = action;
-            return {
-                ...state,
-                openKeys: payload,
-            };
         },
         [types.GET_MENU_STATUS](state, action) { // 根据url 获取菜单状态 openKeys selectedMenu topMenu
             const menuTreeData = action.payload;
@@ -97,7 +86,6 @@ export default {
                 }
             }
             return {
-                ...state,
                 topMenu,
                 selectedMenu,
                 openKeys,

@@ -61,7 +61,10 @@ export default class UserList extends Component {
                 const {promptVisible = {}} = this.state;
                 const items = [
                     {
-                        label: <Link to={`/users/detail/${id}`}>详情</Link>,
+                        label: '详情',
+                        onClick: () => {
+                            this.props.history.push(`/users/detail/${id}`, {name: 123, age: 25});
+                        },
                         // isMore: true,
                     },
                     {
@@ -183,7 +186,8 @@ export default class UserList extends Component {
             params,
             successTip: '查询成功！',
             errorTip: '查询失败',
-            onResolve: () => console.log('成功')
+            onResolve: () => console.log('成功'),
+            onReject: () => console.log('失败'),
         });
     };
 
@@ -212,9 +216,7 @@ export default class UserList extends Component {
                     onSearch={this.handleSearch}
                     onPageNumChange={pn => this.handleSearch({pageNum: pn})}
                 />
-                <FixBottom
-                    right
-                >
+                <FixBottom right>
                     <Button type="danger">批量删除</Button>
                     <Button type="primary">导出</Button>
                 </FixBottom>

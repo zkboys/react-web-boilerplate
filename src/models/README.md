@@ -45,10 +45,25 @@ function mapStateToProps(state) {
 export default connectComponent({LayoutComponent: Demo, mapStateToProps});
 ```
 
-## action reducers 二合一
+## action reducer 二合一
+一个model中，除了initialState actions reducers 等关键字之外的属性，都视为action reducer合并写法
 ```js
+
+// page-head.js
+
 // action reducer 合并写法，如果一个action 只对应一个reducer，这种写法可以有效减少代码量
-export const ar = { // ar 为约定变量名，不可更改
+export default {
+    initialState: {
+        title: '',
+        show: true,
+        ...
+    },
+    actions: {
+        ...
+    },
+    reducers: {
+        ...
+    },
     arDemo: { // 如果action有额外的数据处理，请使用这种结构
         payload() {
         },

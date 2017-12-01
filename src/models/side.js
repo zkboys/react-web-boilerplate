@@ -4,7 +4,6 @@ import uuid from 'uuid/v4';
 import {identity} from 'lodash/util';
 
 const types = {
-    SET_WIDTH: uuid(),
     SET_COLLAPSED: uuid(),
 };
 
@@ -12,10 +11,13 @@ export default {
     initialState: {
         width: 256,         // 左侧宽度
         collapsedWidth: 80, // 收起时宽度
-        collapsed: false,
+        collapsed: false,   // 是否展开/收起
+    },
+    setWidth: { // 合并写法
+        meta: {sync: 'side'},
+        reducer: (state, {payload}) => ({width: payload}),
     },
     actions: {
-        setWidth: createAction(types.SET_WIDTH, identity, () => ({sync: 'side'})),
         setCollapsed: createAction(types.SET_COLLAPSED, identity, () => ({sync: 'side'})),
     },
     reducers: {
@@ -24,23 +26,9 @@ export default {
             const {side} = payload;
             if (side) {
                 const {width = 256, collapsed = false} = side;
-                return {...state, width, collapsed};
+                return {width, collapsed};
             }
-            return {...state};
         },
-        [types.SET_WIDTH](state, action) {
-            const {payload} = action;
-            return {
-                ...state,
-                width: payload,
-            };
-        },
-        [types.SET_COLLAPSED](state, action) {
-            const {payload} = action;
-            return {
-                ...state,
-                collapsed: payload,
-            };
-        },
+        [types.SET_COLLAPSED]: (state, {payload}) => ({collapsed: payload}),
     }
 }
