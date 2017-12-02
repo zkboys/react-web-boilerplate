@@ -3,14 +3,14 @@ import pathToRegexp from 'path-to-regexp';
 import {getNodeByPropertyAndValue, getTopNodeByNode} from 'zk-utils/lib/tree-utils';
 import {uniqueArray} from 'zk-utils';
 import {actionTypes} from 'zk-redux';
-import uuid from 'uuid/v4';
+// import uuid from 'uuid/v4';
 import {getMenuTreeData} from '../commons';
 
 // types只是做action 与 reducer之间的连接，它的值并没有太多意义；
 // 如果其他model用到这个model的types，可以将这个types export 出去；
 const types = {
-    // GET_MENU_STATUS: 'MENU_GET_MENU_STATUS',        // 防止各个模块冲突，最好模块名开头
-    GET_MENU_STATUS: uuid(),        // 使用uuid，编写方便，但是redux的Log信息可读性比较差
+    GET_MENU_STATUS: 'MENU:GET_MENU_STATUS',        // 防止各个模块冲突，最好模块名开头
+    // GET_MENU_STATUS: uuid(),        // 使用uuid，编写方便，可以避免冲突，但是redux的Log信息可读性比较差
 };
 
 export default {
@@ -32,10 +32,10 @@ export default {
         getMenuStatus: createAction(types.GET_MENU_STATUS, getMenuTreeData, () => ({sync: 'menu'})), // sync 用于指定是否同步到存储中，menu要对应模块名
     },
     reducers: {
-        // 如何从store中恢复数据
+        // 从store中恢复数据
         [actionTypes.GET_STATE_FROM_STORAGE](state, action) {
             const {payload = {}} = action;
-            const {menu} = payload;
+            const {menu} = payload; // payload包含了所有同步的数据
             if (menu) {
                 const {openKeys = [], selectedMenu, topMenu} = menu;
                 return {openKeys, selectedMenu, topMenu};

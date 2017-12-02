@@ -61,10 +61,7 @@ export default class UserList extends Component {
                 const {promptVisible = {}} = this.state;
                 const items = [
                     {
-                        label: '详情',
-                        onClick: () => {
-                            this.props.history.push(`/users/detail/${id}`, {name: 123, age: 25});
-                        },
+                        label: <Link to={`/users/detail/${id}`}>详情</Link>,
                         // isMore: true,
                     },
                     {

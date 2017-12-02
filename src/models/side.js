@@ -1,10 +1,9 @@
 import {createAction} from 'redux-actions';
 import {actionTypes} from 'zk-redux';
-import uuid from 'uuid/v4';
 import {identity} from 'lodash/util';
 
 const types = {
-    SET_COLLAPSED: uuid(),
+    SET_COLLAPSED: 'MENU_SET_COLLAPSED',
 };
 
 export default {

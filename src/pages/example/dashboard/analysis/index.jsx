@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button} from 'antd';
 import moment from 'moment';
 import PageContent from '../../../../layouts/page-content';
-import {connect} from "../../../../models/index";
+import {connect} from '../../../../models/index';
 import girl from './girl.jpeg';
 import './style.less';
 
