@@ -1,6 +1,6 @@
 # models(redux) 封装
 
-models用于管理数据，他要解决的问题：
+models用于管理数据，要解决的问题：
 1. 如何方便的获取数据：connect与组件连接
 2. 如何方便的修改数据：action中方法
 3. 客户端数据持久化（保存到LocalStorage中）：sync标记
