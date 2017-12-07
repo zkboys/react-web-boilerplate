@@ -22,11 +22,11 @@ export default {
     },
     // action reducer 混合写法
     setOpenKeys: (state, {payload}) => ({openKeys: payload}),
-    getMenus: () => ({menus: getMenuTreeData()}),
-    // getMenus: {
-    //     payload: getMenuTreeData,
-    //     reducer: (state, {payload}) => ({menus: payload}),
-    // },
+    // getMenus: () => ({menus: getMenuTreeData()}), // 这样不是纯函数了
+    getMenus: {
+        payload: getMenuTreeData,
+        reducer: (state, {payload}) => ({menus: payload}),
+    },
     actions: {
         // 获取菜单状态，openKeys selectedMenu topMenu
         getMenuStatus: createAction(types.GET_MENU_STATUS, getMenuTreeData, () => ({sync: 'menu'})), // sync 用于指定是否同步到存储中，menu要对应模块名

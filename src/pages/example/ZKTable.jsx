@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {Button} from 'antd'
-import {AnimationTable, ToolBar, Operator} from 'zk-antd';
+import {Button, Menu} from 'antd'
+import {ToolBar, Operator, Table} from 'zk-antd';
 import PageContent from '../../layouts/page-content';
 
-export const PAGE_ROUTE = '/example/animation-table';
+export const PAGE_ROUTE = '/example/zk-table';
 
 export default class Index extends Component {
     state = {
@@ -72,11 +72,26 @@ export default class Index extends Component {
                 <ToolBar>
                     <Button onClick={this.handleAdd} type="primary">添加</Button>
                 </ToolBar>
-                <AnimationTable
+                <Table
                     columns={this.columns}
                     dataSource={dataSource}
                     pagination={false}
                     uniqueKey="id"
+                    rightClickContent={(record, index) => {
+                        console.log(record, index);
+                        return (
+                            <Menu
+                                selectable={false}
+                                mode={'inline'}
+                                onClick={({key}) => {
+                                    console.log(key);
+                                }}
+                            >
+                                <Menu.Item key="1">操作1</Menu.Item>
+                                <Menu.Item key="2">操作2</Menu.Item>
+                            </Menu>
+                        );
+                    }}
                 />
             </PageContent>
         );

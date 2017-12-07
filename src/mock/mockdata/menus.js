@@ -6,7 +6,7 @@ export default [
 
     {key: 'example', text: 'Example', icon: 'fa-file-code-o', path: ''},
 
-    {key: 'animation-table', parentKey: 'example', text: '动画表格', icon: 'table', path: '/example/animation-table'},
+    {key: 'animation-table', parentKey: 'example', text: '表格', icon: 'table', path: '/example/zk-table'},
 
     {key: 'dashboard', parentKey: 'example', text: 'Dashboard', icon: 'dashboard', order: 10009},
     {key: 'dashboard/analysis', parentKey: 'dashboard', text: '分析页', path: '/dashboard/analysis'},

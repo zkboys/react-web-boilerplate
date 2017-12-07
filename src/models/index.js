@@ -33,9 +33,8 @@ export function configureStore(initialState) {
     return applyMiddleware(...middlewares)(createStore)(combineReducers(reducers), initialState);
 }
 
-const options = {withRef: true};
 // 与redux进行连接 函数
-export const connectComponent = _connect({actions, options});
+export const connectComponent = _connect({actions, options: {withRef: true}});
 
 // 与redux进行连接 装饰器
 export const connect = createConnectHOC(connectComponent);
