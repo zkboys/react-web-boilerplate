@@ -31,3 +31,4 @@ yarn-error.log*
 /zk-redux/
 /zk-roadhog/
 /zk-utils/
+/server/
