@@ -1,6 +1,6 @@
 import {getCurrentLoginUser} from '../commons';
 
-const currentLoginUser = getCurrentLoginUser();
+const currentLoginUser = getCurrentLoginUser() || {};
 /**
  * 存放系统级数据 及 操作
  */
