@@ -7,6 +7,9 @@ import './style.less';
 const Item = Menu.Item;
 
 export default class HeaderUser extends Component {
+    static defaultProps = {
+        theme: 'default',
+    };
     handleMenuClick = ({key}) => {
         if (key === 'logout') {
             toLogin();
@@ -17,10 +20,10 @@ export default class HeaderUser extends Component {
         const user = getCurrentLoginUser() || {};
         const name = user.name;
 
-        const {className} = this.props;
+        const {className, theme} = this.props;
 
         const menu = (
-            <Menu styleName="menu" selectedKeys={[]} onClick={this.handleMenuClick}>
+            <Menu styleName="menu" theme={theme} selectedKeys={[]} onClick={this.handleMenuClick}>
                 <Item><Icon type="user"/>个人中心</Item>
                 <Item><Icon type="setting"/>设置</Item>
                 <Menu.Divider/>

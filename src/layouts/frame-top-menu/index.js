@@ -108,6 +108,7 @@ export default class BaseFrame extends Component {
                     </div>
 
                     <HeaderMenu
+                        theme="dark"
                         dataSource={menus}
                         selectedKeys={[topMenu && topMenu.key]}
                     />
@@ -123,7 +124,7 @@ export default class BaseFrame extends Component {
                                 console.log('enter', value); // eslint-disable-line
                             }}
                         />
-                        <HeaderUser styleName="action"/>
+                        <HeaderUser theme="dark" styleName="action"/>
                     </div>
                 </div>
                 <div styleName="content">
