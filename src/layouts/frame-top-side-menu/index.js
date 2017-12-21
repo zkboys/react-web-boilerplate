@@ -15,6 +15,7 @@ import './style.less';
 
 const scrollBarWidth = getScrollBarWidth();
 
+@withRouter
 @connect(state => {
     const {menus, openKeys, topMenu, selectedMenu} = state.menu;
     const {title, breadcrumbs, show} = state.pageHead;
@@ -36,8 +37,7 @@ const scrollBarWidth = getScrollBarWidth();
         globalLoading: loading,
     };
 })
-@withRouter
-export default class BaseFrame extends Component {
+export default class FrameTopSideMenu extends Component {
     state = {
         sideWidth: 256,
         transitionDuration: 0,

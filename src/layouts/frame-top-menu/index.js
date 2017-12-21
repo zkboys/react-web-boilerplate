@@ -10,6 +10,7 @@ import HeaderMenu from '../header-menu';
 import {connect} from '../../models/index';
 import './style.less';
 
+@withRouter
 @connect(state => {
     const {menus, topMenu, selectedMenu} = state.menu;
     const {title, breadcrumbs, show} = state.pageHead;
@@ -24,7 +25,6 @@ import './style.less';
         globalLoading: loading,
     };
 })
-@withRouter
 export default class BaseFrame extends Component {
     state = {};
 
