@@ -17,18 +17,22 @@ const scrollBarWidth = getScrollBarWidth();
 @connect(state => {
     const {menus, openKeys, selectedMenu} = state.menu;
     const {title, breadcrumbs, show} = state.pageHead;
-    const {width, collapsed, collapsedWidth} = state.side;
+    const {show: showSide, width, collapsed, collapsedWidth} = state.side;
     const {loading} = state.global;
     return {
         menus,
         openKeys,
         selectedMenu,
+
         showPageHead: show,
         title,
         breadcrumbs,
+
+        showSide,
         sideWidth: width,
         sideCollapsed: collapsed,
         sideCollapsedWidth: collapsedWidth,
+
         globalLoading: loading,
     };
 })
@@ -40,13 +44,15 @@ export default class BaseFrame extends Component {
     };
 
     componentWillMount() {
-        const {action, action: {menu}} = this.props;
+        const {action, action: {menu, side}} = this.props;
         action.getStateFromStorage();
         menu.getMenus();
         menu.getMenuStatus();
+        side.show();
         this.setBreadcrumbs();
         this.props.history.listen(() => {
             menu.getMenuStatus();
+            side.show();
             this.setBreadcrumbs();
         });
     }
@@ -126,6 +132,8 @@ export default class BaseFrame extends Component {
             showPageHead,
             title,
             breadcrumbs,
+
+            showSide,
             sideCollapsed,
             sideCollapsedWidth,
             sideWidth,
@@ -135,6 +143,7 @@ export default class BaseFrame extends Component {
         let {transitionDuration} = this.state;
 
         sideWidth = sideCollapsed ? sideCollapsedWidth : sideWidth;
+
         const sideInnerWidth = sideWidth + scrollBarWidth;
         const outerOverFlow = sideCollapsed ? 'visible' : 'hidden';
         const innerOverFlow = sideCollapsed ? 'visible' : '';
@@ -143,7 +152,7 @@ export default class BaseFrame extends Component {
         // 左侧菜单数据，与顶部菜单配合显示顶部菜单的子菜单；
         const sideMenus = menus;
 
-        window.document.body.style.paddingLeft = `${sideWidth}px`;
+        window.document.body.style.paddingLeft = showSide ? `${sideWidth}px` : 0;
 
         return (
             <div styleName="base-frame">
@@ -151,7 +160,12 @@ export default class BaseFrame extends Component {
                     <title>{title}</title>
                 </Helmet>
                 <BackTop/>
-                <div styleName="header" style={{left: sideWidth}}>
+                <div styleName="header">
+                    <div styleName="logo" style={{width: sideWidth, transitionDuration}}>
+                        <Link to="/">
+                            <Logo min={sideCollapsed}/>
+                        </Link>
+                    </div>
                     <Icon
                         styleName="trigger"
                         type={sideCollapsed ? 'menu-unfold' : 'menu-fold'}
@@ -173,7 +187,7 @@ export default class BaseFrame extends Component {
                     </div>
                 </div>
 
-                <div styleName="side" style={{width: sideWidth, transitionDuration}}>
+                <div styleName="side" style={{width: sideWidth, display: showSide ? 'block' : 'none', transitionDuration}}>
                     <Rnd
                         disableDragging
                         enableResizing={{right: !sideCollapsed}}
@@ -184,11 +198,6 @@ export default class BaseFrame extends Component {
                         onResize={this.handleSideResize}
                         onResizeStop={this.handleSideResizeStop}
                     >
-                        <div styleName="logo">
-                            <Link to="/">
-                                <Logo min={sideCollapsed}/>
-                            </Link>
-                        </div>
                         <div styleName="outer" style={{overflow: outerOverFlow, transitionDuration}}>
                             <div styleName="inner" style={{width: sideInnerWidth, overflow: innerOverFlow, transitionDuration}}>
                                 <SideMenu

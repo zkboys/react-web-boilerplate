@@ -75,6 +75,7 @@ export default class index extends Component {
 
                 <Button
                     onClick={() => {
+                        this.props.action.side.hide();
                         const {action: {global}} = this.props;
                         global.showLoading();
                         setTimeout(() => {

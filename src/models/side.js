@@ -8,9 +8,16 @@ const types = {
 
 export default {
     initialState: {
+        show: true,
         width: 256,         // 左侧宽度
         collapsedWidth: 80, // 收起时宽度
         collapsed: false,   // 是否展开/收起
+    },
+    hide() {
+        return {show: false};
+    },
+    show() {
+        return {show: true};
     },
     setWidth: { // 合并写法
         meta: {sync: 'side'},

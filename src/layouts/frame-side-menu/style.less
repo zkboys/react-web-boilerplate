@@ -26,7 +26,7 @@ body {
     z-index: 9999;
     top: 0;
     right: 0;
-    left: @sideWidth;
+    left: 0;
     height: @headerHeight;
     line-height: @headerHeight;
     padding-right: 16px;
@@ -36,6 +36,21 @@ body {
     .right {
         float: right;
         height: 100%;
+    }
+}
+
+.logo {
+    float: left;
+    display: inline-block;
+    width: @sideWidth;
+    height: @headerHeight;
+    line-height: @headerHeight;
+    position: relative;
+    transition: all @transitionDuration;
+    background: #002140;
+    overflow: hidden;
+    h1 {
+        color: #fff;
     }
 }
 
@@ -54,7 +69,7 @@ body {
 .side {
     position: fixed;
     z-index: 99999;
-    top: 0;
+    top: @headerHeight;
     left: 0;
     bottom: 0;
     width: 200px;
@@ -64,7 +79,7 @@ body {
     .outer {
         position: absolute;
         width: 100%;
-        top: @headerHeight;
+        top: 0;
         bottom: 0;
         overflow: hidden;
         transition: all @transitionDuration;
@@ -96,18 +111,6 @@ body {
     height: @footerHeight;
     line-height: @footerHeight;
     text-align: center;
-}
-
-.logo {
-    height: @headerHeight;
-    line-height: @headerHeight;
-    position: relative;
-    transition: all @transitionDuration;
-    background: #002140;
-    overflow: hidden;
-    h1 {
-        color: #fff;
-    }
 }
 
 .action {
