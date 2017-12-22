@@ -122,7 +122,7 @@ export default class FrameTopSideMenu extends Component {
         const theme = (isTopSideMenu || isSideMenu) ? 'default' : 'dark';
 
         return (
-            <div styleName="base-frame">
+            <div styleName="base-frame" className="no-print">
                 <Helmet><title>{title}</title></Helmet>
                 <BackTop/>
                 <Header theme={theme} layout={layout}/>

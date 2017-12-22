@@ -67,3 +67,12 @@ export function hasPermission(code) {
     }
     return false;
 }
+
+/**
+ * 打印封装,便于以后更改打印方式
+ * 不需要打印的内容，但是页面需要显示，添加`no-print`class类；
+ * 需要打印的内容，但是页面不需要显示，添加`just-print`class类
+ */
+export function print() {
+    window.print()
+}

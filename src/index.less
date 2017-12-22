@@ -15,3 +15,30 @@ body {
 :global(.ant-message) {
     z-index: 9999;
 }
+
+:global(.just-print) {
+    display: none !important;
+}
+
+@media print {
+    body {
+        padding: 0 !important;
+        background: none;
+    }
+
+    :global(.no-print) {
+        display: none !important;
+    }
+
+    :global(.just-print) {
+        display: block !important;
+    }
+
+    :global(.ant-message) {
+        display: none !important;
+    }
+
+    :global(.ant-modal-mask) {
+        display: none !important;
+    }
+}
