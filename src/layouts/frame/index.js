@@ -1,41 +1,53 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {BackTop, Spin} from 'antd';
 import {Helmet} from 'react-helmet';
-import {withRouter, Link} from 'react-router-dom';
-import Logo from '../logo';
-import HeaderUser from '../header-user';
+import {withRouter} from 'react-router-dom';
 import PageHead from '../page-head';
-import HeaderSearch from '../header-search';
-import HeaderMenu from '../header-menu';
+import Header from '../header';
+import Side from '../side';
 import {connect} from '../../models/index';
 import './style.less';
 
+
 @withRouter
 @connect(state => {
-    const {menus, topMenu, selectedMenu} = state.menu;
+    const {selectedMenu} = state.menu;
     const {title, breadcrumbs, show} = state.pageHead;
+    const {show: showSide, width, collapsed, collapsedWidth} = state.side;
     const {loading} = state.global;
     return {
-        menus,
-        topMenu,
         selectedMenu,
         showPageHead: show,
         title,
         breadcrumbs,
+
+        showSide,
+        sideWidth: width,
+        sideCollapsed: collapsed,
+        sideCollapsedWidth: collapsedWidth,
         globalLoading: loading,
     };
 })
-export default class BaseFrame extends Component {
-    state = {};
+export default class FrameTopSideMenu extends Component {
+    static propTypes = {
+        layout: PropTypes.string,
+    };
+
+    static defaultProps = {
+        layout: 'top-side-menu', // top-menu side-menu
+    };
 
     componentWillMount() {
-        const {action, action: {menu}} = this.props;
+        const {action, action: {menu, side}} = this.props;
         action.getStateFromStorage();
         menu.getMenus();
         menu.getMenuStatus();
+        side.show();
         this.setBreadcrumbs();
         this.props.history.listen(() => {
             menu.getMenuStatus();
+            side.show();
             this.setBreadcrumbs();
         });
     }
@@ -83,50 +95,38 @@ export default class BaseFrame extends Component {
 
     render() {
         let {
-            menus,          // 所有的菜单数据
-            topMenu,        // 当前页面选中菜单的顶级菜单
+            layout,
             showPageHead,
             title,
             breadcrumbs,
+
+            showSide,
             sideCollapsed,
+            sideCollapsedWidth,
+            sideWidth,
             globalLoading,
         } = this.props;
 
-        window.document.body.style.paddingLeft = 0;
+        sideWidth = sideCollapsed ? sideCollapsedWidth : sideWidth;
+
+        const isTopSideMenu = layout === 'top-side-menu';
+        const isSideMenu = layout === 'side-menu';
+        const hasSide = isTopSideMenu || isSideMenu;
+
+        if (!hasSide) {
+            window.document.body.style.paddingLeft = '0px';
+        } else {
+            window.document.body.style.paddingLeft = showSide ? `${sideWidth}px` : 0;
+        }
+
+        const theme = (isTopSideMenu || isSideMenu) ? 'default' : 'dark';
 
         return (
             <div styleName="base-frame">
-                <Helmet>
-                    <title>{title}</title>
-                </Helmet>
+                <Helmet><title>{title}</title></Helmet>
                 <BackTop/>
-                <div styleName="header">
-                    <div styleName="logo">
-                        <Link to="/">
-                            <Logo min={sideCollapsed}/>
-                        </Link>
-                    </div>
-
-                    <HeaderMenu
-                        theme="dark"
-                        dataSource={menus}
-                        selectedKeys={[topMenu && topMenu.key]}
-                    />
-                    <div styleName="right">
-                        <HeaderSearch
-                            styleName="action"
-                            placeholder="站内搜索"
-                            dataSource={['搜索提示一', '搜索提示二', '搜索提示三']}
-                            onSearch={(value) => {
-                                console.log('input', value); // eslint-disable-line
-                            }}
-                            onPressEnter={(value) => {
-                                console.log('enter', value); // eslint-disable-line
-                            }}
-                        />
-                        <HeaderUser theme="dark" styleName="action"/>
-                    </div>
-                </div>
+                <Header theme={theme} layout={layout}/>
+                <Side layout={layout}/>
                 <div styleName="content">
                     {
                         showPageHead ? (
@@ -137,7 +137,6 @@ export default class BaseFrame extends Component {
                         ) : null
                     }
                 </div>
-
                 <div styleName="global-loading" style={{display: globalLoading ? 'block' : 'none'}}>
                     <Spin spinning size="large"/>
                 </div>

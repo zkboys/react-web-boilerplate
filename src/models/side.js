@@ -12,7 +12,9 @@ export default {
         width: 256,         // 左侧宽度
         collapsedWidth: 80, // 收起时宽度
         collapsed: false,   // 是否展开/收起
+        dragging: false,    // 是否正在拖动
     },
+    setDragging: (state, {payload}) => ({dragging: payload}),
     hide() {
         return {show: false};
     },

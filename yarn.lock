@@ -537,7 +537,7 @@ babel-code-frame@^6.11.0, babel-code-frame@^6.16.0, babel-code-frame@^6.26.0:
     esutils "^2.0.2"
     js-tokens "^3.0.2"
 
-babel-core@^6.0.0, babel-core@^6.20.0, babel-core@^6.26.0:
+babel-core@^6.0.0, babel-core@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.26.0.tgz#af32f78b31a6fcef119c87b0fd8d9753f03a0bb8"
   dependencies:
@@ -9693,14 +9693,14 @@ zk-redux@^2.0.5:
     redux-thunk "^2.2.0"
     uuid "^3.1.0"
 
-zk-roadhog@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/zk-roadhog/-/zk-roadhog-0.0.8.tgz#cd0f9c989289b7dc4b6bad40c67c993ddc419f28"
+zk-roadhog@^0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/zk-roadhog/-/zk-roadhog-0.0.11.tgz#e2bb77bf6262827bfbedd780bd6d5225dd51482b"
   dependencies:
     atool-monitor "^0.4.3"
     autoprefixer "^7.1.1"
     awesome-typescript-loader "^3.1.3"
-    babel-core "^6.20.0"
+    babel-core "^6.26.0"
     babel-eslint "^8.0.1"
     babel-jest "^21.0.0"
     babel-loader "^7.0.0"

@@ -5,7 +5,7 @@
 ## 相关文档
 
 - [models(redux)](https://github.com/zkboys/react-web-boilerplate/blob/master/src/models/README.md)
-- [layouts(布局)](https://github.com/zkboys/react-web-boilerplate/blob/master/src/layouts/base-frame/README.md)
+- [layouts(布局)](https://github.com/zkboys/react-web-boilerplate/blob/master/src/layouts/README.md)
 - [router(路由)](https://github.com/zkboys/react-web-boilerplate/blob/master/src/router/README.md)
 - [services(服务)](https://github.com/zkboys/react-web-boilerplate/blob/master/src/services/README.md)
 
@@ -95,4 +95,7 @@ server {
 ```
 
 ## TODO
+
+- [ ] babel 升级到7 使用 [optional-chaining](https://www.npmjs.com/package/babel-plugin-transform-optional-chaining)简化取值判断;
+
 

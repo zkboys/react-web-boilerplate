@@ -1,0 +1,32 @@
+@headerHeight: 64px;
+@transitionDuration: 300ms;
+
+.side {
+    position: fixed;
+    z-index: 99999;
+    top: @headerHeight;
+    left: 0;
+    bottom: 0;
+    width: 200px;
+    box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+    background: #001529;
+    transition: all @transitionDuration;
+    .outer {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        bottom: 0;
+        overflow: hidden;
+        transition: all @transitionDuration;
+    }
+    .inner {
+        position: relative;
+        height: 100%;
+        overflow-x: visible;
+        overflow-y: scroll;
+        transition: all @transitionDuration;
+    }
+    :global(.react-draggable) {
+        transition: all @transitionDuration;
+    }
+}

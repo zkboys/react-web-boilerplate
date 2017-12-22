@@ -16,9 +16,7 @@ import routes from '../pages/routes';
 import Home from '../pages/home/Home';
 import Login from '../pages/login/Login';
 import Error404 from '../pages/error/Error404';
-// import PageFrame from '../layouts/frame-side-menu';
-// import PageFrame from '../layouts/frame-top-menu';
-import PageFrame from '../layouts/frame-top-side-menu';
+import PageFrame from '../layouts/frame';
 import IFrame from '../layouts/iframe'
 import AuthRoute from './AuthRoute';
 import {ajax} from '../commons/axios';
@@ -56,7 +54,7 @@ export default class extends Component {
                         if (props.location.pathname === '/login') {
                             return null;
                         }
-                        return <PageFrame {...props}/>;
+                        return <PageFrame layout="top-side-menu" {...props}/>;
                     }}/>
                     <Switch>
                         <AuthRoute exact path="/" component={Home}/>
