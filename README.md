@@ -97,5 +97,6 @@ server {
 ## TODO
 
 - [ ] babel 升级到7 使用 [optional-chaining](https://www.npmjs.com/package/babel-plugin-transform-optional-chaining)简化取值判断;
-
+- [ ] 前端监控
+- [ ] e2e 测试
 
