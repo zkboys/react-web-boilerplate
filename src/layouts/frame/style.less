@@ -6,6 +6,7 @@
 @contentBottom: @footerHeight;
 @borderColor: #d9d9d9;
 @transitionDuration: 300ms;
+@pageHeadHeight: 62px;
 
 body {
     margin: 0;
@@ -94,11 +95,22 @@ body {
     }
 }
 
-.content {
+.content-top-space {
     position: relative;
-    padding: @contentTop 0 0 0;
+    height: @contentTop;
     background: #f0f2f5;
     transition: all @transitionDuration;
+    &.with-fixed-page-head {
+        height: @contentTop + @pageHeadHeight;
+    }
+}
+
+.page-head-fixed {
+    position: fixed;
+    right: 0;
+    top: @contentTop;
+    background: #fff;
+    z-index: 9999;
 }
 
 .footer {

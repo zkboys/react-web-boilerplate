@@ -35,7 +35,8 @@ export default class FrameTopSideMenu extends Component {
     };
 
     static defaultProps = {
-        layout: 'top-side-menu', // top-menu side-menu
+        layout: 'top-side-menu',    // top-menu side-menu
+        pageHeadFixed: true,        // 页面头部是否固定
     };
 
     componentWillMount() {
@@ -96,6 +97,7 @@ export default class FrameTopSideMenu extends Component {
     render() {
         let {
             layout,
+            pageHeadFixed,
             showPageHead,
             title,
             breadcrumbs,
@@ -108,6 +110,7 @@ export default class FrameTopSideMenu extends Component {
         } = this.props;
 
         sideWidth = sideCollapsed ? sideCollapsedWidth : sideWidth;
+        sideWidth = showSide ? sideWidth : 0;
 
         const isTopSideMenu = layout === 'top-side-menu';
         const isSideMenu = layout === 'side-menu';
@@ -116,10 +119,28 @@ export default class FrameTopSideMenu extends Component {
         if (!hasSide) {
             window.document.body.style.paddingLeft = '0px';
         } else {
-            window.document.body.style.paddingLeft = showSide ? `${sideWidth}px` : 0;
+            window.document.body.style.paddingLeft = `${sideWidth}px`;
         }
 
         const theme = (isTopSideMenu || isSideMenu) ? 'default' : 'dark';
+
+        let pageHead = null;
+        if (showPageHead) {
+            pageHead = (
+                <PageHead
+                    title={title}
+                    breadcrumbs={breadcrumbs}
+                />
+            );
+
+            if (pageHeadFixed) {
+                pageHead = (
+                    <div styleName="page-head-fixed" style={{left: sideWidth}}>
+                        {pageHead}
+                    </div>
+                );
+            }
+        }
 
         return (
             <div styleName="base-frame" className="no-print">
@@ -127,16 +148,8 @@ export default class FrameTopSideMenu extends Component {
                 <BackTop/>
                 <Header theme={theme} layout={layout}/>
                 <Side layout={layout}/>
-                <div styleName="content">
-                    {
-                        showPageHead ? (
-                            <PageHead
-                                title={title}
-                                breadcrumbs={breadcrumbs}
-                            />
-                        ) : null
-                    }
-                </div>
+                <div styleName={`content-top-space ${pageHeadFixed ? 'with-fixed-page-head' : ''}`}/>
+                {pageHead}
                 <div styleName="global-loading" style={{display: globalLoading ? 'block' : 'none'}}>
                     <Spin spinning size="large"/>
                 </div>
