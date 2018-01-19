@@ -7,6 +7,7 @@ import PageHead from '../page-head';
 import Header from '../header';
 import Side from '../side';
 import {connect} from '../../models/index';
+import {getSelectedMenuByPath} from '../../commons';
 import './style.less';
 
 
@@ -55,43 +56,41 @@ export default class FrameTopSideMenu extends Component {
 
     setBreadcrumbs() {
         const {action: {pageHead}} = this.props;
-        setTimeout(() => {
-            const {selectedMenu} = this.props;
-            let breadcrumbs = [];
-            let title = '';
-            if (selectedMenu) {
-                title = selectedMenu.text;
-                if (selectedMenu.parentNodes) {
-                    breadcrumbs = selectedMenu.parentNodes.map(item => {
-                        return {
-                            key: item.key,
-                            icon: item.icon,
-                            text: item.text,
-                            path: item.path,
-                        }
-                    });
-                }
-
-                if (selectedMenu.path !== '/') {
-                    breadcrumbs.unshift({
-                        key: 'index',
-                        icon: 'home',
-                        text: '首页',
-                        path: '/',
-                    });
-                }
-
-                breadcrumbs.push({
-                    key: selectedMenu.key,
-                    icon: selectedMenu.icon,
-                    text: selectedMenu.text,
+        const selectedMenu = getSelectedMenuByPath(window.location.pathname);
+        let breadcrumbs = [];
+        let title = '';
+        if (selectedMenu) {
+            title = selectedMenu.text;
+            if (selectedMenu.parentNodes) {
+                breadcrumbs = selectedMenu.parentNodes.map(item => {
+                    return {
+                        key: item.key,
+                        icon: item.icon,
+                        text: item.text,
+                        path: item.path,
+                    }
                 });
             }
 
-            pageHead.setBreadcrumbs(breadcrumbs);
-            pageHead.setTitle(title);
-            pageHead.show();
-        })
+            if (selectedMenu.path !== '/') {
+                breadcrumbs.unshift({
+                    key: 'index',
+                    icon: 'home',
+                    text: '首页',
+                    path: '/',
+                });
+            }
+
+            breadcrumbs.push({
+                key: selectedMenu.key,
+                icon: selectedMenu.icon,
+                text: selectedMenu.text,
+            });
+        }
+
+        pageHead.setBreadcrumbs(breadcrumbs);
+        pageHead.setTitle(title);
+        pageHead.show();
     }
 
     render() {

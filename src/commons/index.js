@@ -1,4 +1,6 @@
 import {session} from 'zk-utils/lib/storage';
+import {getNodeByPropertyAndValue} from 'zk-utils/lib/tree-utils';
+import pathToRegexp from "path-to-regexp/index";
 
 export const isPro = process.env.NODE_ENV === 'production';
 export const isTest = process.env.NODE_ENV === 'test';
@@ -75,4 +77,37 @@ export function hasPermission(code) {
  */
 export function print() {
     window.print()
+}
+
+/**
+ * 根据path获取对应的菜单
+ * @param path
+ * @returns {*}
+ */
+export function getSelectedMenuByPath(path) {
+    const menuTreeData = getMenuTreeData();
+    let selectedMenu;
+    if (menuTreeData) {
+        if (path.indexOf('/+') > -1) {
+            path = path.substring(0, path.indexOf('/+'));
+        }
+
+        // 先精确匹配
+        selectedMenu = getNodeByPropertyAndValue(menuTreeData, 'path', path, (itemValue, value, item) => {
+            const isTop = item.children && item.children.length;
+            return itemValue === value && !isTop; // 排除父级节点
+        });
+
+        // 正则匹配，路由中有`:id`的情况
+        // fixme 容易出问题：a/b/:id,会匹配 a/b/1, a/b/detail，有可能不是期望的结果，注意路由写法
+        // fixme: a/b/tab/:id 具体的:id，添加一级，用来表明id是什么
+        if (!selectedMenu && path !== '/') {
+            selectedMenu = getNodeByPropertyAndValue(menuTreeData, 'path', path, (itemValue, value, item) => {
+                const isTop = item.children && item.children.length;
+                const re = pathToRegexp(itemValue);
+                return !!re.exec(value) && !isTop; // 排除父级节点
+            });
+        }
+    }
+    return selectedMenu;
 }

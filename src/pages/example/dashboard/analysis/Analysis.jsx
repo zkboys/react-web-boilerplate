@@ -17,14 +17,12 @@ export default class Analysis extends Component {
         this.st = setInterval(() => {
             const time = moment().format('YYYY-MM-DD HH:mm:ss');
             this.setState({time});
-        }, 1000)
-    }
-
-    componentDidMount() {
+        }, 1000);
         // console.log(this.props.service);
         // console.log(this.props.action.setState);
         // console.log(this.props.menu);
-        this.props.action.pageHead.appendBreadcrumbs([
+        const {action: {pageHead}} = this.props;
+        pageHead.appendBreadcrumbs([
             {
                 key: 'need a key1',
                 text: 'append',
@@ -36,12 +34,17 @@ export default class Analysis extends Component {
                 icon: 'fa-user'
             }
         ]);
-        // this.props.action.pageHead.setBreadcrumbs([
-        //     {
-        //         key: 'need a key',
-        //         text: <span style={{color: 'red'}}>理论上可以设置成任何东西</span>,
-        //     }
-        // ]);
+        pageHead.setTitle('重新设置Title');
+        pageHead.setBreadcrumbs([
+            {
+                key: 'need a key',
+                text: <span style={{color: 'red'}}>理论上可以设置成任何东西</span>,
+            }
+        ]);
+    }
+
+    componentDidMount() {
+
     }
 
     componentWillUnmount() {
