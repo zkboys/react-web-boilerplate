@@ -78,7 +78,7 @@ export default class Analysis extends Component {
 
                 <Button
                     onClick={() => {
-                        this.props.action.side.hide();
+                        // this.props.action.side.hide();
                         const {action: {global}} = this.props;
                         global.showLoading();
                         setTimeout(() => {
@@ -88,6 +88,8 @@ export default class Analysis extends Component {
                 >
                     全局loading
                 </Button>
+                <Button onClick={() => this.props.action.side.hide()}>隐藏左侧菜单</Button>
+                <Button onClick={() => this.props.action.side.show()}>显示左侧菜单</Button>
                 <br/>
                 <br/>
                 <div styleName="test-theme">测试一下主题 theme.js</div>
