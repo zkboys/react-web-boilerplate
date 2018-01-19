@@ -9670,9 +9670,9 @@ yauzl@2.4.1:
   dependencies:
     fd-slicer "~1.0.1"
 
-zk-antd@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/zk-antd/-/zk-antd-1.0.7.tgz#9c327a67d482324a4e7583422ce7c288500fb363"
+zk-antd@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/zk-antd/-/zk-antd-1.0.9.tgz#a0acb8e92d80f33e239f571619a689c9ff80d0e6"
 
 zk-axios@^1.0.5:
   version "1.0.5"

@@ -10,7 +10,7 @@ export const PAGE_ROUTE = '/dashboard/analysis';
 
 
 @connect(state => ({menu: state.menu}))
-export default class index extends Component {
+export default class Analysis extends Component {
     state = {};
 
     componentWillMount() {
@@ -21,9 +21,9 @@ export default class index extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.service);
-        console.log(this.props.action.setState);
-        console.log(this.props.menu);
+        // console.log(this.props.service);
+        // console.log(this.props.action.setState);
+        // console.log(this.props.menu);
         this.props.action.pageHead.appendBreadcrumbs([
             {
                 key: 'need a key1',
