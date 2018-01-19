@@ -26,7 +26,13 @@
         overflow-y: scroll;
         transition: all @transitionDuration;
     }
-    :global(.react-draggable) {
-        transition: all @transitionDuration;
+    .drag-bar {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 10px;
+        height: 100%;
+        cursor: col-resize;
+        z-index: 1;
     }
 }

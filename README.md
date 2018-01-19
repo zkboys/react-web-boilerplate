@@ -99,4 +99,6 @@ server {
 - [ ] babel 升级到7 使用 [optional-chaining](https://www.npmjs.com/package/babel-plugin-transform-optional-chaining)简化取值判断;
 - [ ] 前端监控
 - [ ] e2e 测试
+- [ ] 通用组件文档，生成antd文档的形式
+- [ ] 各个模块内部独立xxx.modal.js，通过脚本生成modal；
 

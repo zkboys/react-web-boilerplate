@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Rnd from 'react-rnd';
 import {getScrollBarWidth} from 'zk-utils';
 import SideMenu from '../side-menu';
 import {connect} from '../../models/index';
+import DragBar from './DragBar';
 import './style.less';
 
 const scrollBarWidth = getScrollBarWidth();
@@ -42,8 +42,8 @@ export default class Side extends Component {
         this.props.action.side.setDragging(true);
     };
 
-    handleSideResize = (e, direction, ref) => {
-        this.props.action.side.setWidth(ref.offsetWidth);
+    handleSideResize = ({clientX}) => {
+        this.props.action.side.setWidth(clientX + 5);
     };
 
     handleSideResizeStop = () => {
@@ -88,34 +88,23 @@ export default class Side extends Component {
 
         if (hasSide) return (
             <div styleName="side" style={{width: sideWidth, display: showSide ? 'block' : 'none', transitionDuration}}>
-                <Rnd
-                    disableDragging
-                    enableResizing={{right: !sideCollapsed}}
-                    size={{width: sideWidth}}
-                    style={{
-                        left: 0,
-                        top: 0,
-                        right: 0,
-                        bottom: 0,
-                        transition: `all ${transitionDuration}`
-                    }}
-                    position={{x: 0, y: 0}}
-                    onResizeStart={this.handleSideResizeStart}
-                    onResize={this.handleSideResize}
-                    onResizeStop={this.handleSideResizeStop}
-                >
-                    <div styleName="outer" style={{overflow: outerOverFlow, transitionDuration}}>
-                        <div styleName="inner" style={{width: sideInnerWidth, overflow: innerOverFlow, transitionDuration}}>
-                            <SideMenu
-                                dataSource={sideMenus}
-                                collapsed={sideCollapsed}
-                                openKeys={openKeys}
-                                selectedKeys={[selectedMenu && selectedMenu.key]}
-                                onOpenChange={this.handleMenuOpenChange}
-                            />
-                        </div>
+                <DragBar
+                    styleName="drag-bar"
+                    onDragStart={this.handleSideResizeStart}
+                    onDragging={this.handleSideResize}
+                    onDragEnd={this.handleSideResizeStop}
+                />
+                <div styleName="outer" style={{overflow: outerOverFlow, transitionDuration}}>
+                    <div styleName="inner" style={{width: sideInnerWidth, overflow: innerOverFlow, transitionDuration}}>
+                        <SideMenu
+                            dataSource={sideMenus}
+                            collapsed={sideCollapsed}
+                            openKeys={openKeys}
+                            selectedKeys={[selectedMenu && selectedMenu.key]}
+                            onOpenChange={this.handleMenuOpenChange}
+                        />
                     </div>
-                </Rnd>
+                </div>
             </div>
         );
         return null;
