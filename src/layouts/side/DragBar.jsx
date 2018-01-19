@@ -27,14 +27,6 @@ export default class DragBar extends Component {
         },
     };
 
-    componentWillMount() {
-
-    }
-
-    componentDidMount() {
-
-    }
-
     componentWillUnmount() {
         window.removeEventListener('mouseup', this.handleDragEnd);
         window.removeEventListener('touchend', this.handleDragEnd);
@@ -42,7 +34,7 @@ export default class DragBar extends Component {
         window.removeEventListener('touchmove', this.handleDragging);
     }
 
-    getPosition(event) {
+    handleDragStart = (event) => {
         let clientX = 0;
         let clientY = 0;
         if (event.nativeEvent instanceof MouseEvent) {
@@ -59,12 +51,10 @@ export default class DragBar extends Component {
             clientY = event.nativeEvent.touches[0].clientY;
         }
 
-        return {x: clientX, y: clientY};
-    };
+        const original = {x: clientX, y: clientY};
 
-    handleDragStart = (event) => {
-        const original = this.getPosition(event);
         this.setState({isDragging: true, original});
+
         if (this.props.onDragStart) {
             this.props.onDragStart();
         }
@@ -73,6 +63,7 @@ export default class DragBar extends Component {
     handleDragging = (event) => {
         const {isDragging, original} = this.state;
         if (isDragging) {
+            event.preventDefault();
             const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX;
             const clientY = event instanceof MouseEvent ? event.clientY : event.touches[0].clientY;
             const {x: originalX, y: originalY} = original;
@@ -80,11 +71,14 @@ export default class DragBar extends Component {
                 x: clientX - originalX,
                 y: clientY - originalY,
             };
+
             this.setState({moved});
+
             if (this.props.onDragging) {
                 this.props.onDragging({...moved, clientX, clientY});
             }
         }
+        return false;
     };
 
     handleDragEnd = () => {
