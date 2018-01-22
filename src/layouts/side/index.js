@@ -27,6 +27,7 @@ const scrollBarWidth = getScrollBarWidth();
 export default class Side extends Component {
     static propTypes = {
         layout: PropTypes.string,
+        theme: PropTypes.string,
     };
 
     static defaultProps = {
@@ -52,6 +53,7 @@ export default class Side extends Component {
 
     render() {
         let {
+            theme,
             layout,
 
             menus,          // 所有的菜单数据
@@ -88,15 +90,19 @@ export default class Side extends Component {
 
         if (hasSide) return (
             <div styleName="side" style={{width: sideWidth, display: showSide ? 'block' : 'none', transitionDuration}}>
-                <DragBar
-                    styleName="drag-bar"
-                    onDragStart={this.handleSideResizeStart}
-                    onDragging={this.handleSideResize}
-                    onDragEnd={this.handleSideResizeStop}
-                />
+                {sideCollapsed ? null : (
+                    <DragBar
+                        styleName="drag-bar"
+                        onDragStart={this.handleSideResizeStart}
+                        onDragging={this.handleSideResize}
+                        onDragEnd={this.handleSideResizeStop}
+                    />
+                )}
+
                 <div styleName="outer" style={{overflow: outerOverFlow, transitionDuration}}>
                     <div styleName="inner" style={{width: sideInnerWidth, overflow: innerOverFlow, transitionDuration}}>
                         <SideMenu
+                            theme={theme}
                             dataSource={sideMenus}
                             collapsed={sideCollapsed}
                             openKeys={openKeys}

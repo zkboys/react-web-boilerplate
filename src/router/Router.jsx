@@ -54,6 +54,7 @@ export default class extends Component {
                         if (props.location.pathname === '/login') {
                             return null;
                         }
+                        // top-side-menu top-menu side-menu
                         return <PageFrame layout="top-side-menu" {...props}/>;
                     }}/>
                     <Switch>

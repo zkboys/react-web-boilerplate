@@ -121,7 +121,7 @@ export default class FrameTopSideMenu extends Component {
             window.document.body.style.paddingLeft = `${sideWidth}px`;
         }
 
-        const theme = (isTopSideMenu || isSideMenu) ? 'default' : 'dark';
+        const theme = (isTopSideMenu || isSideMenu) ? 'dark' : 'default';
 
         let pageHead = null;
         if (showPageHead) {
@@ -134,7 +134,7 @@ export default class FrameTopSideMenu extends Component {
 
             if (pageHeadFixed) {
                 pageHead = (
-                    <div styleName="page-head-fixed" style={{left: sideWidth}}>
+                    <div styleName="page-head-fixed" style={{left: hasSide ? sideWidth : 0}}>
                         {pageHead}
                     </div>
                 );
@@ -145,8 +145,8 @@ export default class FrameTopSideMenu extends Component {
             <div styleName="base-frame" className="no-print">
                 <Helmet><title>{title}</title></Helmet>
                 <BackTop/>
-                <Header theme={theme} layout={layout}/>
-                <Side layout={layout}/>
+                <Header theme={(isTopSideMenu || isSideMenu) ? 'default' : 'dark'} layout={layout}/>
+                <Side layout={layout} theme={theme}/>
                 <div styleName={`content-top-space ${pageHeadFixed ? 'with-fixed-page-head' : ''}`}/>
                 {pageHead}
                 <div styleName="global-loading" style={{display: globalLoading ? 'block' : 'none'}}>
