@@ -24,9 +24,11 @@ export const zkAxios = new ZkAxios({
 
 // 默认配置
 zkAxios.defaults.baseURL = '/api';
-zkAxios.defaults.timeout = 1000 * 5;
+zkAxios.defaults.timeout = 1000 * 60;
 zkAxios.mockDefaults.baseURL = '/';
 
+// ajax高阶组件
+export const ajax = createAjaxHoc(zkAxios);
 
 /**
  * ajax工具，不含有 errorTip和successTip
@@ -43,5 +45,3 @@ axios.defaults.timeout = 1000 * 5;
 // mockjs使用的axios实例
 export const mockInstance = axios.mockInstance = zkAxios.mockInstance;
 
-// ajax高阶组件
-export const ajax = createAjaxHoc(zkAxios);
