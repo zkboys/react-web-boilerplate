@@ -12,13 +12,10 @@ function getErrorTip({error, errorTip}) {
     if (errorTip) return errorTip;
 
     if (error && error.response) {
-        const resData = error.response;
-        const {status} = error.response;
+        const {status, message} = error.response;
 
         // 后端自定义信息
-        if (resData && resData.message) {
-            return resData.message;
-        }
+        if (message) return message;
 
         if (status === 401) { // 需要登录
             return toLogin();

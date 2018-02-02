@@ -1,0 +1,110 @@
+:global(.container td) {
+    padding: 20px 20px;
+}
+
+:global(.time-col) {
+    position: relative;
+    text-align: right;
+}
+
+:global(.line-up) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: -10px;
+    width: 1px;
+    height: 50%;
+    border: 1px solid red;
+}
+
+:global(.line-up.last-one) {
+    border: 1px solid #000;
+}
+
+:global(.line-down) {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: -10px;
+    width: 1px;
+    height: 50%;
+    border: 1px solid red;
+}
+
+:global(.line-down.last-one) {
+    border: 1px solid #000;
+}
+
+:global(.line-down.first-one) {
+    margin-bottom: -15px;
+}
+
+:global(.icon-circle) {
+    width: 20px;
+    height: 20px;
+    border: 3px solid red;
+    border-radius: 50%;
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    right: -9px;
+}
+
+:global(.icon-circle.common-circle:after) {
+    content: '';
+    position: absolute;
+    top: 50%;
+    margin-top: -2px;
+    left: 50%;
+    margin-left: -2px;
+    width: 4px;
+    height: 4px;
+    background: red;
+    border-radius: 50%;
+}
+
+:global(.icon-circle.last-one) {
+    width: 30px;
+    height: 30px;
+    line-height: 26px;
+    text-align: center;
+    font-size: 12px;
+    background: #fff;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    margin-top: -15px;
+    right: -14px;
+}
+
+:global(.icon-circle.first-one) {
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    right: -14px;
+    border: 3px solid red;
+}
+
+:global(.icon-circle.first-one:before) {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 12px;
+    background: red;
+    left: 50%;
+    margin-left: -2px;
+    top: 2px;
+}
+
+:global(.icon-circle.first-one:after) {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 3px;
+    background: red;
+    top: 50%;
+    right: 4px;
+}
+
+:global(.time-month-day) {
+    font-size: 8px;
+}

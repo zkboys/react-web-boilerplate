@@ -9,9 +9,9 @@ export default {
     /**
      * 如果action有额外的数据处理，请使用这种结构
      *
-     * key(fetchUser)   action函数名
-     * payload          payload数据创建函数或数据，参数为调用action（fetchUser）时传入的参数，可以是任意多个，若是函数其返回值将作为action.payload传递给reducer，若是数据，直接作为action.payload传递给reducer
-     * meta             meta数据创建函数或数据，参数为调用action（fetchUser）时传入的参数，可以是任意多个(与payload所接到的参数相同)，其返回值将作为action.meta传递给reducer，若是数据，直接作为action.meta传递给reducer
+     * key(fetchUser): action函数名
+     * payload: payload数据创建函数或数据，参数为调用action（fetchUser）时传入的参数，可以是任意多个，若是函数其返回值将作为action.payload传递给reducer，若是非函数，直接作为action.payload传递给reducer
+     * meta: meta数据创建函数或数据，参数为调用action（fetchUser）时传入的参数，可以是任意多个(与payload所接到的参数相同)，其返回值将作为action.meta传递给reducer，若是非函数，直接作为action.meta传递给reducer
      */
     fetchUser: {
         // redux 中 有错误/成功处理，不需要successTip 和 errorTip，使用 axios；

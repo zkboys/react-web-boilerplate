@@ -70,7 +70,8 @@ export default {
         meta() {
         },
         reducer(state, action) {
-            return {...state};
+            // return {...state};
+            returtn {};
         },
     },
     // action 数据不需要特殊处理，会直接传递给 reducer的action.payload
@@ -78,19 +79,20 @@ export default {
     setTitle(state, action) {
         const {payload} = action;
         return {
-            ...state,
+            // ...state,
             title: payload,
         };
     },
     show(state) {
-        return {...state, show: true}
+        return {/* ...state,  */ show: true}
     },
     hide(state) {
-        return {...state, show: false}
+        return {/* ...state,  */ show: false}
     },
 };
 
 ```
+注：所有的reducer方法，无论是什么写法中的，都可以直接返回新数据，不必关心与元数据合并（...state），封装内部做了合并；
 
 ## 关于redux
 actions可以被各个页面组件和reducers复用
