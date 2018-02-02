@@ -15,7 +15,7 @@ import './style.less';
 @connect(state => {
     const {selectedMenu} = state.menu;
     const {title, breadcrumbs, show} = state.pageHead;
-    const {show: showSide, width, collapsed, collapsedWidth} = state.side;
+    const {show: showSide, width, collapsed, collapsedWidth, dragging} = state.side;
     const {loading} = state.global;
     return {
         selectedMenu,
@@ -28,6 +28,7 @@ import './style.less';
         sideCollapsed: collapsed,
         sideCollapsedWidth: collapsedWidth,
         globalLoading: loading,
+        sideDragging: dragging,
     };
 })
 export default class FrameTopSideMenu extends Component {
@@ -106,10 +107,13 @@ export default class FrameTopSideMenu extends Component {
             sideCollapsedWidth,
             sideWidth,
             globalLoading,
+            sideDragging,
         } = this.props;
 
         sideWidth = sideCollapsed ? sideCollapsedWidth : sideWidth;
         sideWidth = showSide ? sideWidth : 0;
+
+        let transitionDuration = sideDragging ? '0ms' : `300ms`;
 
         const isTopSideMenu = layout === 'top-side-menu';
         const isSideMenu = layout === 'side-menu';
@@ -134,7 +138,7 @@ export default class FrameTopSideMenu extends Component {
 
             if (pageHeadFixed) {
                 pageHead = (
-                    <div styleName="page-head-fixed" style={{left: hasSide ? sideWidth : 0}}>
+                    <div styleName="page-head-fixed" style={{left: hasSide ? sideWidth : 0, transitionDuration}}>
                         {pageHead}
                     </div>
                 );
