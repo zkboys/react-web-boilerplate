@@ -53,7 +53,7 @@
         "uuid": "^3.1.0",
         "zk-antd": "^1.0.9",
         "zk-axios": "^1.0.5",
-        "zk-redux": "^2.0.5",
+        "zk-redux": "^3.0.7",
         "zk-roadhog": "^0.0.11",
         "zk-utils": "^1.0.4"
     },

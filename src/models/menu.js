@@ -17,11 +17,11 @@ export default {
         openKeys: [],       // 当前展开菜单keys
         selectedMenu: [],   // 当前选中菜单
         topMenu: [],        // 当前选中菜单的顶级菜单
-        sync: {
-            openKeys: true,
-            selectedMenu: true,
-            topMenu: true,
-        }
+    },
+    syncState: {
+        openKeys: true,
+        selectedMenu: true,
+        topMenu: true,
     },
     // action reducer 混合写法
     setOpenKeys: (state, {payload}) => ({openKeys: payload}),

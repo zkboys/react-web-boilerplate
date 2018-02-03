@@ -11,10 +11,10 @@ export default {
         collapsedWidth: 80, // 收起时宽度
         collapsed: false,   // 是否展开/收起
         dragging: false,    // 是否正在拖动
-        sync: {
-            width: true,
-            collapsed: true,
-        },
+    },
+    syncState: {
+        width: true,
+        collapsed: true,
     },
     setDragging: (state, {payload}) => ({dragging: payload}),
     hide() {

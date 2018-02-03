@@ -58,6 +58,13 @@ export default {
         show: true,
         ...
     },
+    // syncState: true, // 全部同步到localStorage中
+    syncState: { // 部分存储到localStorage中
+        titel: true,
+        user: {
+            name: true,
+        },
+    },
     actions: {
         ...
     },
@@ -155,7 +162,6 @@ export const testAsync = createAction(
     	return {
     		resolved,
     		rejected,
-    		sync: 'home'
     	}
     }
 );
@@ -166,7 +172,6 @@ export const testAsync = createAction(
     return {
         resolved,
         rejected,
-        sync: 'home'
     }
 }
 就是 createAction 的第三个参数 metaCreator，是一个函数，这个函数返回的数据，最终存放在action的meta中。
@@ -286,67 +291,29 @@ export default handleActions({
 自己可以在action中，使用`try-catch`处理？？？
 
 ### 将数据存储到localStorage中
-开发过程中只需要在action中添加sync标记即可实现state存储到localStorage。
-以及src/actions/utils.js 的 getStateFromStorage 方法中维护对应的sync，即可同步localStorage到state中。
 
-action中通过 metaCreator 的 sync 属性来标记这个action相关的state是否存储到localStorage中。其中sync将会作为存储数据的key
-```js
-export const setSettings = createAction(types.SET_SETTING, data => data, () => ({sync: 'setting'}));
+model 中 通过 `syncState` 标记那些state需要同步到localStorage中，如果 syncState === true，将同步当前model中所有state；
+models/xxx.js
 ```
-
-使用 sync-reducer-to-local-storage-middleware.js 中间件进行存储操作：
-```js
-import {isFSA} from 'flux-standard-action';
-import * as types from '../constants/actionTypes';
-import * as storage from '../utils/storage';
-
-export default ({dispatch, getState}) => next => action => {
-    if (!isFSA(action)) {
-        return next(action);
-    }
-
-    const {meta = {}, sequence = {}, error, payload} = action;
-    const {sync} = meta;
-
-    if (action.type === types.SYNC_STATE_TO_STORAGE) {
-        let state = getState();
-        try {
-            storage.setItem(payload, state[payload]);
-        } catch (err) {
-            /* eslint-disable */
-            console.warn(err);
+export default {
+    initialState: {
+        user: {
+            name: '张三',
+            age: 20,
+        },
+        org: {
+            id: 1,
+            name: '架构部',
+        },
+    },
+    // syncState: true, // 全部同步
+    syncState: { // 指定数据
+        user: true,
+        org: {
+            name: true,
         }
     }
-
-    if (!sync || sequence.type === 'start' || error) {
-        return next(action);
-    }
-
-    next(action);
-
-    setTimeout(() => {
-        dispatch({
-            type: types.SYNC_STATE_TO_STORAGE,
-            payload: sync,
-        });
-    }, 16);
-};
-
-```
-
-项目启动的时候，会在src/layouts/app-frame/AppFrame.jsx 中调用 actions.getStateFromStorage(); 方法，将localStorage中的数据同步到state中
-
-actions.getStateFromStorage(); 在 src/actions/utils.js中实现：
-```js
-// 同步本地数据到state中
-export const getStateFromStorage = createAction(types.GET_STATE_FROM_STORAGE, () => {
-    return Storage.multiGet(['setting']); // action 中使用sync标记的同时，这里也需要对应的添加，否则无法同不会来
-}, (resolved, rejected) => {
-    return {
-        resolved,
-        rejected,
-    };
-});
+}
 ```
 
 ### 撤销&重做

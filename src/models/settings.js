@@ -5,11 +5,12 @@ export default {
         pageFrameLayout: PAGE_FRAME_LAYOUT[0],
         pageHeadFixed: true,
         pageHeadShow: true,
-        sync: true,  // 全部同步
-        // sync: { // 部分同步，指定结构
-        //     pageHeadShow: true,
-        // },
     },
+
+    syncState: true, // 全部同步
+    // syncState: { // 部分同步，指定结构
+    //     pageHeadShow: true,
+    // },
 
     setPageFrameLayout: (state, {payload}) => ({pageFrameLayout: payload}),
     setPageHeadFixed: (state, {payload}) => ({pageHeadFixed: !!payload}),
