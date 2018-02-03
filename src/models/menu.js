@@ -1,7 +1,6 @@
 import {createAction} from 'redux-actions';
 import {getTopNodeByNode} from 'zk-utils/lib/tree-utils';
 import {uniqueArray} from 'zk-utils';
-import {actionTypes} from 'zk-redux';
 // import uuid from 'uuid/v4';
 import {getMenuTreeData, getSelectedMenuByPath} from '../commons';
 
@@ -18,6 +17,11 @@ export default {
         openKeys: [],       // 当前展开菜单keys
         selectedMenu: [],   // 当前选中菜单
         topMenu: [],        // 当前选中菜单的顶级菜单
+        sync: {
+            openKeys: true,
+            selectedMenu: true,
+            topMenu: true,
+        }
     },
     // action reducer 混合写法
     setOpenKeys: (state, {payload}) => ({openKeys: payload}),
@@ -28,18 +32,9 @@ export default {
     },
     actions: {
         // 获取菜单状态，openKeys selectedMenu topMenu
-        getMenuStatus: createAction(types.GET_MENU_STATUS, v => v, () => ({sync: 'menu'})), // sync 用于指定是否同步到存储中，menu要对应模块名
+        getMenuStatus: createAction(types.GET_MENU_STATUS),
     },
     reducers: {
-        // 从store中恢复数据
-        [actionTypes.GET_STATE_FROM_STORAGE](state, action) {
-            const {payload = {}} = action;
-            const {menu} = payload; // payload包含了所有同步的数据
-            if (menu) {
-                const {openKeys = [], selectedMenu, topMenu} = menu;
-                return {openKeys, selectedMenu, topMenu};
-            }
-        },
         [types.GET_MENU_STATUS](state) { // 根据url 获取菜单状态 openKeys selectedMenu topMenu
             let path = window.location.pathname;
             let selectedMenu = getSelectedMenuByPath(path);

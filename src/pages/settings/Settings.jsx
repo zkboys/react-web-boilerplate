@@ -84,16 +84,18 @@ export default class Settings extends Component {
                         <Card
                             title="页面头部"
                         >
-                            <Checkbox
-                                onChange={this.handlePageHeadFixedChange}
-                                checked={pageHeadFixed}
-                            >头部固定</Checkbox>
 
                             <Checkbox
                                 onChange={this.handlePageHeadShowChange}
                                 checked={pageHeadShow}
                             >显示头部</Checkbox>
 
+                            {pageHeadShow ? (
+                                <Checkbox
+                                    onChange={this.handlePageHeadFixedChange}
+                                    checked={pageHeadFixed}
+                                >头部固定</Checkbox>
+                            ) : null}
                         </Card>
                     </Col>
                 </Row>

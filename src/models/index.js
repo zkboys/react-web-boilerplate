@@ -12,15 +12,7 @@ import {
 import pageInitState from '../pages/page-init-state';
 import * as models from './all-models';
 
-// 这里需要指定同步数据的key，对应meta中的sync字段，对应的是reducers中的数据，即：model名称
-const syncKeys = [
-    'settings',
-    'side',
-    'menu',
-];
-
-
-const {actions, reducers} = getActionsAndReducers({models, syncKeys, pageInitState});
+const {actions, reducers} = getActionsAndReducers({models, pageInitState});
 let middleware = [
     thunkMiddleware,
     middlewarePromise,
