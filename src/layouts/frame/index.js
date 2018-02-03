@@ -17,6 +17,7 @@ import './style.less';
     const {title, breadcrumbs, show} = state.pageHead;
     const {show: showSide, width, collapsed, collapsedWidth, dragging} = state.side;
     const {loading} = state.global;
+    const {pageFrameLayout, pageHeadFixed, pageHeadShow} = state.settings;
     return {
         selectedMenu,
         showPageHead: show,
@@ -29,6 +30,9 @@ import './style.less';
         sideCollapsedWidth: collapsedWidth,
         globalLoading: loading,
         sideDragging: dragging,
+        layout: pageFrameLayout,
+        pageHeadFixed,
+        pageHeadShow, // 设置中统一控制的头部是否显示
     };
 })
 export default class FrameTopSideMenu extends Component {
@@ -56,7 +60,8 @@ export default class FrameTopSideMenu extends Component {
     }
 
     setBreadcrumbs() {
-        const {action: {pageHead}} = this.props;
+        const {action: {pageHead}, pageHeadShow} = this.props;
+
         const selectedMenu = getSelectedMenuByPath(window.location.pathname);
         let breadcrumbs = [];
         let title = '';
@@ -91,7 +96,7 @@ export default class FrameTopSideMenu extends Component {
 
         pageHead.setBreadcrumbs(breadcrumbs);
         pageHead.setTitle(title);
-        pageHead.show();
+        pageHeadShow ? pageHead.show() : pageHead.hide();
     }
 
     render() {

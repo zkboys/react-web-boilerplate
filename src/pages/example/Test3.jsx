@@ -65,8 +65,8 @@ export default class Test3 extends Component {
                                 <TimePicker defaultValue={el ? moment(el, 'HH:mm') : null} format="HH:mm"/>
                                 <span>{el}</span>
                                 {/*<AA>{moment().valueOf()}</AA>*/}
-                                <a href="javascript:void(0);" onClick={this.addTimeItem.bind(this, index)}>增加</a>
-                                <a href="javascript:void(0);" onClick={this.removeTimeItem.bind(this, index)}> 删除</a>
+                                <a onClick={this.addTimeItem.bind(this, index)}>增加</a>
+                                <a onClick={this.removeTimeItem.bind(this, index)}> 删除</a>
                             </div>
                         );
                     })
