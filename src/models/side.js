@@ -1,13 +1,9 @@
-import {createAction} from 'redux-actions';
-
-const types = {
-    SET_COLLAPSED: 'MENU_SET_COLLAPSED',
-};
+const INIT_WIDTH = 256;
 
 export default {
     initialState: {
         show: true,
-        width: 256,         // 左侧宽度
+        width: INIT_WIDTH,  // 左侧宽度
         collapsedWidth: 80, // 收起时宽度
         collapsed: false,   // 是否展开/收起
         dragging: false,    // 是否正在拖动
@@ -17,17 +13,9 @@ export default {
         collapsed: true,
     },
     setDragging: (state, {payload}) => ({dragging: payload}),
-    hide() {
-        return {show: false};
-    },
-    show() {
-        return {show: true};
-    },
+    hide: () => ({show: false}),
+    show: () => ({show: true}),
     setWidth: (state, {payload}) => ({width: payload}),
-    actions: {
-        setCollapsed: createAction(types.SET_COLLAPSED),
-    },
-    reducers: {
-        [types.SET_COLLAPSED]: (state, {payload}) => ({collapsed: payload}),
-    }
+    initWidth: () => ({width: INIT_WIDTH}),
+    setCollapsed: (state, {payload}) => ({collapsed: payload}),
 }

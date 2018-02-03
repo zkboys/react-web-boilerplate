@@ -34,7 +34,12 @@ export default class Settings extends Component {
 
     handlePageFrameLayoutChange = (e) => {
         const {value} = e.target;
-        this.props.action.settings.setPageFrameLayout(value);
+        const {action} = this.props;
+        if (value === 'top-menu') {
+            action.side.initWidth();
+            action.side.setCollapsed(false);
+        }
+        action.settings.setPageFrameLayout(value);
     };
 
     handlePageHeadFixedChange = (e) => {
