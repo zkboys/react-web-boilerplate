@@ -53,7 +53,10 @@ export default class index extends Component {
 
                 return (
                     <Menu.Item key={key}>
-                        <Link to={path}>
+                        <Link to={{
+                            pathname: path,
+                            state: {from: 'menu'}
+                        }}>
                             {title}
                         </Link>
                     </Menu.Item>

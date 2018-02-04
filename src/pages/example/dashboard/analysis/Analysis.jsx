@@ -14,6 +14,20 @@ export default class Analysis extends Component {
     state = {};
 
     componentWillMount() {
+        const {action} = this.props.history;
+        const {from} = this.props.location.state;
+        console.log(action, from);
+        if (action === 'PUSH') { // POP REPLACE
+            if (from === 'menu') {
+                // 菜单点击进入的
+            }
+        }
+
+        if (action === 'POP') { // POP REPLACE
+            if (from === 'menu') {
+                // 两种情况：1. 刷新页面 2.点击浏览器的前进后退按钮
+            }
+        }
         this.st = setInterval(() => {
             const time = moment().format('YYYY-MM-DD HH:mm:ss');
             this.setState({time});
@@ -58,6 +72,11 @@ export default class Analysis extends Component {
         return (
             <PageContent>
                 <div>当前时间：{time}</div>
+                <Button
+                    onClick={() => {
+                        this.props.history.push('/dashboard/analysis', {from: 'current'});
+                    }}
+                >分析页，测试from</Button>
                 <Button
                     onClick={() => {
                         this.props.ajax.get('/test-ajax', null, {successTip: '获取成功！'})
