@@ -1,39 +1,18 @@
 import React, {Component} from 'react';
 import {LocaleProvider, Spin} from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
-import moment from 'moment';
-import 'moment/locale/zh-cn';
-import {Provider} from 'react-redux';
-import * as storage from 'zk-utils/lib/storage';
-import {convertToTree} from 'zk-utils/lib/tree-utils';
-import {init as initRedux} from 'zk-redux';
-import handleError from './commons/handle-error';
-import handleSuccess from './commons/handle-success';
-import {configureStore} from './models/index';
 import service from './services/service-hoc';
 import {
     setCurrentLoginUser,
     getCurrentLoginUser,
-    setMenuTreeData,
+    getMenuTreeDataAndPermissions,
 } from './commons';
 import Router from './router/Router';
-
-const initStorage = storage.init;
-
-// moment国际化为中国
-moment.locale('zh-cn');
+import {connect} from "./models";
 
 const currentLoginUser = getCurrentLoginUser();
 
-// 初始化存储 设置存储前缀，用于区分不同用户的数据
-initStorage({keyPrefix: currentLoginUser && currentLoginUser.id});
-
-// 初始化redux
-initRedux({storage, handleError, handleSuccess});
-
-// models store
-const store = configureStore();
-
+@connect()
 @service()
 export default class App extends Component {
     state = {
@@ -71,70 +50,15 @@ export default class App extends Component {
                 .getMenus({userId})
                 .then(res => {
                     let menus = res || [];
-                    if (process.env.NODE_ENV === 'development') {
-                        // 这里做个备份，防止数据丢失之后，方便恢复菜单数据。
-                        menus && menus.length && window.localStorage.setItem(`${currentLoginUser.name}-menus.bak`, JSON.stringify(menus));
-                    }
-
-                    // 处理path： 只声明了url，没有声明path，为iframe页面
-                    menus = menus.map(item => {
-                        if (item.url && !item.path) {
-                            item.path = `/frame/(${item.url})`;
-                        }
-                        return item;
-                    });
-
-                    // 用户权限code，通过菜单携带过来的
-                    const permissions = menus.map(item => {
-                        if (item.type === '0') return item.key;
-                        if (item.type === '1') return item.code;
-                        return null;
-                    });
-
-                    // 菜单根据order 排序
-                    const orderedData = [...menus].sort((a, b) => {
-                        const aOrder = a.order || 0;
-                        const bOrder = b.order || 0;
-
-                        // 如果order都不存在，根据 text 排序
-                        if (!aOrder && !bOrder) {
-                            return a.text > b.text ? 1 : -1;
-                        }
-
-                        return bOrder - aOrder;
-                    });
-
-                    // 设置顶级节点path，有的顶级没有指定path，默认设置为子孙节点的第一个path
-                    const findPath = (node) => {
-                        const children = orderedData.filter(item => item.parentKey === node.key);
-                        let path = '';
-                        if (children && children.length) {
-                            for (let i = 0; i < children.length; i++) {
-                                const child = children[i];
-                                if (child.path) {
-                                    path = child.path;
-                                    break;
-                                }
-                                path = findPath(child);
-                            }
-                        }
-                        return path;
-                    };
-                    orderedData.forEach(item => {
-                        if (!item.path) {
-                            item.path = findPath(item);
-                        }
-                    });
-
-                    const menuTreeData = convertToTree(orderedData);
-                    setMenuTreeData(menuTreeData);
+                    const {menuTreeData, permissions} = getMenuTreeDataAndPermissions(menus);
+                    this.props.action.menu.setMenus(menuTreeData);
 
                     currentLoginUser.permissions = permissions;
                     setCurrentLoginUser(currentLoginUser);
+                    this.props.action.global.setLoginUser(currentLoginUser);
+                    this.props.action.global.setPermissions(permissions);
                 })
-                .finally(() => {
-                    this.setState({loading: false});
-                });
+                .finally(() => this.setState({loading: false}));
         }
     }
 
@@ -146,11 +70,12 @@ export default class App extends Component {
         }
         return (
             <LocaleProvider locale={zhCN}>
-                {
-                    loading ?
-                        <Spin style={{position: 'absolute', left: '50%', top: '30%'}} tip="Loading..." size={'large'}/>
-                        :
-                        <Provider store={store}><Router/></Provider>
+                {loading ? (
+                    <Spin
+                        style={{position: 'absolute', left: '50%', top: '30%'}}
+                        tip="Loading..."
+                        size={'large'}/>
+                ) : <Router/>
                 }
             </LocaleProvider>
         );

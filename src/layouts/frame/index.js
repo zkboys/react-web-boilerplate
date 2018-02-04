@@ -13,12 +13,13 @@ import './style.less';
 
 @withRouter
 @connect(state => {
-    const {selectedMenu} = state.menu;
+    const {selectedMenu, menus} = state.menu;
     const {title, breadcrumbs, show} = state.pageHead;
     const {show: showSide, width, collapsed, collapsedWidth, dragging} = state.side;
     const {loading} = state.global;
     const {pageFrameLayout, pageHeadFixed, pageHeadShow} = state.settings;
     return {
+        menus,
         selectedMenu,
         showPageHead: show,
         title,
@@ -49,7 +50,6 @@ export default class FrameTopSideMenu extends Component {
         const {action, action: {menu, side}} = this.props;
         // 从Storage中获取出需要同步到redux的数据
         action.getStateFromStorage();
-        menu.getMenus();
         menu.getMenuStatus();
         side.show();
         this.setBreadcrumbs();
@@ -61,9 +61,9 @@ export default class FrameTopSideMenu extends Component {
     }
 
     setBreadcrumbs() {
-        const {action: {pageHead}, pageHeadShow} = this.props;
+        const {action: {pageHead}, pageHeadShow, menus} = this.props;
 
-        const selectedMenu = getSelectedMenuByPath(window.location.pathname);
+        const selectedMenu = getSelectedMenuByPath(window.location.pathname, menus);
         let breadcrumbs = [];
         let title = '';
         if (selectedMenu) {

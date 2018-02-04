@@ -1,5 +1,5 @@
 import {session} from 'zk-utils/lib/storage';
-import {getNodeByPropertyAndValue} from 'zk-utils/lib/tree-utils';
+import {getNodeByPropertyAndValue, convertToTree} from 'zk-utils/lib/tree-utils';
 import pathToRegexp from "path-to-regexp/index";
 
 export const isPro = process.env.NODE_ENV === 'production';
@@ -27,22 +27,6 @@ export function getCurrentLoginUser() {
  */
 export function setCurrentLoginUser(currentLoginUser) {
     window.sessionStorage.setItem('currentLoginUser', JSON.stringify(currentLoginUser));
-}
-
-/**
- * 从sessionStorage中获取菜单的树形结构数据
- * @returns {*}
- */
-export function getMenuTreeData() {
-    return session.getItem('menuTreeData');
-}
-
-/**
- * 保存菜单的树形结构到sessionStorage中
- * @param menuTreeData
- */
-export function setMenuTreeData(menuTreeData) {
-    session.setItem('menuTreeData', menuTreeData);
 }
 
 /**
@@ -84,8 +68,7 @@ export function print() {
  * @param path
  * @returns {*}
  */
-export function getSelectedMenuByPath(path) {
-    const menuTreeData = getMenuTreeData();
+export function getSelectedMenuByPath(path, menuTreeData) {
     let selectedMenu;
     if (menuTreeData) {
         if (path.indexOf('/+') > -1) {
@@ -110,4 +93,64 @@ export function getSelectedMenuByPath(path) {
         }
     }
     return selectedMenu;
+}
+
+
+/**
+ * 获取菜单树状结构数据 和 随菜单携带过来的权限
+ * @param menus 扁平化菜单数据
+ */
+export function getMenuTreeDataAndPermissions(menus) {
+    // 处理path： 只声明了url，没有声明path，为iframe页面
+    menus = menus.map(item => {
+        if (item.url && !item.path) {
+            item.path = `/frame/(${item.url})`;
+        }
+        return item;
+    });
+
+    // 用户权限code，通过菜单携带过来的
+    const permissions = menus.map(item => {
+        if (item.type === '0') return item.key;
+        if (item.type === '1') return item.code;
+        return null;
+    });
+
+    // 菜单根据order 排序
+    const orderedData = [...menus].sort((a, b) => {
+        const aOrder = a.order || 0;
+        const bOrder = b.order || 0;
+
+        // 如果order都不存在，根据 text 排序
+        if (!aOrder && !bOrder) {
+            return a.text > b.text ? 1 : -1;
+        }
+
+        return bOrder - aOrder;
+    });
+
+    // 设置顶级节点path，有的顶级没有指定path，默认设置为子孙节点的第一个path
+    const findPath = (node) => {
+        const children = orderedData.filter(item => item.parentKey === node.key);
+        let path = '';
+        if (children && children.length) {
+            for (let i = 0; i < children.length; i++) {
+                const child = children[i];
+                if (child.path) {
+                    path = child.path;
+                    break;
+                }
+                path = findPath(child);
+            }
+        }
+        return path;
+    };
+    orderedData.forEach(item => {
+        if (!item.path) {
+            item.path = findPath(item);
+        }
+    });
+
+    const menuTreeData = convertToTree(orderedData);
+    return {menuTreeData, permissions}
 }

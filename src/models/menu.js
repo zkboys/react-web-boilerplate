@@ -2,7 +2,7 @@ import {createAction} from 'redux-actions';
 import {getTopNodeByNode} from 'zk-utils/lib/tree-utils';
 import {uniqueArray} from 'zk-utils';
 // import uuid from 'uuid/v4';
-import {getMenuTreeData, getSelectedMenuByPath} from '../commons';
+import {getSelectedMenuByPath} from '../commons';
 
 // types只是做action 与 reducer之间的连接，它的值并没有太多意义；
 // 如果其他model用到这个model的types，可以将这个types export 出去；
@@ -25,11 +25,7 @@ export default {
     },
     // action reducer 混合写法
     setOpenKeys: (state, {payload}) => ({openKeys: payload}),
-    // getMenus: () => ({menus: getMenuTreeData()}), // 这样不是纯函数了
-    getMenus: {
-        payload: getMenuTreeData,
-        reducer: (state, {payload}) => ({menus: payload}),
-    },
+    setMenus: (state, {payload}) => ({menus: payload}),
     actions: {
         // 获取菜单状态，openKeys selectedMenu topMenu
         getMenuStatus: createAction(types.GET_MENU_STATUS),
@@ -37,7 +33,7 @@ export default {
     reducers: {
         [types.GET_MENU_STATUS](state) { // 根据url 获取菜单状态 openKeys selectedMenu topMenu
             let path = window.location.pathname;
-            let selectedMenu = getSelectedMenuByPath(path);
+            let selectedMenu = getSelectedMenuByPath(path, state.menus);
             let topMenu = {};
             let openKeys = [...state.openKeys];
 
@@ -47,7 +43,7 @@ export default {
             }
 
             if (selectedMenu) {
-                topMenu = getTopNodeByNode(getMenuTreeData(), selectedMenu);
+                topMenu = getTopNodeByNode(state.menus, selectedMenu);
                 const parentKeys = selectedMenu.parentKeys || [];
                 // openKeys = openKeys.concat(parentKeys); // 保持其他打开的菜单
                 openKeys = [...parentKeys]; // 关闭其他菜单
