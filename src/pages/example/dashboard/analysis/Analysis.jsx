@@ -14,8 +14,8 @@ export default class Analysis extends Component {
     state = {};
 
     componentWillMount() {
-        const {action} = this.props.history;
-        const {from} = this.props.location.state;
+        const {action} = this.props.history || {};
+        const {from} = this.props.location.state || {};
         console.log(action, from);
         if (action === 'PUSH') { // POP REPLACE
             if (from === 'menu') {

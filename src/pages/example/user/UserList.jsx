@@ -181,10 +181,11 @@ export default class UserList extends Component {
 
         this.props.action.user.fetchUser({
             params,
-            successTip: '查询成功！',
-            errorTip: '查询失败',
+            successTip: '查询用户成功！',
+            errorTip: '查询用户失败！',
             onResolve: () => console.log('成功'),
             onReject: () => console.log('失败'),
+            onComplete: () => console.log('完成，无论成功失败'),
         });
     };
 

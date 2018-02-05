@@ -16,7 +16,7 @@ export default {
     fetchUser: {
         // redux 中 有错误/成功处理，不需要successTip 和 errorTip，使用 axios；
         payload: ({params, options}) => axios.get('/mock/users', params, options), // 异步action payload 返回promise
-        // meta: commonAsyncMeta, // 异步action 默认使用通用异步meta配置commonAsyncMeta，对successTip errorTip onResolve onReject 进行了合理的默认值处理，需要action以对象形式传参
+        // meta: commonAsyncMeta, // 异步action 默认使用通用异步meta配置commonAsyncMeta，对successTip errorTip onResolve onReject onComplete 进行了合理的默认值处理，需要action以对象形式传参
         // meta: { // 可以是函数，可以是对象
         //     successTip: '查询成功！欧耶~',
         //     errorTip: '自定义errorTip！马丹~',

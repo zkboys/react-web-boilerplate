@@ -13,6 +13,7 @@ const types = {
 
 export default {
     initialState: {
+        loading: false,     // 请求菜单loading
         menus: [],          // 菜单数据，树状结构
         openKeys: [],       // 当前展开菜单keys
         selectedMenu: [],   // 当前选中菜单

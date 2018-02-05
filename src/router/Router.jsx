@@ -20,7 +20,7 @@ import PageFrame from '../layouts/frame';
 import IFrame from '../layouts/iframe'
 import AuthRoute from './AuthRoute';
 import {ajax} from '../commons/axios';
-import service from '../services/service-hoc';
+import service from '../api/api-hoc';
 
 const allRoutes = pageRoutes.concat(routes);
 
