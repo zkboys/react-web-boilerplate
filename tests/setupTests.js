@@ -1,10 +1,10 @@
 /* eslint-disable import/first */
 import '../src/polyfill';
-import { jsdom } from 'jsdom';
+import {jsdom} from 'jsdom';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-Enzyme.configure({ adapter: new Adapter() });
+Enzyme.configure({adapter: new Adapter()});
 
 // fixed jsdom miss
 const documentHTML = '<!doctype html><html><body><div id="root"></div></body></html>';

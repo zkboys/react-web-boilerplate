@@ -4,8 +4,8 @@ export default class System extends BaseApi {
     constructor(...args) {
         super(...args);
         /**
-         * 基础url BaseApi会基于此url及restfull规范提供基础的一些接口
-         * 这些接口需要后端基于restfull提供，单未必全部有效
+         * 基础url BaseApi会基于此url及restful规范提供基础的一些接口
+         * 这些接口需要后端基于restful提供，未必全部有效
          * @type {string}
          */
         this.url = '/v1/system';

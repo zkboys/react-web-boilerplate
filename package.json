@@ -15,7 +15,8 @@
         "lint:fix": "eslint --fix --ext .js src mock tests && npm run lint:style",
         "lint-staged": "lint-staged",
         "lint-staged:js": "eslint --ext .js",
-        "test": "jest",
+        "test:commons": "jest ./src/commons --watch",
+        "test:components": "jest ./src/components",
         "test:all": "node ./tests/run-tests.js"
     },
     "dependencies": {

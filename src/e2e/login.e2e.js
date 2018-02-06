@@ -1,27 +1,31 @@
 import Nightmare from 'nightmare';
+// https://github.com/segmentio/nightmare
 
 describe('Login', () => {
-  let page;
-  beforeEach(() => {
-    page = Nightmare();
-    page.goto('http://localhost:8000/login');
-  });
+    let page;
+    beforeEach(() => {
+        page = Nightmare({show: true}); // 显示浏览器
+        page.goto('http://localhost:8000/login');
+    });
 
-  it('should login with failure', async () => {
-    await page.type('#userName', 'mockuser')
-      .type('#password', 'wrong_password')
-      .click('button[type="submit"]')
-      .wait('.ant-alert-error') // should display error
-      .end();
-  });
+    it('登录失败，显示"用户名或密码错误"', async () => {
+        const text = await page.type('#userName', 'mockuser')
+            .type('#password', 'wrong_password')
+            .click('button[type="submit"]')
+            .wait(3000) // 等待两秒钟
+            .evaluate(() => document.body.innerHTML)
+            .end();
+        expect(text).toContain('用户名或密码错误');
+    });
 
-  it('should login successfully', async () => {
-    const text = await page.type('#userName', 'test')
-      .type('#password', '111')
-      .click('button[type="submit"]')
-      .wait('.ant-layout-sider h1') // should display error
-      .evaluate(() => document.body.innerHTML)
-      .end();
-    expect(text).toContain('<h1>React Web</h1>');
-  });
+    it('登录成功，跳转到首页', async () => {
+        const text = await page.type('#userName', 'test')
+            .type('#password', '111')
+            .click('button[type="submit"]')
+            .wait('.no-print')
+            .evaluate(() => document.body.innerHTML)
+            .end();
+
+        expect(text).toContain('<h1>React Web</h1>');
+    });
 });

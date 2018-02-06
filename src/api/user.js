@@ -10,7 +10,9 @@ export default class User extends BaseApi {
         return this.ajax
             .get(this.url, params, options)
             .then(res => {
-                throw new Error('查询用户出错了!!');
+                if (params.throwError) {
+                    throw new Error('查询用户出错了!!')
+                }
                 return {
                     total: res.total || 0,
                     list: res.list || [],

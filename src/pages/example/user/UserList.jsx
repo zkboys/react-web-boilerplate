@@ -179,10 +179,11 @@ export default class UserList extends Component {
         params = {...this.state.params, ...params};
         this.setState({params});
 
+        // params.throwError = true;
         this.props.action.user.getUsersByPage({
             params,
-            // successTip: '查询用户成功！',
-            // errorTip: '查询用户失败！',
+            successTip: '页面内成功提示！',
+            errorTip: '页面内错误提示！',
             onResolve: () => console.log('成功'),
             onReject: () => console.log('失败'),
             onComplete: () => console.log('完成，无论成功失败'),
