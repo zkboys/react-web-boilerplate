@@ -9,6 +9,7 @@ import {toLogin} from './index';
  * @returns {*}
  */
 function getErrorTip({error, errorTip}) {
+
     if (errorTip) return errorTip;
 
     if (error && error.response) {
@@ -42,7 +43,7 @@ function getErrorTip({error, errorTip}) {
     return '未知系统错误';
 }
 
-export default function ({error, errorTip}) {
+export default function handleError({error, errorTip}) {
     if (errorTip === false) return;
 
     const description = getErrorTip({error, errorTip});

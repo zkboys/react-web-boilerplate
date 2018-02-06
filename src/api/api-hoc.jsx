@@ -36,7 +36,7 @@ const api = (options) => (WrappedComponent) => {
             // 没有设置api，默认注入全部api
             if (!options || (Object.keys(options).length === 1 && Object.keys(options)[0] === 'propName')) {
                 Object.keys(allApiClass).forEach(item => {
-                    if (item !== this.propName) this.apis[firstLowerCase(item)] = new allApiClass[item]({useResource: true});
+                    if (item !== this.propName) this.apis[firstLowerCase(item)] = new allApiClass[item]({useResource: true, useTip: true});
                 });
             } else {
                 // 有指定api

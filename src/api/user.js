@@ -6,17 +6,15 @@ export default class User extends BaseApi {
         this.url = '/mock/users';
     }
 
-    async getUsersByPage(params, options) {
-        try {
-            return await this.ajax.get(this.url, params, options)
-                .then(res => {
-                    return {
-                        total: res.total || 0,
-                        list: res.list || [],
-                    };
-                });
-        } catch (e) {
-            console.error(e);
-        }
+    getUsersByPage(params, options) {
+        return this.ajax
+            .get(this.url, params, options)
+            .then(res => {
+                throw new Error('查询用户出错了!!');
+                return {
+                    total: res.total || 0,
+                    list: res.list || [],
+                };
+            });
     }
 }

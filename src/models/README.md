@@ -59,7 +59,7 @@ const types = {
     GET_MENU_STATUS: 'MENU:GET_MENU_STATUS', // 防止各个模块冲突，最好模块名开头
 };
 
-// action reducer 合并写法，如果一个action 只对应一个reducer，这种写法不需要指定actionType，可以有效简化代码；
+
 export default {
     initialState: {
         title: '',
@@ -91,11 +91,12 @@ export default {
         }
     },
     
+    // action reducer 合并写法，如果一个action 只对应一个reducer，这种写法不需要指定actionType，可以有效简化代码；
     // 如果action有额外的数据处理，请使用这种结构
     arDemo: {
         payload() { // 如果是函数返回值将作为action.payload 传递给reducer，如果非函数，直接将payload的值，作为action.payload;
         },
-        meta() { // 如果是函数返回值将作为action.meta 传递给reducer，如果非函数，直接将meta的值，作为action.payload;
+        meta() { // 如果是函数返回值将作为action.meta 传递给reducer，如果非函数，直接将meta的值，作为action.meta;
         },
         reducer(state, action) {
             // return {...state};
@@ -110,38 +111,38 @@ export default {
     
     // 异步action写法
     fetchUser: {
-            // 调用时（`this.props.action.user.fetchUser({params, options, successTip, errorTip, onResolve, onReject, onComplete})`）参数约定为一个对象，对象各个属性说明如下:
-            // params: 请求参数
-            // options: 请求配置
-            // successTip: 成功提示信息
-            // errorTip: 错误提示信息
-            // onResolve: 成功回调
-            // onReject: 失败回调
-            // onComplete: 完成回调，无论成功、失败都会调用
-            
-            // 异步action payload 返回promise     
-            payload: ({params, options}) => axios.get('/mock/users', params, options),
-            
-            // 异步action 默认使用通用异步meta配置commonAsyncMeta，对successTip errorTip onResolve onReject onComplete 进行了合理的默认值处理，需要action以对象形式传参调用
-            // meta: commonAsyncMeta, 
-            // meta: { // 可以是函数，可以是对象
-            //     successTip: '查询成功！欧耶~',
-            //     errorTip: '自定义errorTip！马丹~',
-            // },
-            
-            // 基于promise 异步reducer写法；
-            reducer: {
-                pending: () => ({loading: true}),
-                resolve(state, {payload = {}}) {
-                    const {total = 0, list = []} = payload;
-                    return {
-                        users: list,
-                        total,
-                    }
-                },
-                complete: () => ({loading: false}),
-            }
-        },
+        // 调用时（`this.props.action.user.fetchUser({params, options, successTip, errorTip, onResolve, onReject, onComplete})`）参数约定为一个对象，对象各个属性说明如下:
+        // params: 请求参数
+        // options: 请求配置
+        // successTip: 成功提示信息
+        // errorTip: 错误提示信息
+        // onResolve: 成功回调
+        // onReject: 失败回调
+        // onComplete: 完成回调，无论成功、失败都会调用
+        
+        // 异步action payload 返回promise     
+        payload: ({params, options}) => axios.get('/mock/users', params, options),
+        
+        // 异步action 默认使用通用异步meta配置commonAsyncMeta，对successTip errorTip onResolve onReject onComplete 进行了合理的默认值处理，需要action以对象形式传参调用
+        // meta: commonAsyncMeta, 
+        // meta: { // 可以是函数，可以是对象
+        //     successTip: '查询成功！欧耶~',
+        //     errorTip: '自定义errorTip！马丹~',
+        // },
+        
+        // 基于promise 异步reducer写法；
+        reducer: {
+            pending: () => ({loading: true}),
+            resolve(state, {payload = {}}) {
+                const {total = 0, list = []} = payload;
+                return {
+                    users: list,
+                    total,
+                }
+            },
+            complete: () => ({loading: false}),
+        }
+    },
 };
 
 ```

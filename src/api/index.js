@@ -10,5 +10,5 @@ export const allApiClass = {
 
 export default {
     system: new System(),
-    User: new User(),
+    user: new User(),
 };

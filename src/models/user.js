@@ -1,4 +1,5 @@
 import {axios} from '../commons/axios';
+import api from '../api';
 
 export default {
     initialState: {
@@ -22,4 +23,19 @@ export default {
             complete: () => ({loading: false}),
         }
     },
+
+    getUsersByPage: {
+        payload: ({params, options}) => api.user.getUsersByPage(params, options),
+        reducer: {
+            pending: () => ({loading: true}),
+            resolve(state, {payload = {}}) {
+                const {total = 0, list = []} = payload;
+                return {
+                    users: list,
+                    total,
+                }
+            },
+            complete: () => ({loading: false}),
+        }
+    }
 }

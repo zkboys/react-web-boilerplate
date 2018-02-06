@@ -1,7 +1,7 @@
-import {zkAxios} from '../commons/axios';
+import {zkAxios, axios} from '../commons/axios';
 
 export default class BaseApi {
-    constructor({useResource = false} = {}) {
+    constructor({useResource = false, useTip = false} = {}) {
 
         // 存放api占用的资源，组件卸载的时候会调用资源的cancel release 方法释放资源
         // 一般是ajax、event等
@@ -10,9 +10,10 @@ export default class BaseApi {
         // 提供this.ajax对象，ajaxToken会自动加入resource
         this.ajax = {};
         const method = ['get', 'post', 'put', 'del'];
+        const axiosInstance = useTip ? zkAxios : axios;
         method.forEach(item => {
             this.ajax[item] = (...args) => {
-                const ajaxToken = zkAxios[item](...args);
+                const ajaxToken = axiosInstance[item](...args);
                 useResource && this.resource.push(ajaxToken);
                 return ajaxToken;
             };
