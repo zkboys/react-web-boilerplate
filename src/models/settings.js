@@ -7,10 +7,7 @@ export default {
         pageHeadShow: true,
     },
 
-    syncState: true, // 全部同步
-    // syncState: { // 部分同步，指定结构
-    //     pageHeadShow: true,
-    // },
+    syncState: true, // 全部同步到localStorage中
 
     setPageFrameLayout: (state, {payload}) => ({pageFrameLayout: payload}),
     setPageHeadFixed: (state, {payload}) => ({pageHeadFixed: !!payload}),

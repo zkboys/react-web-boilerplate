@@ -12,6 +12,7 @@ export default {
         width: true,
         collapsed: true,
     },
+
     setDragging: (state, {payload}) => ({dragging: payload}),
     hide: () => ({show: false}),
     show: () => ({show: true}),

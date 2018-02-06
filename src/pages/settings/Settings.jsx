@@ -7,10 +7,12 @@ export const PAGE_ROUTE = '/settings';
 
 @connect(state => {
     const {pageFrameLayout, pageHeadFixed, pageHeadShow} = state.settings;
+    const {keepOtherOpen} = state.menu;
     return {
         pageFrameLayout,
         pageHeadFixed,
         pageHeadShow,
+        keepOtherMenuOpen: keepOtherOpen,
     };
 })
 export default class Settings extends Component {
@@ -54,11 +56,17 @@ export default class Settings extends Component {
         checked ? action.pageHead.show() : action.pageHead.hide();
     };
 
+    handleKeepOtherMenuOpenChange = (e) => {
+        const {checked} = e.target;
+        this.props.action.menu.setKeepOtherOpen(checked);
+    };
+
     render() {
         const {
             pageFrameLayout,
             pageHeadFixed,
             pageHeadShow,
+            keepOtherMenuOpen,
         } = this.props;
 
         const radioStyle = {
@@ -85,6 +93,7 @@ export default class Settings extends Component {
                             </Radio.Group>
                         </Card>
                     </Col>
+
                     <Col span={12} style={colStyle}>
                         <Card
                             title="页面头部"
@@ -101,6 +110,17 @@ export default class Settings extends Component {
                                     checked={pageHeadFixed}
                                 >头部固定</Checkbox>
                             ) : null}
+                        </Card>
+                    </Col>
+
+                    <Col span={12} style={colStyle}>
+                        <Card
+                            title="菜单"
+                        >
+                            <Checkbox
+                                onChange={this.handleKeepOtherMenuOpenChange}
+                                checked={keepOtherMenuOpen}
+                            >点击菜单进入页面时，保持菜单展开状态</Checkbox>
                         </Card>
                     </Col>
                 </Row>
