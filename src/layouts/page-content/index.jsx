@@ -34,14 +34,14 @@ export default class index extends Component {
         });
 
         const style = {...others.style};
-        if (hasFixBottom && style.marginBottom === undefined) {
+        if (hasFixBottom && style.marginBottom === void 0) {
             style.marginBottom = '66px';
         }
         others.style = style;
 
         return (
             <div {...others}>
-                <Spin size="large" spinning={loading}>
+                <Spin size="large" spinning={loading} style={{cursor: 'not-allowed'}}>
                     <div styleName="page-content">{children}</div>
                 </Spin>
                 {footer ? <div styleName="footer"><Footer/></div> : null}
