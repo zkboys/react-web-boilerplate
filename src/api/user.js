@@ -7,8 +7,7 @@ export default class User extends BaseApi {
     }
 
     getUsersByPage(params, options) {
-        return this.ajax
-            .get(this.url, params, options)
+        return this.ajax.get(this.url, params, options)
             .then(res => {
                 if (params.throwError) {
                     throw new Error('查询用户出错了!!')

@@ -83,9 +83,7 @@ export default class Settings extends Component {
             <PageContent>
                 <Row>
                     <Col span={12} style={colStyle}>
-                        <Card
-                            title="导航布局"
-                        >
+                        <Card title="导航布局">
                             <Radio.Group onChange={this.handlePageFrameLayoutChange} value={pageFrameLayout}>
                                 <Radio style={radioStyle} value="top-side-menu">顶部+左侧导航</Radio>
                                 <Radio style={radioStyle} value="top-menu">顶部导航</Radio>
@@ -95,10 +93,7 @@ export default class Settings extends Component {
                     </Col>
 
                     <Col span={12} style={colStyle}>
-                        <Card
-                            title="页面头部"
-                        >
-
+                        <Card title="页面头部">
                             <Checkbox
                                 onChange={this.handlePageHeadShowChange}
                                 checked={pageHeadShow}
@@ -114,13 +109,11 @@ export default class Settings extends Component {
                     </Col>
 
                     <Col span={12} style={colStyle}>
-                        <Card
-                            title="菜单"
-                        >
+                        <Card title="菜单">
                             <Checkbox
                                 onChange={this.handleKeepOtherMenuOpenChange}
                                 checked={keepOtherMenuOpen}
-                            >点击菜单进入页面时，保持菜单展开状态</Checkbox>
+                            >保持菜单展开状态</Checkbox>
                         </Card>
                     </Col>
                 </Row>
