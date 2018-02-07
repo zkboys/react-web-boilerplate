@@ -13,14 +13,13 @@
     getComponent: () => import('path/to/User.jsx'),
 },
 ```
-相关脚本[scripts/generate-page-route.js](https://github.com/zkboys/react-web-boilerplate/blob/master/scripts/generate-page-route.js)
 
 如果需要其他路由属性，请在`src/pages/routes.js`文件中定义路由，同时页面一定不要写`export const PAGE_ROUTE = ...`，否则路由被定义两遍，会产生意料之外的bug。
 
 ## 后端配合
 后端所有http的get请求，没有被截获的都渲染`index.html`
 ```
-node后端路由配置（routes.js）：
+// node后端路由配置（routes.js）：
 router.get('*', function (req, res, next) {
     // ajax请求 抛出404,其他请求直接render index.html
     res.render('index.html');
@@ -34,6 +33,15 @@ router.get('*', function (req, res, next) {
 ```
 ## 页面跳转
 页面跳转使用`Link`，或者`this.props.history`相关API，否则会跳出单页面应用;
+
+
+```jsx harmony
+import {Link} from 'react-router';
+<Link to="/xxxxx">XXXXX</Link>
+
+this.props.router.push('/user/add');
+```
+
 与路由连接的页面，都已经含有`this.props.history`,如果非路由直接页面，可以通过`withRouter`进行包装:
 
 ```jsx harmony
@@ -67,20 +75,14 @@ export default class WorkSpace extends Component {
 }
 
 ```
-```jsx harmony
-import {Link} from 'react-router';
-<Link to="/xxxxx">XXXXX</Link>
-
-this.props.router.push('/user/add');
-```
 
 ## 注入页面中的属性
-页面进行了一些包装，注入了一些常用属性 `service()(ajax()(withRouter(connectComponent(Com))));`;
+页面进行了一些包装`api()(ajax()(withRouter(connectComponent(Com))));`，注入了一些常用属性;
 
 在页面中，可以调用：
 
 - this.porps.ajax
-- this.props.service
+- this.props.api
 - this.porps.action
 - this.props.history
 

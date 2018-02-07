@@ -2,8 +2,14 @@ export default {
     initialState: {
         breadcrumbs: [],    // 面包屑数据
         title: '',          // 页面title
-        show: true,         // 是否显示/隐藏页面头部
+        showHead: true,     // 是否显示/隐藏页面头部
+        loading: false,
     },
+
+    showHead: () => ({showHead: true}),
+    hideHead: () => ({showHead: false}),
+
+    setTitle: (state, {payload}) => ({title: payload}),
 
     setBreadcrumbs: (state, {payload}) => ({breadcrumbs: payload}),
     appendBreadcrumbs: (state, {payload}) => {
@@ -11,7 +17,7 @@ export default {
         breadcrumbs = breadcrumbs.concat(payload);
         return {breadcrumbs};
     },
-    setTitle: (state, {payload}) => ({title: payload}),
-    show: () => ({show: true}),
-    hide: () => ({show: false}),
+
+    showLoading: () => ({loading: true}),
+    hideLoading: () => ({loading: false}),
 }

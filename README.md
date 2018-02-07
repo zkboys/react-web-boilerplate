@@ -7,7 +7,7 @@
 - [models(redux)](https://github.com/zkboys/react-web-boilerplate/blob/master/src/models/README.md)
 - [layouts(布局)](https://github.com/zkboys/react-web-boilerplate/blob/master/src/layouts/README.md)
 - [router(路由)](https://github.com/zkboys/react-web-boilerplate/blob/master/src/router/README.md)
-- [services(服务)](https://github.com/zkboys/react-web-boilerplate/blob/master/src/services/README.md)
+- [api(后端接口)](https://github.com/zkboys/react-web-boilerplate/blob/master/src/api/README.md)
 
 ## 依赖
 1. nodejs v8.1.3
@@ -97,8 +97,8 @@ server {
 ## TODO
 
 - [ ] babel 升级到7 使用 [optional-chaining](https://www.npmjs.com/package/babel-plugin-transform-optional-chaining)简化取值判断;
-- [ ] 前端监控
-- [ ] e2e 测试
+- [ ] 前端监控，异常捕获
+- [x] e2e 测试
 - [ ] 通用组件文档，生成antd文档的形式
 - [ ] 各个模块内部独立xxx.modal.js，通过脚本生成modal；
 

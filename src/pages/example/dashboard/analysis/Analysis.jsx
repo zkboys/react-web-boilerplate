@@ -11,7 +11,9 @@ export const PAGE_ROUTE = '/dashboard/analysis';
 
 @connect(state => ({menu: state.menu}))
 export default class Analysis extends Component {
-    state = {};
+    state = {
+        time: moment().format('YYYY-MM-DD HH:mm:ss'),
+    };
 
     componentWillMount() {
         const {action} = this.props.history || {};
@@ -28,6 +30,7 @@ export default class Analysis extends Component {
                 // 两种情况：1. 刷新页面 2.点击浏览器的前进后退按钮
             }
         }
+
         this.st = setInterval(() => {
             const time = moment().format('YYYY-MM-DD HH:mm:ss');
             this.setState({time});
@@ -35,8 +38,8 @@ export default class Analysis extends Component {
         // console.log(this.props.service);
         // console.log(this.props.action.setState);
         // console.log(this.props.menu);
-        const {action: {pageHead}} = this.props;
-        pageHead.appendBreadcrumbs([
+        const {action: {page}} = this.props;
+        page.appendBreadcrumbs([
             {
                 key: 'need a key1',
                 text: 'append',
@@ -48,8 +51,8 @@ export default class Analysis extends Component {
                 icon: 'fa-user'
             }
         ]);
-        pageHead.setTitle('重新设置Title');
-        pageHead.setBreadcrumbs([
+        page.setTitle('重新设置Title');
+        page.setBreadcrumbs([
             {
                 key: 'need a key',
                 text: <span style={{color: 'red'}}>理论上可以设置成任何东西</span>,
@@ -69,15 +72,20 @@ export default class Analysis extends Component {
     render() {
         const {time} = this.state;
 
+        const buttonStyle = {marginRight: 8, marginTop: 8};
         return (
             <PageContent>
                 <div>当前时间：{time}</div>
+
                 <Button
+                    style={buttonStyle}
                     onClick={() => {
                         this.props.history.push('/dashboard/analysis', {from: 'current'});
                     }}
                 >分析页，测试from</Button>
+
                 <Button
+                    style={buttonStyle}
                     onClick={() => {
                         this.props.ajax.get('/test-ajax', null, {successTip: '获取成功！'})
                             .then(res => {
@@ -87,6 +95,7 @@ export default class Analysis extends Component {
                 >发请求 proxy 请求</Button>
 
                 <Button
+                    style={buttonStyle}
                     onClick={() => {
                         this.props.ajax.put('/mock/test-ajax/array', null, {successTip: <span>获取<span style={{color: 'red'}}>mock</span>数据成功</span>})
                             .then(res => {
@@ -96,6 +105,7 @@ export default class Analysis extends Component {
                 >发请求 mock 请求</Button>
 
                 <Button
+                    style={buttonStyle}
                     onClick={() => {
                         // this.props.action.side.hide();
                         const {action: {global}} = this.props;
@@ -104,11 +114,28 @@ export default class Analysis extends Component {
                             global.hideLoading();
                         }, 3000)
                     }}
-                >
-                    全局loading
-                </Button>
-                <Button onClick={() => this.props.action.side.hide()}>隐藏左侧菜单</Button>
-                <Button onClick={() => this.props.action.side.show()}>显示左侧菜单</Button>
+                >全局loading</Button>
+
+                <Button
+                    style={buttonStyle}
+                    onClick={() => {
+                        const {action: {page}} = this.props;
+                        page.showLoading();
+                        setTimeout(() => {
+                            page.hideLoading();
+                        }, 3000);
+                    }}
+                >页面loading</Button>
+
+                <Button
+                    style={buttonStyle}
+                    onClick={() => this.props.action.side.hide()}
+                >隐藏左侧菜单</Button>
+
+                <Button
+                    style={buttonStyle}
+                    onClick={() => this.props.action.side.show()}
+                >显示左侧菜单</Button>
                 <br/>
                 <br/>
                 <div styleName="test-theme">测试一下主题 theme.js</div>

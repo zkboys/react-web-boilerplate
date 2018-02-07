@@ -18,9 +18,9 @@ export const PAGE_ROUTE = '/settings';
 export default class Settings extends Component {
 
     componentWillMount() {
-        const {pageHead} = this.props.action;
-        pageHead.setTitle('设置');
-        pageHead.setBreadcrumbs([
+        const {page} = this.props.action;
+        page.setTitle('设置');
+        page.setBreadcrumbs([
             {
                 key: '1',
                 path: '/',
@@ -53,7 +53,7 @@ export default class Settings extends Component {
         const {checked} = e.target;
         const {action} = this.props;
         action.settings.showPageHead(checked);
-        checked ? action.pageHead.show() : action.pageHead.hide();
+        checked ? action.page.showHead() : action.page.hideHead();
     };
 
     handleKeepOtherMenuOpenChange = (e) => {

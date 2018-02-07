@@ -41,7 +41,7 @@ export default class UserList extends Component {
         {
             type: 'primary', text: '添加', icon: 'plus-circle-o',
             onClick: () => {
-                this.props.action.pageHead.setTitle('查询');
+                this.props.action.page.setTitle('查询');
             },
         },
     ];

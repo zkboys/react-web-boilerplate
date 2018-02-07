@@ -14,14 +14,14 @@ import './style.less';
 @withRouter
 @connect(state => {
     const {selectedMenu, menus} = state.menu;
-    const {title, breadcrumbs, show} = state.pageHead;
+    const {title, breadcrumbs, showHead} = state.page;
     const {show: showSide, width, collapsed, collapsedWidth, dragging} = state.side;
     const {loading} = state.global;
     const {pageFrameLayout, pageHeadFixed, pageHeadShow} = state.settings;
     return {
         menus,
         selectedMenu,
-        showPageHead: show,
+        showPageHead: showHead,
         title,
         breadcrumbs,
 
@@ -61,7 +61,7 @@ export default class FrameTopSideMenu extends Component {
     }
 
     setBreadcrumbs() {
-        const {action: {pageHead}, pageHeadShow, menus} = this.props;
+        const {action: {page}, pageHeadShow, menus} = this.props;
 
         const selectedMenu = getSelectedMenuByPath(window.location.pathname, menus);
         let breadcrumbs = [];
@@ -95,9 +95,9 @@ export default class FrameTopSideMenu extends Component {
             });
         }
 
-        pageHead.setBreadcrumbs(breadcrumbs);
-        pageHead.setTitle(title);
-        pageHeadShow ? pageHead.show() : pageHead.hide();
+        page.setBreadcrumbs(breadcrumbs);
+        page.setTitle(title);
+        pageHeadShow ? page.showHead() : page.hideHead();
     }
 
     render() {
