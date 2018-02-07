@@ -212,7 +212,7 @@ export default class UserList extends Component {
                         columns: this.columns,
                         dataSource: users,
                     }}
-                    onSearch={this.handleSearch}
+                    onSearch={params => this.handleSearch({...params, pageNum: 1})}
                     onPageNumChange={pn => this.handleSearch({pageNum: pn})}
                 />
                 <FixBottom right>
