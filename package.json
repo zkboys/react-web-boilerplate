@@ -15,6 +15,7 @@
         "lint:fix": "eslint --fix --ext .js src mock tests && npm run lint:style",
         "lint-staged": "lint-staged",
         "lint-staged:js": "eslint --ext .js",
+        "test": "jest",
         "test:commons": "jest ./src/commons --watch",
         "test:components": "jest ./src/components",
         "test:all": "node ./tests/run-tests.js"
@@ -64,6 +65,7 @@
         "ejs": "^2.5.7",
         "enzyme": "^3.1.0",
         "enzyme-adapter-react-16": "^1.0.2",
+        "eslint": "^4.17.0",
         "gh-pages": "^1.0.0",
         "husky": "^0.14.3",
         "jest": "^21.0.1",

@@ -12,7 +12,7 @@ describe('Login', () => {
         const text = await page.type('#userName', 'mockuser')
             .type('#password', 'wrong_password')
             .click('button[type="submit"]')
-            .wait(3000) // 等待两秒钟
+            .wait(3000) // 等待三秒钟
             .evaluate(() => document.body.innerHTML)
             .end();
         expect(text).toContain('用户名或密码错误');
