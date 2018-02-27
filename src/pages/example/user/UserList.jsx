@@ -204,7 +204,7 @@ export default class UserList extends Component {
                     loading={loading}
                     toolItems={this.toolItems}
                     queryItems={this.queryItems}
-                    showCollapsed={true}
+                    showCollapsed
                     total={total}
                     pageNum={pageNum}
                     defaultPageSize={10}
