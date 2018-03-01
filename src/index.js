@@ -31,6 +31,13 @@ const currentLoginUser = getCurrentLoginUser();
 // 初始化存储 设置存储前缀，用于区分不同用户的数据
 storage.init({keyPrefix: currentLoginUser && currentLoginUser.id});
 
+/*
+const setItem = storage.setItem;
+storage.setItem = (key, value) => {
+    console.log(value); // 可以根据value中的标记字段，比如syncType='server' 区分如何处理；
+    setItem(key, value);
+};
+*/
 // 初始化redux
 zkRedux.init({storage, handleError, handleSuccess});
 
