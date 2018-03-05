@@ -102,3 +102,13 @@ server {
 - [ ] 通用组件文档，生成antd文档的形式
 - [ ] 各个模块内部独立xxx.modal.js，通过脚本生成modal；
 
+
+server {
+    listen       80;
+    server_name  www.shubin.wang shubin.wang;
+    location / {
+      root /home/admin/deploy/react-web-boilerplate; // 前端打包之后的文件存放路径
+      index index.html;
+      try_files $uri $uri/ /index.html; #react-router 防止页面刷新出现404
+    }
+}

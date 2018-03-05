@@ -1,12 +1,38 @@
 import React, {Component} from 'react';
 import {Button, Menu} from 'antd'
-import {ToolBar, Operator, Table} from 'zk-antd';
+import {ToolBar, Operator} from 'zk-antd';
+import Table from './table/index';
 import PageContent from '../../layouts/page-content';
+import DragColumn from './table/DragColumn';
+import DragRow from './table/DragRow';
 
 export const PAGE_ROUTE = '/example/zk-table';
 
+let WTable = DragRow(DragColumn(Table));
+
 export default class Index extends Component {
     state = {
+        columns: [
+            {title: '用户名', dataIndex: 'name', key: 'name'},
+            {title: '性别', dataIndex: 'gender', key: 'gender'},
+            {title: '工作', dataIndex: 'job', key: 'job'},
+            {
+                title: '操作', dataIndex: 'operator', key: 'operator',
+                render: (text, record) => {
+                    const {id} = record;
+                    const items = [{
+                        label: '删除',
+                        color: 'red',
+                        onClick: () => {
+                            let {dataSource} = this.state;
+                            const newDataSource = dataSource.filter(item => item.id !== id);
+                            this.setState({dataSource: newDataSource});
+                        },
+                    }];
+                    return <Operator items={items}/>
+                },
+            },
+        ],
         dataSource: [],
         count: 0,
     };
@@ -30,27 +56,6 @@ export default class Index extends Component {
 
     }
 
-    columns = [
-        {title: '用户名', dataIndex: 'name', key: 'name'},
-        {title: '性别', dataIndex: 'gender', key: 'gender'},
-        {title: '工作', dataIndex: 'job', key: 'job'},
-        {
-            title: '操作', dataIndex: 'operator', key: 'operator',
-            render: (text, record) => {
-                const {id} = record;
-                const items = [{
-                    label: '删除',
-                    color: 'red',
-                    onClick: () => {
-                        let {dataSource} = this.state;
-                        const newDataSource = dataSource.filter(item => item.id !== id);
-                        this.setState({dataSource: newDataSource});
-                    },
-                }];
-                return <Operator items={items}/>
-            },
-        },
-    ];
 
     handleAdd = () => {
         const dataSource = [...this.state.dataSource];
@@ -72,9 +77,13 @@ export default class Index extends Component {
                 <ToolBar>
                     <Button onClick={this.handleAdd} type="primary">添加</Button>
                 </ToolBar>
-                <Table
-                    columns={this.columns}
+                <WTable
+                    columns={this.state.columns}
+                    onColumnMoved={columns => this.setState({columns})}
+
                     dataSource={dataSource}
+                    onRowMoved={data => this.setState({dataSource: data})}
+
                     pagination={false}
                     uniqueKey="id"
                     rightClickContent={(record, index) => {
