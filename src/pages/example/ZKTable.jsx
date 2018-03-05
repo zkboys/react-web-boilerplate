@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
-import {Button, Menu} from 'antd'
+import {Button, Menu, Table} from 'antd'
 import {ToolBar, Operator} from 'zk-antd';
-import Table from './table/index';
 import PageContent from '../../layouts/page-content';
 import DragColumn from './table/DragColumn';
 import DragRow from './table/DragRow';
+import Animation from './table/Animation';
+import RightClick from './table/RightClick';
 
 export const PAGE_ROUTE = '/example/zk-table';
 
-let WTable = DragRow(DragColumn(Table));
+let WTable = DragColumn(Animation(DragRow(RightClick(Table))));
+
+const MenuItemGroup = Menu.ItemGroup;
 
 export default class Index extends Component {
     state = {
@@ -84,20 +87,28 @@ export default class Index extends Component {
                     dataSource={dataSource}
                     onRowMoved={data => this.setState({dataSource: data})}
 
-                    pagination={false}
                     uniqueKey="id"
+
+                    pagination={false}
+
                     rightClickContent={(record, index) => {
                         console.log(record, index);
                         return (
                             <Menu
-                                selectable={false}
-                                mode={'inline'}
-                                onClick={({key}) => {
-                                    console.log(key);
+                                onClick={(e) => {
+                                    console.log(e);
                                 }}
+                                style={{width: 256}}
+                                mode="vertical"
                             >
-                                <Menu.Item key="1">操作1</Menu.Item>
-                                <Menu.Item key="2">操作2</Menu.Item>
+                                <MenuItemGroup title="Item 1">
+                                    <Menu.Item key="1">Option 1</Menu.Item>
+                                    <Menu.Item key="2">Option 2</Menu.Item>
+                                </MenuItemGroup>
+                                <MenuItemGroup title="Iteom 2">
+                                    <Menu.Item key="3">Option 3</Menu.Item>
+                                    <Menu.Item key="4">Option 4</Menu.Item>
+                                </MenuItemGroup>
                             </Menu>
                         );
                     }}

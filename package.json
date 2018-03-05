@@ -57,7 +57,7 @@
         "react-rnd": "^7.1.5",
         "react-router-dom": "^4.2.2",
         "uuid": "^3.1.0",
-        "zk-antd": "^1.0.9",
+        "zk-antd": "^2.0.2",
         "zk-axios": "^1.0.5",
         "zk-redux": "^3.0.7",
         "zk-roadhog": "^0.0.11",
