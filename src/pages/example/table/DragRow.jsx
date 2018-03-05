@@ -104,6 +104,25 @@ BodyRow = DropTarget('row', rowTarget, (connect, monitor) => ({
     }))(BodyRow)
 );
 
+
+/**
+ * antd Table 行可拖拽 高阶组件
+ *
+ * @example
+ * import {Table} from 'antd';
+ * const WTable = DragRow(Table);
+ *
+ * ...
+ *  <WTable
+ *      dataSource={this.state.dataSource}
+ *      onRowMoved={dataSource => this.setState({dataSource})}
+ *  />
+ * ...
+ *
+ * @param OriTable
+ * @returns {DragRowTable}
+ * @constructor
+ */
 export default function DragRow(OriTable) {
 
     @DragDropContext(HTML5Backend)
