@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        .box {
+            height: 100vw;
+            background: green;
+        }
+
+        .box > div {
+            float: left;
+            width: 33.3333%;
+            height: 33.3333%;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+    <div>9</div>
+</div>
+
+<script>
+    if (!Function.prototype.bind) {
+        Function.prototype.bind = function (obj) {
+            var slice = [].slice,
+                //bind 函数是可以传参数的。比如：this.click.bind(this,1,2,3)
+                args = slice.call(arguments, 1),
+                self = this,
+                nop = function () {
+                },
+                bound = function () {
+                    return self.apply(this instanceof nop ? this : (obj || {}), args.concat(slice.call(arguments)));
+                };
+
+            nop.prototype = self.prototype;
+            bound.prototype = new nop();
+            return bound;
+        };
+    }
+</script>
+
+</body>
+</html>

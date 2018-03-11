@@ -9,6 +9,7 @@ export default [
     {key: 'animation-table', parentKey: 'example', text: '表格', icon: 'table', path: '/example/zk-table'},
     {key: 'table-drag-column', parentKey: 'example', text: '表头可拖拽', icon: 'table', path: '/example/table-drag-column'},
     {key: 'table-drag-row', parentKey: 'example', text: '行拖拽排序', icon: 'table', path: '/example/table-drag-row'},
+    {key: '/example/fe-zip-image', parentKey: 'example', text: '前端图片压缩', icon: 'table', path: '/example/fe-zip-image'},
     {key: 'page-generator', parentKey: 'example', text: '页面生成工具', icon: 'table', path: '/example/page-generator', order: 10010},
 
     {key: 'dashboard', parentKey: 'example', text: 'Dashboard', icon: 'dashboard', order: 10009},
