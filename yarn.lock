@@ -8229,6 +8229,13 @@ rmc-feedback@^1.0.0:
     babel-runtime "6.x"
     classnames "^2.2.5"
 
+rmc-feedback@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/rmc-feedback/-/rmc-feedback-1.0.4.tgz#fba066059ae2057ac0e0b53ea7ce982c8f4f7f19"
+  dependencies:
+    babel-runtime "6.x"
+    classnames "^2.2.5"
+
 roadhog-api-doc@^0.2.5:
   version "0.2.11"
   resolved "https://registry.yarnpkg.com/roadhog-api-doc/-/roadhog-api-doc-0.2.11.tgz#d52e9089e6b6eec58a8a5b6c2712660514179383"

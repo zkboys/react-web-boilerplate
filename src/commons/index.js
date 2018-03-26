@@ -35,13 +35,21 @@ export function setCurrentLoginUser(currentLoginUser) {
 
 /**
  * 跳转到登录页面
- * @returns {string}
+ * @returns {null}
  */
 export function toLogin() {
+    const loginPath = '/login';
+    const pathname = window.location.pathname;
+    const isLogin = pathname.indexOf(loginPath) !== -1;
+
+    if (isLogin) return null;
+
     session.clear();
     window.sessionStorage.clear();
     window.sessionStorage.setItem('last-href', window.location.href);
-    return window.location.href = '/login';
+    window.location.href = loginPath;
+
+    return null;
 }
 
 /**

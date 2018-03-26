@@ -101,3 +101,4 @@ server {
 - [x] e2e 测试
 - [ ] 通用组件文档，生成antd文档的形式
 - [ ] 各个模块内部独立xxx.modal.js，通过脚本生成modal；
+- [ ] redux库重构，存储同步改成中间件、去掉page相关内容

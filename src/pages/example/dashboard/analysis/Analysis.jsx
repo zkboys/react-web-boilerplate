@@ -13,9 +13,18 @@ export const PAGE_ROUTE = '/dashboard/analysis';
 export default class Analysis extends Component {
     state = {
         time: moment().format('YYYY-MM-DD HH:mm:ss'),
+        name: '123',
     };
 
     componentWillMount() {
+
+        this.props.ajax.put('/mock/test-ajax/array', null, {successTip: <span>获取<span style={{color: 'red'}}>mock</span>数据成功</span>})
+            .then(res => {
+                console.log(res);
+                this.setState({name: 'componentWillMount'})
+            });
+
+
         const {action} = this.props.history || {};
         const {from} = this.props.location.state || {};
         console.log(action, from);
@@ -73,10 +82,12 @@ export default class Analysis extends Component {
         const {time} = this.state;
 
         const buttonStyle = {marginRight: 8, marginTop: 8};
+        console.log(123, this.state.name);
         return (
             <PageContent>
                 <div>当前时间：{time}</div>
 
+                <div>{this.state.name}</div>
                 <Button
                     style={buttonStyle}
                     onClick={() => {

@@ -51,7 +51,7 @@ export default connectComponent({LayoutComponent: Demo, mapStateToProps});
 ## action reducer 二合一
 一个model中，除了initialState syncState actions reducers 等关键字之外的属性，都视为action reducer合并写法;
 
-缺陷是一个action只能被一个reducer处理，但是也同时保证了代码的简介性，action与reducer一一对应，不会出现一对多的混乱（会混乱吗？）；
+缺陷是一个action只能被一个reducer处理，但是也同时保证了代码的简介性，常见需求，action与reducer都是一一对应的；
 
 ```js
 

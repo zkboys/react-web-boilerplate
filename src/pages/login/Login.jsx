@@ -19,7 +19,7 @@ export default class extends Component {
     state = {
         loading: false,
         message: '',
-    }
+    };
 
     componentDidMount() {
         // To disabled submit button at the beginning.

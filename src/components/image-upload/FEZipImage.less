@@ -1,0 +1,31 @@
+:global(.image-upload-btn) {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    background: center center no-repeat;
+    background-size: contain;
+    cursor: pointer;
+
+    input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        opacity: 0;
+        width: 100%;
+    }
+
+    img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+    }
+}
+
+:global(.image-upload-btn-active) {
+    background: #ccc;
+}

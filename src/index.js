@@ -32,12 +32,14 @@ const currentLoginUser = getCurrentLoginUser();
 storage.init({keyPrefix: currentLoginUser && currentLoginUser.id});
 
 /*
+// 可以根据value中的标记字段，比如syncType='server' 区分如何处理；
 const setItem = storage.setItem;
 storage.setItem = (key, value) => {
-    console.log(value); // 可以根据value中的标记字段，比如syncType='server' 区分如何处理；
+    console.log(value);
     setItem(key, value);
 };
 */
+
 // 初始化redux
 zkRedux.init({storage, handleError, handleSuccess});
 

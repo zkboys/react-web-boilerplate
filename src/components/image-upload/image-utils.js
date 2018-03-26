@@ -79,8 +79,11 @@ export function compressImageToSize({
                                         size = 300 * 1000, // 默认 300K左右
                                         qualityStep = 0.9, // 每次压缩比
                                     }) {
-    if (getImageSizeByBase64(data) < size) {
-        return Promise.resolve(data);
+
+    const realSize = getImageSizeByBase64(data);
+
+    if (realSize < size) {
+        return Promise.resolve({base64Data: data, size: realSize});
     }
     const loop = (d) => {
         return compressImage({
