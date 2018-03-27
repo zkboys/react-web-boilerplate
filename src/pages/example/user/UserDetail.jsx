@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 export const PAGE_ROUTE = '/users/detail/:id';
 
-export default class detail extends Component {
+export default class UserDetail extends Component {
     state = {};
 
     componentWillMount() {
