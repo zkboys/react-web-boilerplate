@@ -9,11 +9,10 @@ import {
     middlewareAsyncActionCallback,
     middlewareSyncReducerToLocalStorage,
 } from 'zk-redux';
-import pageInitState from '../pages/page-init-state';
 import * as models from './all-models';
 
-const {actions, reducers} = getActionsAndReducers({models, pageInitState});
-let middleware = [
+const {actions, reducers} = getActionsAndReducers({models});
+const middleware = [
     thunkMiddleware,
     middlewarePromise,
     middlewareAsyncActionCallback,

@@ -9,7 +9,7 @@ export default class BaseApi {
 
         // 提供this.ajax对象，ajaxToken会自动加入resource
         this.ajax = {};
-        const method = ['get', 'post', 'put', 'del'];
+        const method = ['get', 'post', 'put', 'del', 'patch'];
         const axiosInstance = useTip ? zkAxios : axios;
         method.forEach(item => {
             this.ajax[item] = (...args) => {
